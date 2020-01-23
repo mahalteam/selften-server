@@ -5,7 +5,7 @@ const Schema = use('Schema')
 
 class MetchUserSchema extends Schema {
 	up () {
-		this.table('metch_users', (table) => {
+		this.create('metch_users', (table) => {
 			table.increments()
 			table.integer('metch_id')
 			table.integer('user_id')
@@ -15,9 +15,7 @@ class MetchUserSchema extends Schema {
 	}
 
 	down () {
-		this.table('metch_users', (table) => {
-			// reverse alternations
-		})
+		this.drop('metch_users')
 	}
 }
 

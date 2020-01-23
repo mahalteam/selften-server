@@ -22,7 +22,4 @@ Route.post('/register', 'AuthController.register')
 Route.post('/login', 'AuthController.login')
 Route.resource('games', 'GameController')
 
-// Route.put('/posts/:id', 'PostController.update').middleware('auth')
-// Route.delete('posts/id', 'PostController.delete').middleware('auth')
-// Route.post('/posts', 'PostController.store').middleware('auth')
-// Route.get('/posts', 'PostController.getPosts');
+

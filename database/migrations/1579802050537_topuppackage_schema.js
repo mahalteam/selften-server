@@ -3,19 +3,19 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 
-class GamesSchema extends Schema {
+class TopuppackageSchema extends Schema {
   up () {
-    this.create('games', (table) => {
+    this.create('topuppackages', (table) => {
       table.increments()
       table.string('name')
-      table.string('logo')
+      table.integer('amount')
       table.timestamps()
     })
   }
 
   down () {
-    this.drop('games')
+    this.drop('topuppackages')
   }
 }
 
-module.exports = GamesSchema
+module.exports = TopuppackageSchema

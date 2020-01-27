@@ -17,6 +17,7 @@
 const Route = use('Route')
 
 Route.get('/', 'HomeController.index')
+Route.get('/table', 'HomeController.table')
 
 Route.post('/register', 'AuthController.register')
 Route.post('/login', 'AuthController.login')

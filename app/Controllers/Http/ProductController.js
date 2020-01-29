@@ -1,57 +1,53 @@
 'use strict'
 
-/** @typedef {import('@adonisjs/framework/src/Request')} Request */
-/** @typedef {import('@adonisjs/framework/src/Response')} Response */
-/** @typedef {import('@adonisjs/framework/src/View')} View */
+const { validate } = use('Validator');
+const database = use('Database');
 
-/**
- * Resourceful controller for interacting with products
- */
 class ProductController {
-  /**
-   * Show a list of all products.
-   * GET products
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
+
   async index ({ request, response, view }) {
   }
 
-  /**
-   * Render a form to be used for creating a new product.
-   * GET products/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
   async create ({ request, response, view }) {
+    return view.render('create_product');
   }
 
-  /**
-   * Create/save a new product.
-   * POST products
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
   async store ({ request, response }) {
+    const rules = {
+      product_name: 'required'
+    }
+    const validation = await validate(request.all(), rules);
+    if (validation.fails()) {
+      return "Insert Form data error";
+    }
+
+    const unixTime  = Date.now();
+    const profilePic = request.file('logo_img', {
+      types: ['image'],
+      size: '1mb'
+    })
+
+    const fileName = `${unixTime}_logo.${profilePic.extname}`;
+    await profilePic.move('uploads/logo', {
+     name: fileName
+    })
+  
+    if (!profilePic.moved()) {
+      return profilePic.error()
+    }
+
+    let dbData = {
+      name: request.input('product_name'),
+      logo: fileName,
+      isactiveforsale: request.input('for_sale', 0),
+      isactiveformatch: request.input('for_match', 0),
+      isactivefortopup: request.input('for_top_up', 0),
+      created_at: 'NOW()'
+    }
+    console.log(await database.table('products').insert(dbData));
+    return  "True";
   }
 
-  /**
-   * Display a single product.
-   * GET products/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
   async show ({ params, request, response, view }) {
   }
 

@@ -14,3 +14,9 @@ database/*.sqlite
 # VSCode & Webstorm history directories
 .history
 .idea
+
+
+#personal task
+
+pending_task.txt
+file-modules.txt

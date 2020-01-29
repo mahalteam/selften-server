@@ -9,9 +9,9 @@ class ProductSchema extends Schema {
 	    table.increments()
 	    table.string('name')
 	    table.string('logo')
-	    table.integer('isactiveforsale')
-	    table.integer('isactiveformatch')
-	    table.integer('isactivefortopup')
+	    table.integer('isactiveforsale').default(0);
+	    table.integer('isactiveformatch').default(0);
+	    table.integer('isactivefortopup').default(0);
 	    table.timestamps()
     })
   }

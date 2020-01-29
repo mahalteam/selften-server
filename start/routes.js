@@ -22,5 +22,4 @@ Route.get('/table', 'HomeController.table')
 Route.post('/register', 'AuthController.register')
 Route.post('/login', 'AuthController.login')
 Route.resource('games', 'GameController')
-
-
+Route.resource('product', 'ProductController');

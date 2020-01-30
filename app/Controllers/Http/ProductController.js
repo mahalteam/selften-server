@@ -6,10 +6,13 @@ const Product = use('App/Models/Product')
 class ProductController {
 
 	async index ({ request, response, view }) {
+		const product = Product.all();
+		return view.render('setup/product/index');
 	}
 
 	async create ({ request, response, view }) {
-		return view.render('create_product');
+		const product = Product.all();
+		return view.render('setup/product/create');
 	}
 
 	async store ({ request, response }) {

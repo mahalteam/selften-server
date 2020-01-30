@@ -27,14 +27,14 @@
 		</div>
 
 		<!-- Nav Item - Pages Collapse Menu -->
-		<li class="nav-item">
+		<li class="nav-item active">
 			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
 				<i class="fas fa-fw fa-cog"></i>
 				<span>Setup</span>
-			</a>
-			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+			</a> 
+			<div id="collapseTwo" class="collapse {{ url=='/product' ? 'show' : '' }}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
-					<a class="collapse-item" href="/product/create">Products</a>
+					<a class="collapse-item" href="/product">Products</a>
 					<a class="collapse-item" href="/matches">Matches</a>
 				</div>
 			</div>

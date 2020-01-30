@@ -23,3 +23,4 @@ Route.post('/register', 'AuthController.register')
 Route.post('/login', 'AuthController.login')
 Route.resource('games', 'GameController')
 Route.resource('product', 'ProductController');
+Route.resource('match', 'MatchController');

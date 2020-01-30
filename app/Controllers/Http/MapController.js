@@ -7,87 +7,96 @@
 /**
  * Resourceful controller for interacting with maps
  */
+const { validate } = use('Validator');
+const Maps = use('App/Models/Map')
 class MapController {
-  /**
-   * Show a list of all maps.
-   * GET maps
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async index ({ request, response, view }) {
-  }
+	/**
+	 * Show a list of all maps.
+	 * GET maps
+	 *
+	 * @param {object} ctx
+	 * @param {Request} ctx.request
+	 * @param {Response} ctx.response
+	 * @param {View} ctx.view
+	 */
+	async index ({ request, response, view }) {
+		const maps = await Maps.all();
+		return view.render('setup/map/index',{maps: maps.rows});
+	}
 
-  /**
-   * Render a form to be used for creating a new map.
-   * GET maps/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async create ({ request, response, view }) {
-  }
+	/**
+	 * Render a form to be used for creating a new map.
+	 * GET maps/create
+	 *
+	 * @param {object} ctx
+	 * @param {Request} ctx.request
+	 * @param {Response} ctx.response
+	 * @param {View} ctx.view
+	 */
+	async create ({ request, response, view }) {
+		
+	}
 
-  /**
-   * Create/save a new map.
-   * POST maps
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async store ({ request, response }) {
-  }
+	/**
+	 * Create/save a new map.
+	 * POST maps
+	 *
+	 * @param {object} ctx
+	 * @param {Request} ctx.request
+	 * @param {Response} ctx.response
+	 */
+	async store ({ request, response }) {
+		let maps = new Maps();
+		maps.name=request.input('name');
+		await maps.save();
+		response.redirect('/map')
+	}
 
-  /**
-   * Display a single map.
-   * GET maps/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async show ({ params, request, response, view }) {
-  }
+	/**
+	 * Display a single map.
+	 * GET maps/:id
+	 *
+	 * @param {object} ctx
+	 * @param {Request} ctx.request
+	 * @param {Response} ctx.response
+	 * @param {View} ctx.view
+	 */
+	async show ({ params, request, response, view }) {
+	}
 
-  /**
-   * Render a form to update an existing map.
-   * GET maps/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async edit ({ params, request, response, view }) {
-  }
+	/**
+	 * Render a form to update an existing map.
+	 * GET maps/:id/edit
+	 *
+	 * @param {object} ctx
+	 * @param {Request} ctx.request
+	 * @param {Response} ctx.response
+	 * @param {View} ctx.view
+	 */
+	async edit ({ params, request, response, view }) {
+	}
 
-  /**
-   * Update map details.
-   * PUT or PATCH maps/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async update ({ params, request, response }) {
-  }
+	/**
+	 * Update map details.
+	 * PUT or PATCH maps/:id
+	 *
+	 * @param {object} ctx
+	 * @param {Request} ctx.request
+	 * @param {Response} ctx.response
+	 */
+	async update ({ params, request, response }) {
+	}
 
-  /**
-   * Delete a map with id.
-   * DELETE maps/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async destroy ({ params, request, response }) {
-  }
+	/**
+	 * Delete a map with id.
+	 * DELETE maps/:id
+	 *
+	 * @param {object} ctx
+	 * @param {Request} ctx.request
+	 * @param {Response} ctx.response
+	 */
+	async destroy ({ params, request, response }) {
+	}
 }
 
 module.exports = MapController

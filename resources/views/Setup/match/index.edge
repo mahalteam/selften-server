@@ -4,6 +4,7 @@
 <div class="container">
 	<!-- Page Heading -->
 	<div class="text-right">
+		<!-- Button trigger modal -->
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
 		  	Create
 		</button>
@@ -19,7 +20,7 @@
 	    </tr>
 	  </thead>
 	  <tbody> 
-	  	@each(product in products)
+	  	@each(product in matches)
 		    <tr>
 		      <th scope="row">1</th>
 		      <td>{{ product.name }}</td>
@@ -31,6 +32,9 @@
 	</table>
 </div>
 
+
+
+<!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -41,7 +45,7 @@
         </button>
       </div>
       <div class="modal-body">
-         <div class="card-body">
+        <div class="card-body">
 	        <form method="post" action="/product" enctype="multipart/form-data">
 	            <div class="form-row">
 	                <div class="col-6">

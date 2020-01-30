@@ -7,6 +7,8 @@
 /**
  * Resourceful controller for interacting with matches
  */
+const { validate } = use('Validator');
+const Match = use('App/Models/Match')
 class MatchController {
   /**
    * Show a list of all matches.
@@ -18,6 +20,8 @@ class MatchController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
+    const match = await Match.all();
+    return view.render('setup/match/index',{matches: match.rows});
   }
 
   /**

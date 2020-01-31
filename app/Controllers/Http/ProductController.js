@@ -54,6 +54,11 @@ class ProductController {
 	async show ({ params, request, response, view }) {
 	}
 
+	async matchproduct ({ params, request, response, view }) {
+		const product = await Product.query().with('matches').where('isactiveformatch',1).fetch();
+		return response.send(product);
+	}
+
 	/**
 	 * Render a form to update an existing product.
 	 * GET products/:id/edit

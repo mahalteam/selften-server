@@ -7,7 +7,7 @@ class MatchSchema extends Schema {
   up () {
     this.create('matches', (table) => {
       table.increments()
-      table.integer('game_id')
+      table.integer('product_id')
       table.integer('map_id')
       table.date('start_at')
       table.time('start_time',[6])

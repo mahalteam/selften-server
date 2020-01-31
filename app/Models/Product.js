@@ -4,6 +4,10 @@
 const Model = use('Model')
 
 class Product extends Model {
+
+	matches () {
+	    return this.hasMany('App/Models/Match')
+	}
 }
 
 module.exports = Product

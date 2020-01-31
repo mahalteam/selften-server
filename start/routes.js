@@ -18,10 +18,15 @@ const Route = use('Route')
 
 Route.get('/', 'HomeController.index')
 Route.get('/table', 'HomeController.table')
-Route.post('/register', 'AuthController.register')
-Route.post('/login', 'AuthController.login')
 Route.get('/users', 'UserController.index')
-Route.resource('games', 'GameController')
 Route.resource('product', 'ProductController');
 Route.resource('match', 'MatchController');
 Route.resource('map', 'MapController');
+
+
+// api
+Route.group(() => {
+	Route.post('/register', 'AuthController.register')
+	Route.post('/login', 'AuthController.login')
+	Route.get('/matchproduct', 'ProductController.matchproduct')
+}).prefix('api')

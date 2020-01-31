@@ -20,7 +20,7 @@ class UserController {
 	 */
 	async index ({ request, response, view }) {
 		const user = await User.all();
-		return view.render('setup/users/index',{user: user.rows});
+		return view.render('setup/users/index',{users: user.rows});
 	}
 
 	/**

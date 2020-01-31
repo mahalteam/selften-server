@@ -1,9 +1,12 @@
 'use strict'
-
+const  fs = require('fs')
+const Drive = use('Drive');
 const { validate } = use('Validator');
 const Product = use('App/Models/Product')
 
 class ProductController {
+
+	uploadError;
 
 	async index ({ request, response, view }) {
 		const product = await Product.all();
@@ -12,7 +15,7 @@ class ProductController {
 
 	async create ({ request, response, view }) {
 		const product = await Product.all();
-		return view.render('setup/product/create',{products: 'product'});
+		return view.render('Setup.Product.create',{products: 'product'});
 	}
 
 	async store ({ request, response }) {
@@ -24,21 +27,7 @@ class ProductController {
 			return "Insert Form data error";
 		}
 
-		const unixTime  = Date.now();
-		const profilePic = request.file('logo_img', {
-			types: ['image'],
-			size: '1mb'
-		})
-
-		const fileName = `${unixTime}_logo.${profilePic.extname}`;
-		await profilePic.move('uploads/logo', {
-		 name: fileName
-		})
-	
-		if (!profilePic.moved()) {
-			return profilePic.error()
-		}
-
+		const fileName = await this._uploadLogo(request);
 		const product = new Product()
 
 		product.name = request.input('product_name')
@@ -54,38 +43,63 @@ class ProductController {
 	async show ({ params, request, response, view }) {
 	}
 
-	/**
-	 * Render a form to update an existing product.
-	 * GET products/:id/edit
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
-	 * @param {View} ctx.view
-	 */
 	async edit ({ params, request, response, view }) {
+		const product = await Product.find(params.id);
+		return view.render('Setup.Product.edit',{product: product});
 	}
 
-	/**
-	 * Update product details.
-	 * PUT or PATCH products/:id
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
-	 */
 	async update ({ params, request, response }) {
+		const product = await Product.find(params.id);
+		if (!product){
+			return "No product for this id";
+		}
+		const rules = {
+			product_name: 'required'
+		}
+		const validation = await validate(request.all(), rules);
+		if (validation.fails()) {
+			return "Insert Form data error";
+		}
+
+		const fileName = await this._uploadLogo(request);
+		product.name = request.input('product_name')
+		product.isactiveforsale = request.input('for_sale', 0)
+		product.isactiveformatch = request.input('for_match', 0)
+		product.isactivefortopup = request.input('for_top_up', 0)
+		if (fileName) {
+			product.logo = fileName;
+			await Drive.delete(`uploads/logo/${product.logo}`)
+		}
+
+		await product.save();
+		return true;
 	}
 
-	/**
-	 * Delete a product with id.
-	 * DELETE products/:id
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
-	 */
 	async destroy ({ params, request, response }) {
+	}
+
+	async _uploadLogo (request) {
+		const unixTime  = Date.now();
+		const profilePic = request.file('logo_img', {
+			types: ['image'],
+			size: '1mb'
+		})
+
+		if (!profilePic) {
+			this.uploadError = "No file";
+			return false;
+		}
+
+		const fileName = `${unixTime}_logo.${profilePic.extname}`;
+		await profilePic.move('uploads/logo', {
+			name: fileName
+		})
+	
+		if (!profilePic.moved()) {
+			this.uploadError = profilePic.error();
+			return false;
+		}
+		return fileName;
 	}
 }
 

@@ -20,3 +20,4 @@ database/*.sqlite
 
 pending_task.txt
 file-modules.txt
+uploads/*

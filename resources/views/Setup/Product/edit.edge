@@ -1,0 +1,76 @@
+@layout('layout')
+
+@section('body')
+<div class="container-fluid">
+
+  <h1 class="h3 mb-4 text-gray-800">Setup Page</h1>
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Edit Product</h6>
+    </div>
+    <div class="card-body">
+        <form method="POST" action="/product/{{product.id}}?_method=put" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="col-6">
+                    <label for="name">Name</label>
+                    <input
+                        type="text"
+                        name="product_name"
+                        class="form-control"
+                        id="name"
+                        value="{{product.name}}"
+                        aria-describedby="nameInput">
+                    <small id="nameInput" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="col-6">
+                    <label for="images">Logo</label>
+                    <input type="file" name="logo_img" class="form-control-file" id="images">
+                </div>
+            </div>
+            <div class="form-check">
+                <input
+                type="checkbox"
+                name="for_sale"
+                value="1"
+                class="form-check-input"
+                id="isactiveforsale"
+                @if(product.isactiveforsale == '1')
+                    checked
+                @endif
+                >
+                <label class="form-check-label" for="isactiveforsale">Is active for sale</label>
+            </div>
+            <div class="form-check">
+                <input
+                    type="checkbox"
+                    name="for_match"
+                    value="1"
+                    class="form-check-input"
+                    id="isactiveformatch"
+                    @if(product.isactiveformatch == '1')
+                        checked
+                    @endif
+                    >
+                <label class="form-check-label" for="isactiveformatch">Is active for match</label>
+            </div>
+            <div class="form-check">
+                <input
+                    type="checkbox"
+                    name="for_top_up"
+                    value="1"
+                    class="form-check-input"
+                    id="isactivefortopup"
+                    @if(product.isactivefortopup == '1')
+                        checked
+                    @endif
+                    >
+                <label class="form-check-label" for="isactivefortopup">Is active for top up</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Edit</button>
+        </form>
+    </div>
+  </div>
+
+</div>
+@endsection
+       

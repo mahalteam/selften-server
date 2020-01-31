@@ -11,6 +11,7 @@
 |
 */
 const providers = [
+  '@adonisjs/drive/providers/DriveProvider',
   '@adonisjs/framework/providers/AppProvider',
   '@adonisjs/framework/providers/ViewProvider',
   '@adonisjs/lucid/providers/LucidProvider',

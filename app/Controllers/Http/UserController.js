@@ -5,14 +5,13 @@
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 /**
- * Resourceful controller for interacting with maps
+ * Resourceful controller for interacting with users
  */
-const { validate } = use('Validator');
-const Maps = use('App/Models/Map')
-class MapController {
+ const User = use('App/Models/User')
+class UserController {
 	/**
-	 * Show a list of all maps.
-	 * GET maps
+	 * Show a list of all users.
+	 * GET users
 	 *
 	 * @param {object} ctx
 	 * @param {Request} ctx.request
@@ -20,13 +19,13 @@ class MapController {
 	 * @param {View} ctx.view
 	 */
 	async index ({ request, response, view }) {
-		const maps = await Maps.all();
-		return view.render('setup/map/index',{maps: maps.rows});
+		const user = await User.all();
+		return view.render('setup/users/index',{users: user.rows});
 	}
 
 	/**
-	 * Render a form to be used for creating a new map.
-	 * GET maps/create
+	 * Render a form to be used for creating a new user.
+	 * GET users/create
 	 *
 	 * @param {object} ctx
 	 * @param {Request} ctx.request
@@ -34,27 +33,22 @@ class MapController {
 	 * @param {View} ctx.view
 	 */
 	async create ({ request, response, view }) {
-		
 	}
 
 	/**
-	 * Create/save a new map.
-	 * POST maps
+	 * Create/save a new user.
+	 * POST users
 	 *
 	 * @param {object} ctx
 	 * @param {Request} ctx.request
 	 * @param {Response} ctx.response
 	 */
 	async store ({ request, response }) {
-		let maps = new Maps();
-		maps.name=request.input('name');
-		await maps.save();
-		response.redirect('/map')
 	}
 
 	/**
-	 * Display a single map.
-	 * GET maps/:id
+	 * Display a single user.
+	 * GET users/:id
 	 *
 	 * @param {object} ctx
 	 * @param {Request} ctx.request
@@ -65,8 +59,8 @@ class MapController {
 	}
 
 	/**
-	 * Render a form to update an existing map.
-	 * GET maps/:id/edit
+	 * Render a form to update an existing user.
+	 * GET users/:id/edit
 	 *
 	 * @param {object} ctx
 	 * @param {Request} ctx.request
@@ -77,8 +71,8 @@ class MapController {
 	}
 
 	/**
-	 * Update map details.
-	 * PUT or PATCH maps/:id
+	 * Update user details.
+	 * PUT or PATCH users/:id
 	 *
 	 * @param {object} ctx
 	 * @param {Request} ctx.request
@@ -88,8 +82,8 @@ class MapController {
 	}
 
 	/**
-	 * Delete a map with id.
-	 * DELETE maps/:id
+	 * Delete a user with id.
+	 * DELETE users/:id
 	 *
 	 * @param {object} ctx
 	 * @param {Request} ctx.request
@@ -99,4 +93,4 @@ class MapController {
 	}
 }
 
-module.exports = MapController
+module.exports = UserController

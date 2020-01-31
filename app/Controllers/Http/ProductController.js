@@ -43,6 +43,12 @@ class ProductController {
 	async show ({ params, request, response, view }) {
 	}
 
+	async matchproduct ({ params, request, response, view }) {
+		const product = await Product.query().with('matches').where('isactiveformatch',1).fetch();
+		return response.send(product);
+	}
+
+
 	async edit ({ params, request, response, view }) {
 		const product = await Product.find(params.id);
 		return view.render('Setup.Product.edit',{product: product});

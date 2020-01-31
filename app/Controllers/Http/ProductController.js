@@ -1,8 +1,8 @@
 'use strict'
-const  fs = require('fs')
 const Drive = use('Drive');
 const { validate } = use('Validator');
 const Product = use('App/Models/Product')
+const Helpers = use('Helpers')
 
 class ProductController {
 
@@ -48,6 +48,7 @@ class ProductController {
 		return response.send(product);
 	}
 
+	// this is edit controller 
 
 	async edit ({ params, request, response, view }) {
 		const product = await Product.find(params.id);
@@ -73,8 +74,8 @@ class ProductController {
 		product.isactiveformatch = request.input('for_match', 0)
 		product.isactivefortopup = request.input('for_top_up', 0)
 		if (fileName) {
+			await Drive.delete(`${Helpers.appRoot()}/uploads/logo/${product.logo}`)
 			product.logo = fileName;
-			await Drive.delete(`uploads/logo/${product.logo}`)
 		}
 
 		await product.save();
@@ -84,7 +85,7 @@ class ProductController {
 	async destroy ({ params, request, response }) {
 	}
 
-	async _uploadLogo (request) {
+	async _uploadLogo (request) { // this function is using for logo upload. This receive request as paramiter from request controller
 		const unixTime  = Date.now();
 		const profilePic = request.file('logo_img', {
 			types: ['image'],

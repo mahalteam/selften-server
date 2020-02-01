@@ -48,8 +48,7 @@ class BannerController {
 
         const fileName = await this._uploadBanner(request);
         if (fileName) {
-            let  deleted =  await Drive.delete(`${Helpers.appRoot()}/uploads/banner/${banner.banner}`)
-            console.log(`${Helpers.appRoot()}uploads/banner/${banner.banner}`);
+            let  deleted =  await Drive.delete(`${Helpers.appRoot()}/uploads/banner/${banner.banner}`);
             banner.banner = fileName;
         }
 
@@ -61,6 +60,13 @@ class BannerController {
     }
 
     async destroy ({ params, request, response }) {
+        const banner = await Banner.find(params.id)
+        if (!banner) {
+            return "No banner for this id";
+        }
+        await Drive.delete(`${Helpers.appRoot()}/uploads/banner/${banner.banner}`);
+        await banner.delete();
+        return "Delete Complated";
     }
 
     async _uploadBanner (request) { // this function is using for logo upload. This receive request as paramiter from request controller

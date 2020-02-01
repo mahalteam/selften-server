@@ -24,7 +24,11 @@
 		      <th scope="row">1</th>
 		      <td>{{ banner.note }}</td>
 		      <td>Otto</td>
-		      <td>@mdo</td>
+		      <td>
+			  	<form method="POST" action="/banner/{{banner.id}}?_method=delete">
+					<button type="submit" class="btn btn-primary">Delete</button>
+				</form>
+			  </td>
 		    </tr>
 	    @endeach
 	  </tbody>

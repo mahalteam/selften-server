@@ -22,6 +22,7 @@ Route.get('/users', 'UserController.index')
 Route.resource('product', 'ProductController');
 Route.resource('match', 'MatchController');
 Route.resource('map', 'MapController');
+Route.resource('banner', 'BannerController');
 
 
 // api

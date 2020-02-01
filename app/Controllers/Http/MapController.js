@@ -62,6 +62,8 @@ class MapController {
 	 * @param {View} ctx.view
 	 */
 	async show ({ params, request, response, view }) {
+		const id = params.id;
+		console.log(params);
 	}
 
 	/**
@@ -74,6 +76,10 @@ class MapController {
 	 * @param {View} ctx.view
 	 */
 	async edit ({ params, request, response, view }) {
+		const id = params.id;
+		// Console.log(id);
+		const map = await Maps.find(id);
+		return map;
 	}
 
 	/**
@@ -85,6 +91,12 @@ class MapController {
 	 * @param {Response} ctx.response
 	 */
 	async update ({ params, request, response }) {
+		const map = request.collect(['name']);
+		const id = params.id;
+		const d_map = await Maps.find(id);
+			d_map.name = map[0].name;
+		await d_map.save();
+		response.redirect('/map')
 	}
 
 	/**
@@ -96,6 +108,11 @@ class MapController {
 	 * @param {Response} ctx.response
 	 */
 	async destroy ({ params, request, response }) {
+		const id = params.id;
+		console.log(params);
+		const map = await Maps.find(id);
+		await map.delete();
+		response.redirect('/map');
 	}
 }
 

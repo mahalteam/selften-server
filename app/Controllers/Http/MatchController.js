@@ -38,6 +38,12 @@ class MatchController {
 	 * @param {View} ctx.view
 	 */
 	async create ({ request, response, view }) {
+		const products = await Product
+			.query()
+			.where('isactiveformatch', '1')
+			.fetch();
+		const maps =  await Maps.all();
+		return view.render('Setup.match.create',{products: products.rows, maps: maps.rows});
 	}
 
 	/**
@@ -49,6 +55,46 @@ class MatchController {
 	 * @param {Response} ctx.response
 	 */
 	async store ({ request, response }) {
+		const rules = {
+			product_id: 'required',
+			start_at: 'required',
+			start_time: 'required',
+			in_time: 'required',
+			end_time: 'required',
+			match_name: 'required',
+			type: 'required',
+			entry_fee: 'required',
+			perkill: 'required',
+			max_join: 'required',
+			min_join: 'required',
+			room_id: 'required',
+			password: 'required'
+
+		}
+		const validation = await validate(request.all(), rules);
+		if (validation.fails()) {
+			return "Insert Form data error";
+		}
+
+		const match = new Match()
+
+		match.product_id = request.input('product_id')
+		match.map_id = request.input('map_id')
+		match.start_at = request.input('start_at')
+		match.start_time = request.input('start_time')
+		match.in_time = request.input('in_time')
+		match.end_time = request.input('end_time')
+		match.match_name = request.input('match_name')
+		match.perkill = request.input('perkill')
+		match.entryfee = request.input('entry_fee')
+		match.type = request.input('type')
+		match.max_join = request.input('max_join')
+		match.min_join = request.input('min_join')
+		match.room_id = request.input('room_id')
+		match.password = request.input('password')
+
+		await match.save()
+		return  "True";
 	}
 
 	/**
@@ -73,6 +119,16 @@ class MatchController {
 	 * @param {View} ctx.view
 	 */
 	async edit ({ params, request, response, view }) {
+		const match = await Match.find(params.id)
+		if (!match){
+			return "No match for this id";
+		}
+		const products = await Product
+			.query()
+			.where('isactiveformatch', '1')
+			.fetch();
+		const maps =  await Maps.all();
+		return view.render('Setup.match.edit',{match: match, products: products.rows, maps: maps.rows});
 	}
 
 	/**
@@ -84,6 +140,49 @@ class MatchController {
 	 * @param {Response} ctx.response
 	 */
 	async update ({ params, request, response }) {
+		const match = await Match.find(params.id)
+		if (!match){
+			return "No match for this id";
+		}
+		const rules = {
+			product_id: 'required',
+			start_at: 'required',
+			start_time: 'required',
+			in_time: 'required',
+			end_time: 'required',
+			match_name: 'required',
+			type: 'required',
+			entry_fee: 'required',
+			perkill: 'required',
+			max_join: 'required',
+			min_join: 'required',
+			room_id: 'required',
+			password: 'required'
+
+		}
+		const validation = await validate(request.all(), rules);
+		if (validation.fails()) {
+			console.log(validation.messages());
+			return "Insert Form data error";
+		}
+
+		match.product_id = request.input('product_id')
+		match.map_id = request.input('map_id')
+		match.start_at = request.input('start_at')
+		match.start_time = request.input('start_time')
+		match.in_time = request.input('in_time')
+		match.end_time = request.input('end_time')
+		match.match_name = request.input('match_name')
+		match.perkill = request.input('perkill')
+		match.entryfee = request.input('entry_fee')
+		match.type = request.input('type')
+		match.max_join = request.input('max_join')
+		match.min_join = request.input('min_join')
+		match.room_id = request.input('room_id')
+		match.password = request.input('password')
+
+		await match.save()
+		return "True"
 	}
 
 	/**
@@ -95,6 +194,12 @@ class MatchController {
 	 * @param {Response} ctx.response
 	 */
 	async destroy ({ params, request, response }) {
+		const match = await Match.find(params.id)
+        if (!match) {
+            return "No banner for this id";
+        }
+		await match.delete();
+		return "Delete complated"
 	}
 }
 

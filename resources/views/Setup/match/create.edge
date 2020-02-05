@@ -9,26 +9,148 @@
         <h6 class="m-0 font-weight-bold text-primary">Create Match</h6>
     </div>
     <div class="card-body">
-        <form method="post" action="/banner" enctype="multipart/form-data">
+        <form method="post" action="/match" enctype="multipart/form-data">
             <div class="form-row">
                 <div class="col-6">
-                    <label for="name">Note</label>
-                    <input type="text" name="banner_note" class="form-control" id="name" aria-describedby="nameInput">
-                    <small id="nameInput" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <label for="product">Product</label>
+                    <select name="product_id" class="form-control" id="product">
+                        <option>Select One</option>
+                        @each(product in products)
+                            <option value="{{product.id}}">{{product.name}}</option>
+                        @endeach
+                    </select>
+                    <small id="start_at" class="form-text text-muted">Validation error</small>
                 </div>
                 <div class="col-6">
-                    <label for="images">Banner</label>
-                    <input type="file" name="banner_img" class="form-control-file" id="images">
+                    <label for="map">Maps:</label>
+                    <select name="map_id" class="form-control" id="map">
+                        <option>Select One</option>
+                        @each(map in maps)
+                            <option value="{{map.id}}">{{map.name}}</option>
+                        @endeach
+                    </select>
+                    <small id="start_at" class="form-text text-muted">Validation error</small>
                 </div>
-            </div>
-            <div class="form-check">
-                <input
-                type="checkbox"
-                name="is_active"
-                value="1"
-                class="form-check-input"
-                id="isactive">
-                <label class="form-check-label" for="isactive">Is active</label>
+                <div class="col-6">
+                    <label for="name">Start At:</label>
+                    <input
+                        type="date"
+                        name="start_at"
+                        class="form-control"
+                        id="start_at"
+                        aria-describedby="start_at">
+                    <small id="start_at" class="form-text text-muted">Validation error</small>
+                </div>
+                <div class="col-6">
+                    <label for="name">Start Time:</label>
+                    <input
+                        type="time"
+                        name="start_time"
+                        class="form-control"
+                        id="start_time"
+                        aria-describedby="start_at">
+                    <small id="start_time" class="form-text text-muted">Validation error</small>
+                </div>
+                <div class="col-6">
+                    <label for="name">In Time:</label>
+                    <input
+                        type="time"
+                        name="in_time"
+                        class="form-control"
+                        id="in_time"
+                        aria-describedby="in_time">
+                    <small id="in_time" class="form-text text-muted">Validation error</small>
+                </div>
+                <div class="col-6">
+                    <label for="name">End Time:</label>
+                    <input
+                        type="time"
+                        name="end_time"
+                        class="form-control"
+                        id="end_time"
+                        aria-describedby="end_time">
+                    <small id="end_time" class="form-text text-muted">Validation error</small>
+                </div>
+                <div class="col-6">
+                    <label for="name">Match Name:</label>
+                    <input
+                        type="text"
+                        name="match_name"
+                        class="form-control"
+                        id="match_name"
+                        aria-describedby="match_name">
+                    <small id="match_name" class="form-text text-muted">Validation error</small>
+                </div>
+                <div class="col-6">
+                    <label for="name">Type :</label>
+                    <input
+                        type="text"
+                        name="type"
+                        class="form-control"
+                        id="type"
+                        aria-describedby="type">
+                    <small id="type" class="form-text text-muted">Validation error</small>
+                </div>
+                <div class="col-6">
+                    <label for="name">Entry Fee:</label>
+                    <input
+                        type="number"
+                        name="entry_fee"
+                        class="form-control"
+                        id="entry_fee"
+                        aria-describedby="entry_fee">
+                    <small id="entry_fee" class="form-text text-muted">Validation error</small>
+                </div>
+                <div class="col-6">
+                    <label for="name">Perkill:</label>
+                    <input
+                        type="text"
+                        name="perkill"
+                        class="form-control"
+                        id="perkill"
+                        aria-describedby="perkill">
+                    <small id="perkill" class="form-text text-muted">Validation error</small>
+                </div>
+                <div class="col-6">
+                    <label for="name">Max Join:</label>
+                    <input
+                        type="text"
+                        name="max_join"
+                        class="form-control"
+                        id="max_join"
+                        aria-describedby="max_join">
+                    <small id="max_join" class="form-text text-muted">Validation error</small>
+                </div>
+                <div class="col-6">
+                    <label for="name">Min Join:</label>
+                    <input
+                        type="text"
+                        name="min_join"
+                        class="form-control"
+                        id="min_join"
+                        aria-describedby="min_join">
+                    <small id="min_join" class="form-text text-muted">Validation error</small>
+                </div>
+                <div class="col-6">
+                    <label for="name">Room Id:</label>
+                    <input
+                        type="text"
+                        name="room_id"
+                        class="form-control"
+                        id="room_id"
+                        aria-describedby="room_id">
+                    <small id="room_id" class="form-text text-muted">Validation error</small>
+                </div>
+                <div class="col-6">
+                    <label for="name">Password:</label>
+                    <input
+                        type="text"
+                        name="password"
+                        class="form-control"
+                        id="password"
+                        aria-describedby="password">
+                    <small id="password" class="form-text text-muted">Validation error</small>
+                </div>
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </form>

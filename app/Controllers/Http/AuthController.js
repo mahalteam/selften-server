@@ -33,7 +33,7 @@ class AuthController {
 		}
 		catch (e) {
 			console.log(e)
-			return response.json({message: 'You are not registered!'})
+			return response.json({message: 'These credentials do not match our records.'})
 		}
 	}
 	async getPosts({request, response}) {

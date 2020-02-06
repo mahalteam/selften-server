@@ -13,9 +13,9 @@
 	  <thead>
 	    <tr>
 	      <th scope="col">#</th>
-	      <th scope="col">First</th>
-	      <th scope="col">Last</th>
-	      <th scope="col">Handle</th>
+	      <th scope="col">Name</th>
+	      <th scope="col">Logo</th>
+	      <th scope="col">Action</th>
 	    </tr>
 	  </thead>
 	  <tbody> 
@@ -23,8 +23,13 @@
 		    <tr>
 		      <th scope="row">1</th>
 		      <td>{{ product.name }}</td>
-		      <td>Otto</td>
-		      <td>@mdo</td>
+		      <td><img src="{{ 'uploads/product/'+product.logo }}" width="50px" /></td>
+		      <td>{{ product.logo }}</td>
+		   	 <td>
+			  	<form method="POST" action="/product/{{product.id}}?_method=delete">
+					<button type="submit" class="btn btn-primary">Delete</button>
+				</form>
+			  </td>
 		    </tr>
 	    @endeach
 	  </tbody>

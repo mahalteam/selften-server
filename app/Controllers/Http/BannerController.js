@@ -29,7 +29,7 @@ class BannerController {
         banner.isactive = request.input('is_active', 0)
 
         await banner.save()
-        return  "True";
+        return response.redirect('/banner');
     }
 
     async show ({ params, request, response, view }) {
@@ -64,9 +64,9 @@ class BannerController {
         if (!banner) {
             return "No banner for this id";
         }
-        await Drive.delete(`${Helpers.appRoot()}/uploads/banner/${banner.banner}`);
+        await Drive.delete(`${Helpers.appRoot()}/public/uploads/banner/${banner.banner}`);
         await banner.delete();
-        return "Delete Complated";
+        return response.redirect('/banner');
     }
 
     async _uploadBanner (request) { // this function is using for logo upload. This receive request as paramiter from request controller
@@ -82,7 +82,7 @@ class BannerController {
         }
 
         const fileName = `${unixTime}_banner.${profilePic.extname}`;
-        await profilePic.move('uploads/banner', {
+        await profilePic.move(Helpers.appRoot('public/uploads/banner'), {
             name: fileName
         })
 

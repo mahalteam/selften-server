@@ -36,7 +36,7 @@ class ProductController {
 		product.isactivefortopup = request.input('for_top_up', 0)
 
 		await product.save()
-		return  "True";
+		return response.redirect('product');
 	}
 
 	async show ({ params, request, response, view }) {
@@ -82,6 +82,13 @@ class ProductController {
 	}
 
 	async destroy ({ params, request, response }) {
+		const product = await Product.find(params.id)
+        if (!product) {
+            return "No product for this id";
+        }
+        await Drive.delete(`${Helpers.appRoot()}/public/uploads/product/${product.product}`);
+        await product.delete();
+        return response.redirect('/product');
 	}
 
 	async _uploadLogo (request) { // this function is using for logo upload. This receive request as paramiter from request controller
@@ -97,7 +104,7 @@ class ProductController {
 		}
 
 		const fileName = `${unixTime}_logo.${profilePic.extname}`;
-		await profilePic.move('uploads/logo', {
+		await profilePic.move(Helpers.appRoot('public/uploads/product'), {
 			name: fileName
 		})
 	

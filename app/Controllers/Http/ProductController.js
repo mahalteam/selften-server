@@ -1,12 +1,11 @@
 'use strict'
 const Drive = use('Drive');
 const { validate } = use('Validator');
-const Product = use('App/Models/Product')
-const Helpers = use('Helpers')
+const Product = use('App/Models/Product');
+const Helpers = use('Helpers');
 
 class ProductController {
 
-	uploadError;
 
 	async index ({ request, response, view }) {
 		const product = await Product.all();

@@ -25,7 +25,20 @@ class MatchController {
 		const match = await Match.all();
 		const product = await Product.all();
 		const maps = await Maps.all();
-		return view.render('setup/match/index',{maps: maps.rows},{products: product.rows},{match: match.rows});
+		return view.render('setup/match/index',
+			{
+			    maps: maps.rows,
+			    products: product.rows,
+			    match: match.rows
+			}
+		);
+	}
+
+	async matchbyid ({ request, response, view }) {
+		const match = await Match.all();
+		const product = await Product.all();
+		const maps = await Maps.all();
+		response.json(await Match.all())
 	}
 
 	/**

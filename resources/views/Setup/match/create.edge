@@ -83,12 +83,12 @@
                 </div>
                 <div class="col-6">
                     <label for="name">Type :</label>
-                    <input
-                        type="text"
-                        name="type"
-                        class="form-control"
-                        id="type"
-                        aria-describedby="type">
+                    <select name="type" class="form-control">
+                        <option>Select One</option>
+                        <option value="1">Solo</option>
+                        <option value="2">Duo</option>
+                        <option value="3">Squad</option>
+                    </select>
                     <small id="type" class="form-text text-muted">Validation error</small>
                 </div>
                 <div class="col-6">
@@ -153,6 +153,7 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
+            <a href="/match" class="btn btn-success">Cancel</a>
         </form>
     </div>
   </div>

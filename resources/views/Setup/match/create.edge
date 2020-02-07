@@ -44,17 +44,16 @@
                 <div class="col-6">
                     <label for="name">Start Time:</label>
                     <input
-                        type="time"
+                        type="text"
                         name="start_time"
                         class="form-control"
                         id="start_time"
                         aria-describedby="start_at">
-                    <small id="start_time" class="form-text text-muted">Validation error</small>
                 </div>
                 <div class="col-6">
                     <label for="name">In Time:</label>
                     <input
-                        type="time"
+                         type="text"
                         name="in_time"
                         class="form-control"
                         id="in_time"
@@ -64,7 +63,7 @@
                 <div class="col-6">
                     <label for="name">End Time:</label>
                     <input
-                        type="time"
+                         type="text"
                         name="end_time"
                         class="form-control"
                         id="end_time"
@@ -85,9 +84,9 @@
                     <label for="name">Type :</label>
                     <select name="type" class="form-control">
                         <option>Select One</option>
-                        <option value="1">Solo</option>
-                        <option value="2">Duo</option>
-                        <option value="3">Squad</option>
+                        <option value="solo">Solo</option>
+                        <option value="duo">Duo</option>
+                        <option value="squad">Squad</option>
                     </select>
                     <small id="type" class="form-text text-muted">Validation error</small>
                 </div>
@@ -109,7 +108,6 @@
                         class="form-control"
                         id="perkill"
                         aria-describedby="perkill">
-                    <small id="perkill" class="form-text text-muted">Validation error</small>
                 </div>
                 <div class="col-6">
                     <label for="name">Max Join:</label>
@@ -119,7 +117,6 @@
                         class="form-control"
                         id="max_join"
                         aria-describedby="max_join">
-                    <small id="max_join" class="form-text text-muted">Validation error</small>
                 </div>
                 <div class="col-6">
                     <label for="name">Min Join:</label>
@@ -129,28 +126,17 @@
                         class="form-control"
                         id="min_join"
                         aria-describedby="min_join">
-                    <small id="min_join" class="form-text text-muted">Validation error</small>
                 </div>
                 <div class="col-6">
-                    <label for="name">Room Id:</label>
+                    <label for="name">Total Prize:</label>
                     <input
                         type="text"
-                        name="room_id"
+                        name="total_prize"
                         class="form-control"
-                        id="room_id"
-                        aria-describedby="room_id">
-                    <small id="room_id" class="form-text text-muted">Validation error</small>
+                        id="total_prize"
+                        aria-describedby="total_prize">
                 </div>
-                <div class="col-6">
-                    <label for="name">Password:</label>
-                    <input
-                        type="text"
-                        name="password"
-                        class="form-control"
-                        id="password"
-                        aria-describedby="password">
-                    <small id="password" class="form-text text-muted">Validation error</small>
-                </div>
+                
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
             <a href="/match" class="btn btn-success">Cancel</a>

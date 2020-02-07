@@ -20,7 +20,6 @@ class ProductController {
 	async store ({ request, response }) {
 		const rules = {
 			product_name: 'required',
-			rules: 'required'
 		}
 		const validation = await validate(request.all(), rules);
 		if (validation.fails()) {

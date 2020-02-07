@@ -21,6 +21,7 @@ class MatchSchema extends Schema {
       table.integer('min_join')
       table.string('room_id')
       table.string('password')
+      table.text('total_prize')
       table.timestamps()
     })
   }

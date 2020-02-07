@@ -8,8 +8,8 @@ class PrizeSchema extends Schema {
     this.create('prizes', (table) => {
       table.increments()
       table.integer('match_id')
-      table.string('lavel')
-      table.string('prize')
+      table.integer('lavel')
+      table.text('prize')
       table.timestamps()
     })
   }

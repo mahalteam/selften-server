@@ -11,6 +11,14 @@ class Match extends Model {
 	users () {
 	    return this.belongsToMany('App/Models/User')
 	}
+
+	prizes () {
+	    return this.hasMany('App/Models/Prize')
+	}
+
+	map(){
+		return this.belongsTo('App/Models/Map')
+	}
 }
 
 module.exports = Match

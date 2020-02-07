@@ -35,7 +35,7 @@ class MatchController {
 	}
 
 	async matchbyid ({ params,request, response, view }) {
-		const match = await Match.query().with('product').with('users').where('product_id',params.id).where('status', 'upcoming').orWhere('status', 'ongoing').fetch();
+		const match = await Match.query().with('product').with('users').with('map').with('prizes').where('product_id',params.id).where('status', 'upcoming').orWhere('status', 'ongoing').fetch();
 		response.json(match)
 	}
 
@@ -78,8 +78,7 @@ class MatchController {
 			perkill: 'required',
 			max_join: 'required',
 			min_join: 'required',
-			room_id: 'required',
-			password: 'required'
+			total_prize: 'required',
 
 		}
 		const validation = await validate(request.all(), rules);
@@ -103,9 +102,8 @@ class MatchController {
 		match.min_join = request.input('min_join')
 		match.room_id = request.input('room_id')
 		match.password = request.input('password')
-
 		await match.save()
-		return  "True";
+		return response.redirect('match');
 	}
 
 	/**
@@ -193,7 +191,7 @@ class MatchController {
 		match.password = request.input('password')
 
 		await match.save()
-		return "True"
+		return response.redirect('match');
 	}
 
 	/**
@@ -210,7 +208,7 @@ class MatchController {
             return "No banner for this id";
         }
 		await match.delete();
-		return "Delete complated"
+		return response.redirect('match');
 	}
 }
 

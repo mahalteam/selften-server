@@ -23,6 +23,7 @@ Route.resource('product', 'ProductController');
 Route.resource('match', 'MatchController');
 Route.resource('map', 'MapController');
 Route.resource('banner', 'BannerController');
+Route.resource('prize', 'PrizeController');
 
 
 // api

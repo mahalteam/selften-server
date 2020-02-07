@@ -26,6 +26,13 @@
                     <label for="images">Logo</label>
                     <input type="file" name="logo_img" class="form-control-file" id="images">
                 </div>
+                <div class="col-12">
+                    <label for="rules">Rules</label>
+                    <textarea name="rules" id="rules">{{product.rules}}</textarea>
+                    <script>
+                            CKEDITOR.replace( 'rules' );
+                    </script>
+                </div>
             </div>
             <div class="form-check">
                 <input

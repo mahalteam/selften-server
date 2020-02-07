@@ -1,5 +1,9 @@
 'use strict'
 
+const Match = use('App/Models/Match')
+const Prize = use('App/Models/Prize')
+const { validate } = use('Validator');
+
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
@@ -30,6 +34,12 @@ class PrizeController {
    * @param {View} ctx.view
    */
   async create ({ request, response, view }) {
+    const matchs = await Match.all();
+		return view.render('Setup.Prize.create',
+			{
+			    matchs: matchs.rows
+			}
+		);
   }
 
   /**
@@ -41,6 +51,25 @@ class PrizeController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const rules = {
+			match_id: 'required',
+			lavel: 'required',
+			prize: 'required'
+
+		}
+		const validation = await validate(request.all(), rules);
+		if (validation.fails()) {
+			return "Insert Form data error";
+		}
+
+		const prize = new Prize()
+
+		prize.match_id = request.input('match_id')
+		prize.prize = request.input('prize')
+		prize.lavel = request.input('lavel')
+
+		await prize.save()
+		return  "True";
   }
 
   /**
@@ -65,6 +94,14 @@ class PrizeController {
    * @param {View} ctx.view
    */
   async edit ({ params, request, response, view }) {
+    const matchs = await Match.all();
+    const prize = await Prize.find(params.id);
+		return view.render('Setup.Prize.edit',
+			{
+          matchs: matchs.rows,
+          prize
+			}
+		);
   }
 
   /**
@@ -76,6 +113,25 @@ class PrizeController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
+    const prize = await Prize.find(params.id);
+    console.log('prize');
+    const rules = {
+			match_id: 'required',
+			lavel: 'required',
+			prize: 'required'
+
+		}
+		const validation = await validate(request.all(), rules);
+		if (validation.fails()) {
+			return "Insert Form data error";
+		}
+
+		prize.match_id = request.input('match_id')
+		prize.prize = request.input('prize')
+		prize.lavel = request.input('lavel')
+
+		await prize.save()
+		return  "True";
   }
 
   /**
@@ -87,6 +143,11 @@ class PrizeController {
    * @param {Response} ctx.response
    */
   async destroy ({ params, request, response }) {
+    const prize = Prize.find(params.id);
+    if(prize) {
+      return "no prize for this id"
+    }
+    prize.delete();
   }
 }
 

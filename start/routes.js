@@ -30,5 +30,5 @@ Route.group(() => {
 	Route.post('/register', 'AuthController.register')
 	Route.post('/login', 'AuthController.login')
 	Route.get('/matchproduct', 'ProductController.matchproduct')
-	Route.get('/match', 'MatchController.matchbyid')
+	Route.get('/match/:id', 'MatchController.matchbyid')
 }).prefix('api')

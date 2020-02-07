@@ -43,7 +43,9 @@ class ProductController {
 	}
 
 	async matchproduct ({ params, request, response, view }) {
-		const product = await Product.query().with('matches').where('isactiveformatch',1).fetch();
+		const product = await Product.query().with('matches',(builder) => {
+		    builder.where('status', 'upcoming').orWhere('status', 'ongoing')
+		  }).where('isactiveformatch',1).fetch();
 		return response.send(product);
 	}
 

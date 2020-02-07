@@ -34,11 +34,9 @@ class MatchController {
 		);
 	}
 
-	async matchbyid ({ request, response, view }) {
-		const match = await Match.all();
-		const product = await Product.all();
-		const maps = await Maps.all();
-		response.json(await Match.all())
+	async matchbyid ({ params,request, response, view }) {
+		const match = await Match.query().with('product').with('users').where('product_id',params.id).where('status', 'upcoming').orWhere('status', 'ongoing').fetch();
+		response.json(match)
 	}
 
 	/**

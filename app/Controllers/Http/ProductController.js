@@ -9,7 +9,7 @@ class ProductController {
 
 	async index ({ request, response, view }) {
 		const product = await Product.all();
-		return view.render('setup/product/index',{products: product.rows});
+		return view.render('Setup.Product/index',{products: product.rows});
 	}
 
 	async create ({ request, response, view }) {
@@ -19,7 +19,8 @@ class ProductController {
 
 	async store ({ request, response }) {
 		const rules = {
-			product_name: 'required'
+			product_name: 'required',
+			rules: 'required'
 		}
 		const validation = await validate(request.all(), rules);
 		if (validation.fails()) {
@@ -30,6 +31,7 @@ class ProductController {
 		const product = new Product()
 
 		product.name = request.input('product_name')
+		product.rules = request.input('rules');
 		product.logo = fileName
 		product.isactiveforsale = request.input('for_sale', 0)
 		product.isactiveformatch = request.input('for_match', 0)
@@ -60,7 +62,8 @@ class ProductController {
 			return "No product for this id";
 		}
 		const rules = {
-			product_name: 'required'
+			product_name: 'required',
+			rules: 'required'
 		}
 		const validation = await validate(request.all(), rules);
 		if (validation.fails()) {
@@ -69,6 +72,7 @@ class ProductController {
 
 		const fileName = await this._uploadLogo(request);
 		product.name = request.input('product_name')
+		product.rules = request.input('rules');
 		product.isactiveforsale = request.input('for_sale', 0)
 		product.isactiveformatch = request.input('for_match', 0)
 		product.isactivefortopup = request.input('for_top_up', 0)
@@ -78,7 +82,7 @@ class ProductController {
 		}
 
 		await product.save();
-		return true;
+		return response.redirect('/product');
 	}
 
 	async destroy ({ params, request, response }) {

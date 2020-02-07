@@ -8,7 +8,8 @@ class ProductSchema extends Schema {
     this.create('products', (table) => {
 	    table.increments()
 	    table.string('name')
-	    table.string('logo')
+      table.string('logo')
+      table.text('rules')
 	    table.integer('isactiveforsale').default(0);
 	    table.integer('isactiveformatch').default(0);
 	    table.integer('isactivefortopup').default(0);

@@ -136,8 +136,18 @@
                         id="total_prize"
                         aria-describedby="total_prize">
                 </div>
+                <div class="col-6">
+                    <label for="name">Platform:</label>
+                    <select name="platform" class="form-control">
+                        <option>Select One</option>
+                        <option value="all">All</option>
+                        <option value="mobile">Mobile</option>
+                        <option value="pc">PC</option>
+                    </select>
+                </div>
                 
             </div>
+            <br><br>
             <button type="submit" class="btn btn-primary">Create</button>
             <a href="/match" class="btn btn-success">Cancel</a>
         </form>

@@ -39,6 +39,11 @@ class MatchController {
 		response.json(match)
 	}
 
+	async singlematch ({ params,request, response, view }) {
+		const match = await Match.query().with('product').with('users').with('map').with('prizes').where('id',params.id).where('status', 'upcoming').orWhere('status', 'ongoing').fetch();
+		response.json(match)
+	}
+
 	/**
 	 * Render a form to be used for creating a new match.
 	 * GET matches/create

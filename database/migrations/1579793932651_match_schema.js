@@ -22,6 +22,7 @@ class MatchSchema extends Schema {
       table.string('room_id')
       table.string('password')
       table.text('total_prize')
+      table.text('platform')
       table.timestamps()
     })
   }

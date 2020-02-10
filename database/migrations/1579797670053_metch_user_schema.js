@@ -10,6 +10,8 @@ class MetchUserSchema extends Schema {
 			table.integer('metch_id')
 			table.integer('user_id')
 			table.integer('totalkill')
+			table.string('gamename')
+			table.string('gameid')
 			table.timestamps()
 		})
 	}

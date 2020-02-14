@@ -22,10 +22,10 @@ class PrizeController {
 	 * @param {View} ctx.view
 	 */
 	async index ({ request, response, view }) {
-		const prize = await Prize.all();
+		const prize = await Prize.query().with('match').fetch();
 		return view.render('Setup.Prize.index',
 			{
-				prize: prize.rows
+				prize: prize.toJSON()
 			}
 		);
 	}
@@ -43,7 +43,7 @@ class PrizeController {
 		const matchs = await Match.all();
 		return view.render('Setup.Prize.create',
 			{
-					matchs: matchs.rows
+				matchs: matchs.rows
 			}
 		);
 	}
@@ -61,7 +61,6 @@ class PrizeController {
 			match_id: 'required',
 			lavel: 'required',
 			prize: 'required'
-
 		}
 		const validation = await validate(request.all(), rules);
 		if (validation.fails()) {
@@ -75,7 +74,7 @@ class PrizeController {
 		prize.lavel = request.input('lavel')
 
 		await prize.save()
-		return  "True";
+		return response.redirect('prize');
 	}
 
 	/**
@@ -104,8 +103,8 @@ class PrizeController {
 		const prize = await Prize.find(params.id);
 		return view.render('Setup.Prize.edit',
 			{
-					matchs: matchs.rows,
-					prize
+				matchs: matchs.rows,
+				prize
 			}
 		);
 	}
@@ -137,7 +136,7 @@ class PrizeController {
 		prize.lavel = request.input('lavel')
 
 		await prize.save()
-		return  "True";
+		return response.redirect('prize');
 	}
 
 	/**
@@ -149,11 +148,13 @@ class PrizeController {
 	 * @param {Response} ctx.response
 	 */
 	async destroy ({ params, request, response }) {
-		const prize = Prize.find(params.id);
-		if(prize) {
+		console.log(params.id)
+		const prize =await Prize.find(params.id);
+		if(!prize) {
 			return "no prize for this id"
 		}
-		prize.delete();
+		await prize.delete();
+		return response.redirect('/prize');
 	}
 }
 

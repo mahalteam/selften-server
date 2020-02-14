@@ -4,6 +4,9 @@
 const Model = use('Model')
 
 class Prize extends Model {
+	match () {
+	    return this.belongsTo('App/Models/Match')
+	}
 }
 
 module.exports = Prize

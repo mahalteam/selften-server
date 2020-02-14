@@ -18,18 +18,17 @@
 	    </tr>
 	  </thead>
 	  <tbody> 
-	  	@each(product in products)
+	  	@each((product,index) in products)
 		    <tr>
-		      <th scope="row">1</th>
+		      <td scope="row">{{ index+1 }}</td>
 		      <td>{{ product.name }}</td>
 		      <td><img src="{{ 'uploads/product/'+product.logo }}" width="50px" /></td>
-		      <td>{{ product.logo }}</td>
 		      <td>{{ product.rules }}</td>
-		   	 <td>
+		   	 <td class="d-flex">
 			  	<form method="POST" action="/product/{{product.id}}?_method=delete">
 					<button type="submit" class="btn btn-primary">Delete</button>
 				</form>
-				<a href="/product/edit" class="btn btn-success">edit</a>
+				<a style="margin: 0px 10px;" href="/product/{{product.id}}/edit" class="btn btn-success">edit</a>
 			  </td>
 		    </tr>
 	    @endeach

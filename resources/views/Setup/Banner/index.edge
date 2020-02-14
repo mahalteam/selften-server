@@ -22,10 +22,11 @@
 		      <th scope="row">1</th>
 		      <td>{{ banner.note }}</td>
 		      <td><img src="{{ 'uploads/banner/'+banner.banner }}" width="50px" /></td>
-		      <td>
+		      <td class="d-flex">
 			  	<form method="POST" action="/banner/{{banner.id}}?_method=delete">
 					<button type="submit" class="btn btn-primary">Delete</button>
 				</form>
+				<a style="margin: 0px 10px;" href="/banner/{{banner.id}}/edit" class="btn btn-success">edit</a>
 			  </td>
 		    </tr>
 	    @endeach

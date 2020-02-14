@@ -9,8 +9,10 @@
  */
 const { validate } = use('Validator');
 const Match = use('App/Models/Match')
+const User = use('App/Models/User')
 const Product = use('App/Models/Product')
 const Maps = use('App/Models/Map')
+const Matchuser = use('App/Models/Matchuser')
 class MatchController {
 	/**
 	 * Show a list of all matches.
@@ -42,6 +44,51 @@ class MatchController {
 	async singlematch ({ params,request, response, view }) {
 		const match = await Match.query().with('product').with('users').with('map').with('prizes').where('id',params.id).where('status', 'upcoming').orWhere('status', 'ongoing').fetch();
 		response.json(match)
+	}
+
+	async join ({ params,request, response, view }) {
+		const matchuser = new Matchuser();
+		var type = request.input('type');
+		var totalfee = request.input('fee');
+		var user_id=request.input('user_id');
+		var match_id=request.input('match_id');
+
+		const user = await User.find(user_id);
+		user.wallet=user.wallet-totalfee
+		user.save();
+		
+		if(type=='solo'){
+			matchuser.user_id=user_id
+			matchuser.match_id=match_id
+			matchuser.gamename=request.input('player1')
+			await matchuser.save()
+		}else if(type=='duo'){
+			matchuser.user_id=user_id
+			matchuser.match_id=match_id
+			matchuser.gamename=request.input('player1')
+			await matchuser.save()
+
+			matchuser.user_id=user_id
+			matchuser.match_id=match_id
+			matchuser.gamename=request.input('player2')
+			await matchuser.save()
+		}else{
+			matchuser.user_id=user_id
+			matchuser.match_id=match_id
+			matchuser.gamename=request.input('player1')
+			await matchuser.save()
+
+			matchuser.user_id=user_id
+			matchuser.match_id=match_id
+			matchuser.gamename=request.input('player2')
+			await matchuser.save()
+
+			matchuser.user_id=user_id
+			matchuser.match_id=match_id
+			matchuser.gamename=request.input('player3')
+			await matchuser.save()
+		}
+		response.json('success')
 	}
 
 	/**

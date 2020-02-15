@@ -23,7 +23,6 @@
                             <option value="{{product.id}}">{{product.name}}</option>
                         @endeach
                     </select>
-                    <small id="start_at" class="form-text text-muted">Validation error</small>
                 </div>
                 <div class="col-6">
                     <label for="map">Maps:</label>
@@ -35,7 +34,6 @@
                             <option value="{{map.id}}">{{map.name}}</option>
                         @endeach
                     </select>
-                    <small id="start_at" class="form-text text-muted">Validation error</small>
                 </div>
                 <div class="col-6">
                     <label for="name">Start At:</label>
@@ -46,40 +44,36 @@
                         class="form-control"
                         id="start_at"
                         aria-describedby="start_at">
-                    <small id="start_at" class="form-text text-muted">Validation error</small>
                 </div>
                 <div class="col-6">
                     <label for="name">Start Time:</label>
                     <input
                         value="{{match.start_time}}"
-                        type="time"
+                        type="text"
                         name="start_time"
                         class="form-control"
                         id="start_time"
                         aria-describedby="start_at">
-                    <small id="start_time" class="form-text text-muted">Validation error</small>
                 </div>
                 <div class="col-6">
                     <label for="name">In Time:</label>
                     <input
                         value="{{match.in_time}}"
-                        type="time"
+                        type="text"
                         name="in_time"
                         class="form-control"
                         id="in_time"
                         aria-describedby="in_time">
-                    <small id="in_time" class="form-text text-muted">Validation error</small>
                 </div>
                 <div class="col-6">
                     <label for="name">End Time:</label>
                     <input
                         value="{{match.end_time}}"
-                        type="time"
+                        type="text"
                         name="end_time"
                         class="form-control"
                         id="end_time"
                         aria-describedby="end_time">
-                    <small id="end_time" class="form-text text-muted">Validation error</small>
                 </div>
                 <div class="col-6">
                     <label for="name">Match Name:</label>
@@ -90,7 +84,6 @@
                         class="form-control"
                         id="match_name"
                         aria-describedby="match_name">
-                    <small id="match_name" class="form-text text-muted">Validation error</small>
                 </div>
                 <div class="col-6">
                     <label for="name">Type :</label>
@@ -101,7 +94,6 @@
                         class="form-control"
                         id="type"
                         aria-describedby="type">
-                    <small id="type" class="form-text text-muted">Validation error</small>
                 </div>
                 <div class="col-6">
                     <label for="name">Entry Fee:</label>
@@ -112,7 +104,6 @@
                         class="form-control"
                         id="entry_fee"
                         aria-describedby="entry_fee">
-                    <small id="entry_fee" class="form-text text-muted">Validation error</small>
                 </div>
                 <div class="col-6">
                     <label for="name">Perkill:</label>
@@ -123,7 +114,6 @@
                         class="form-control"
                         id="perkill"
                         aria-describedby="perkill">
-                    <small id="perkill" class="form-text text-muted">Validation error</small>
                 </div>
                 <div class="col-6">
                     <label for="name">Max Join:</label>
@@ -134,7 +124,6 @@
                         class="form-control"
                         id="max_join"
                         aria-describedby="max_join">
-                    <small id="max_join" class="form-text text-muted">Validation error</small>
                 </div>
                 <div class="col-6">
                     <label for="name">Min Join:</label>
@@ -145,7 +134,6 @@
                         class="form-control"
                         id="min_join"
                         aria-describedby="min_join">
-                    <small id="min_join" class="form-text text-muted">Validation error</small>
                 </div>
                 <div class="col-6">
                     <label for="name">Room Id:</label>
@@ -156,7 +144,6 @@
                         class="form-control"
                         id="room_id"
                         aria-describedby="room_id">
-                    <small id="room_id" class="form-text text-muted">Validation error</small>
                 </div>
                 <div class="col-6">
                     <label for="name">Password:</label>
@@ -167,9 +154,9 @@
                         class="form-control"
                         id="password"
                         aria-describedby="password">
-                    <small id="password" class="form-text text-muted">Validation error</small>
                 </div>
             </div>
+            <br>
             <button type="submit" class="btn btn-primary">Edit</button>
         </form>
     </div>

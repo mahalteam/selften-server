@@ -24,14 +24,14 @@ class MatchController {
 	 * @param {View} ctx.view
 	 */
 	async index ({ request, response, view }) {
-		const match = await Match.all();
+		const match = await Match.query().with('product').with('users').fetch();
 		const product = await Product.all();
 		const maps = await Maps.all();
 		return view.render('setup/match/index',
 			{
 			    maps: maps.rows,
 			    products: product.rows,
-			    match: match.rows
+			    match: match.toJSON()
 			}
 		);
 	}
@@ -257,10 +257,24 @@ class MatchController {
 	async destroy ({ params, request, response }) {
 		const match = await Match.find(params.id)
         if (!match) {
-            return "No banner for this id";
+            return "No Match for this id";
         }
 		await match.delete();
-		return response.redirect('match');
+		return response.redirect('/match');
+	}
+
+	async totalplayer({ params, request, response,view }){
+		const match = await Match.query().with('users').where('id',params.id).first();
+		return view.render('setup/match/totalplayer',
+			{
+			    match: match.toJSON()
+			}
+		);
+	}
+
+	async updatestatus({ params, request, response,view }){
+		var match = Match.query().where('id', params.id).update({ status: request.input('status') });
+		return match;
 	}
 }
 

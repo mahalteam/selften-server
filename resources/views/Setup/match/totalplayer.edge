@@ -1,0 +1,32 @@
+@layout('layout')
+
+@section('body')
+<div class="container-fluid">
+	<!-- Page Heading -->
+	<table class="table table-success">
+	  <thead>
+	    <tr>
+	      <th scope="col">#</th>
+	      <th scope="col">Name</th>
+	      <th scope="col">email</th>
+	      <th scope="col">Game Name</th>
+	      <th scope="col">Marks</th>
+	    </tr>
+	  </thead>
+	  <tbody> 
+	  	@each((m,index) in match.users)
+		    <tr>
+		      <th scope="row">{{ index+1 }}</th>
+		      <td>{{ m.username }}</td>
+		      <td>{{ m.email }}</td>
+		      <td>{{ m.pivot.gamename }}</td>
+		      <td>
+		      	
+		      </td>
+		    </tr>
+	    @endeach
+	  </tbody>
+	</table>
+</div>
+
+@endsection

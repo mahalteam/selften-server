@@ -19,6 +19,8 @@ const Route = use('Route')
 Route.get('/', 'HomeController.index')
 Route.get('/table', 'HomeController.table')
 Route.get('/users', 'UserController.index')
+Route.get('/totalplayer/:id', 'MatchController.totalplayer')
+Route.get('/update/:id', 'MatchController.updatestatus')
 Route.resource('product', 'ProductController');
 Route.resource('match', 'MatchController');
 Route.resource('map', 'MapController');

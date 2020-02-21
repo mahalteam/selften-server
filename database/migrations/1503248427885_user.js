@@ -12,6 +12,7 @@ class UserSchema extends Schema {
       table.string('email', 254).notNullable().unique()
       table.string('password', 60).notNullable()
       table.integer('wallet', 10).default(0)
+      table.integer('earn_wallet', 10).default(0)
       table.integer('scores', 10).default(0)
       table.integer('matchesplayed', 10).default(0)
       table.integer('totalkills', 10).default(0)

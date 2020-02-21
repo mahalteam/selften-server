@@ -9,9 +9,10 @@ class MetchUserSchema extends Schema {
 			table.increments()
 			table.integer('metch_id')
 			table.integer('user_id')
-			table.integer('totalkill')
-			table.string('gamename')
-			table.string('gameid')
+			table.integer('total_kill').default(0)
+			table.integer('total_earn').default(0)
+			table.string('gamename').default(0)
+			table.string('gameid').default(0)
 			table.timestamps()
 		})
 	}

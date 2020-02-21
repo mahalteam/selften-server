@@ -10,7 +10,9 @@
 	      <th scope="col">Name</th>
 	      <th scope="col">email</th>
 	      <th scope="col">Game Name</th>
-	      <th scope="col">Marks</th>
+	      <th scope="col">Total Kill</th>
+	      <th scope="col">Total Earn</th>
+	      <th scope="col">Update</th>
 	    </tr>
 	  </thead>
 	  <tbody> 
@@ -20,9 +22,9 @@
 		      <td>{{ m.username }}</td>
 		      <td>{{ m.email }}</td>
 		      <td>{{ m.pivot.gamename }}</td>
-		      <td>
-		      	
-		      </td>
+		      <td>{{ m.pivot.total_kill }}</td>
+		      <td>{{ m.pivot.total_earn }}</td>
+		      <td><a href="" class="btn btn-sm btn-success">Update</a></td>
 		    </tr>
 	    @endeach
 	  </tbody>

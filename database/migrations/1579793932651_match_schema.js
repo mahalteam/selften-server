@@ -17,6 +17,7 @@ class MatchSchema extends Schema {
       table.integer('perkill')
       table.integer('entryfee')
       table.integer('type')
+      table.enu('status',['upcoming','ongoing','result'])
       table.integer('max_join')
       table.integer('min_join')
       table.string('room_id')

@@ -24,11 +24,71 @@
 		      <td>{{ m.pivot.gamename }}</td>
 		      <td>{{ m.pivot.total_kill }}</td>
 		      <td>{{ m.pivot.total_earn }}</td>
-		      <td><a href="" class="btn btn-sm btn-success">Update</a></td>
+		      <td><a href=""  onclick="playerUpdate({{m.id}})" class="btn btn-sm btn-success"  data-toggle="modal" data-target="#exampleModalPlayerUpdate" data-whatever="@mdo">Update</a></td>
 		    </tr>
 	    @endeach
 	  </tbody>
 	</table>
 </div>
 
+
+<script>
+
+
+function playerUpdate(id){
+    $.ajax({    //create an ajax request to display.php
+        type: "GET",
+        url: "/playerupdate/"+id,             
+        //dataType: "html",   //expect html to be returned                
+        success: function(response){        
+		  var data = response;
+		  console.log(data); 
+		  $('#id').val(data.id);
+		  $('#kill').val(data.total_kill);
+		  $('#previous_earn').val(data.total_earn);
+          $('#exampleModal').modal('hide');
+        }
+    });
+}
+</script>
+
+
+
+
+<div class="modal fade" id="exampleModalPlayerUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Player</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form  method="POST" action="/playerUpdateStore/">
+          {{ csrfField() }}
+          <div class="form-group">
+            <input type="text" id="kill" class="form-control" required name="kill" placeholder="Enter Kill">
+          </div>
+			
+			  <input type="hidden"  id="id" name="id">
+			  <input type="hidden"  id="previous_earn" name="previous_earn">
+              
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        {{--  <button type="submit" class="btn btn-primary">Update</button>  --}}
+        <input type="submit" id="update" class="btn btn-primary" value="Update">
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 @endsection
+
+
+{{--  <input type="email"  id="email" class="form-control" required name="email" placeholder="Email">
+			<input type="text" id="gender" class="form-control" required name="gender" placeholder="gender">
+            <input type="text"  id="contact" class="form-control" required name="contact" placeholder="Contect Number">  --}}

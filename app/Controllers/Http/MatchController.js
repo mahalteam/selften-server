@@ -272,6 +272,48 @@ class MatchController {
 		);
 	}
 
+
+	async playerupdate ({ request, response, view, params }) {
+		const id = params.id;
+		const matchuser = await Matchuser.find(id);
+		// console.log(user);
+		return matchuser;
+	}
+
+	async playerUpdateStore ({ request, response}) {
+		//collect update data
+    const match_user_info = request.collect(['kill', 'id', 'previous_earn']);
+	const id = match_user_info[0].id;
+	const previous_earn = match_user_info[0].previous_earn;
+    // find match user
+	const collectmatchuser = await Matchuser.find(id);
+	//belongsTo used to select metch data
+	const user_match = await Matchuser.query().with('matches').fetch();
+	const user_match_data = user_match.toJSON();
+	const perkill = user_match_data[0].matches.perkill;
+	const m_id = user_match_data[0].matches.id;
+	//belongsTo used to select User data
+	const match_player = await Matchuser.query().with('users').fetch();
+	const match_player_data = match_player.toJSON();
+	const tottal_earn_wallet = match_player_data[0].users.earn_wallet;
+	const player_id =  match_player_data[0].users.id;
+	// find match user
+	const collectuser = await User.find(player_id);
+	const new_earn_wallet = (tottal_earn_wallet - previous_earn) + match_user_info[0].kill * perkill;
+	collectuser.earn_wallet = new_earn_wallet;
+	// return match_player;
+	// return perkill;
+	collectmatchuser.total_kill = match_user_info[0].kill;
+	collectmatchuser.total_earn = match_user_info[0].kill * perkill;
+	// return collectmatchuser;
+	//save match user data and user earn_wallet
+	await collectmatchuser.save()
+	await collectuser.save()
+    response.redirect('/totalplayer/'+m_id)
+  }
+
+
+
 	async updatestatus({ params, request, response,view }){
 		var match = Match.query().where('id', params.id).update({ status: request.input('status') });
 		return match;

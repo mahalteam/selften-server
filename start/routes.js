@@ -16,17 +16,37 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.get('/', 'HomeController.index')
-Route.get('/table', 'HomeController.table')
-Route.get('/users', 'UserController.index')
-Route.get('/totalplayer/:id', 'MatchController.totalplayer')
-Route.get('/update/:id', 'MatchController.updatestatus')
-Route.resource('product', 'ProductController');
-Route.resource('match', 'MatchController');
-Route.resource('map', 'MapController');
-Route.resource('banner', 'BannerController');
-Route.resource('prize', 'PrizeController');
 
+
+
+
+
+Route.group(() => {
+
+    Route.get('/register', 'AdminController.registerview')
+    Route.post('/registerstore', 'AdminController.register').validator('Register')
+    // Route.post('/registerstore', 'AuthController.register')
+    Route.get('/loginview', 'AdminController.loginview')
+    Route.post('/login', 'AdminController.login')
+
+    })
+
+
+
+Route.group(() => {
+	Route.get('/', 'HomeController.index')
+	Route.get('/table', 'HomeController.table')
+	Route.get('/users', 'UserController.index')
+	Route.get('/totalplayer/:id', 'MatchController.totalplayer')
+	Route.get('/playerupdate/:id', 'MatchController.playerupdate')
+	Route.post('/playerUpdateStore', 'MatchController.playerUpdateStore')
+	Route.get('/update/:id', 'MatchController.updatestatus')
+	Route.resource('product', 'ProductController');
+	Route.resource('match', 'MatchController');
+	Route.resource('map', 'MapController');
+	Route.resource('banner', 'BannerController');
+	Route.resource('prize', 'PrizeController');
+}).middleware(['auth'])
 
 // api
 Route.group(() => {

@@ -16,22 +16,13 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-
-
-
-
-
 Route.group(() => {
-
     Route.get('/register', 'AdminController.registerview')
     Route.post('/registerstore', 'AdminController.register').validator('Register')
     // Route.post('/registerstore', 'AuthController.register')
     Route.get('/loginview', 'AdminController.loginview')
     Route.post('/login', 'AdminController.login')
-
-    })
-
-
+})
 
 Route.group(() => {
 	Route.get('/', 'HomeController.index')
@@ -46,7 +37,7 @@ Route.group(() => {
 	Route.resource('map', 'MapController');
 	Route.resource('banner', 'BannerController');
 	Route.resource('prize', 'PrizeController');
-}).middleware(['auth'])
+})
 
 // api
 Route.group(() => {

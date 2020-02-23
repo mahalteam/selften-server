@@ -27,7 +27,7 @@ class MatchController {
 		const match = await Match.query().with('product').with('users').fetch();
 		const product = await Product.all();
 		const maps = await Maps.all();
-		return view.render('setup/match/index',
+		return view.render('Setup/match/index',
 			{
 			    maps: maps.rows,
 			    products: product.rows,
@@ -265,7 +265,7 @@ class MatchController {
 
 	async totalplayer({ params, request, response,view }){
 		const match = await Match.query().with('users').where('id',params.id).first();
-		return view.render('setup/match/totalplayer',
+		return view.render('Setup/match/totalplayer',
 			{
 			    match: match.toJSON()
 			}

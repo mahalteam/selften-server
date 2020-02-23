@@ -21,7 +21,7 @@ class MapController {
 	 */
 	async index ({ request, response, view }) {
 		const maps = await Maps.all();
-		return view.render('setup/map/index',{maps: maps.rows});
+		return view.render('Setup/map/index',{maps: maps.rows});
 	}
 
 	/**

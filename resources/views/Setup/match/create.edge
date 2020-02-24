@@ -19,8 +19,8 @@
                             <option value="{{product.id}}">{{product.name}}</option>
                         @endeach
                     </select>
-                    <small id="start_at" class="form-text text-muted">Validation error</small>
                 </div>
+                {{ elIf('<span class="alert alert-danger mb-2 mt-2">$self</span>', getErrorFor('product_id'), hasErrorFor('product_id')) }}
                 <div class="col-6">
                     <label for="map">Maps:</label>
                     <select name="map_id" class="form-control" id="map">
@@ -29,7 +29,7 @@
                             <option value="{{map.id}}">{{map.name}}</option>
                         @endeach
                     </select>
-                    <small id="start_at" class="form-text text-muted">Validation error</small>
+                    {{ elIf('<span class="alert alert-danger mb-2 mt-2">$self</span>', getErrorFor('map_id'), hasErrorFor('map_id')) }}
                 </div>
                 <div class="col-6">
                     <label for="name">Start At:</label>
@@ -39,7 +39,7 @@
                         class="form-control"
                         id="start_at"
                         aria-describedby="start_at">
-                    <small id="start_at" class="form-text text-muted">Validation error</small>
+                    {{ elIf('<span class="alert alert-danger mb-2 mt-2">$self</span>', getErrorFor('start_at'), hasErrorFor('start_at')) }}
                 </div>
                 <div class="col-6">
                     <label for="name">Start Time:</label>
@@ -49,6 +49,7 @@
                         class="form-control"
                         id="start_time"
                         aria-describedby="start_at">
+                        {{ elIf('<span class="alert alert-danger mb-2 mt-2">$self</span>', getErrorFor('start_time'), hasErrorFor('start_time')) }}
                 </div>
                 <div class="col-6">
                     <label for="name">Match Name:</label>
@@ -58,7 +59,7 @@
                         class="form-control"
                         id="match_name"
                         aria-describedby="match_name">
-                    <small id="match_name" class="form-text text-muted">Validation error</small>
+                    {{ elIf('<span class="alert alert-danger mb-2 mt-2">$self</span>', getErrorFor('match_name'), hasErrorFor('match_name')) }}
                 </div>
                 <div class="col-6">
                     <label for="name">Type :</label>
@@ -68,7 +69,7 @@
                         <option value="duo">Duo</option>
                         <option value="squad">Squad</option>
                     </select>
-                    <small id="type" class="form-text text-muted">Validation error</small>
+                    {{ elIf('<span class="alert alert-danger mb-2 mt-2">$self</span>', getErrorFor('type'), hasErrorFor('type')) }}
                 </div>
                 <div class="col-6">
                     <label for="name">Entry Fee:</label>
@@ -78,7 +79,7 @@
                         class="form-control"
                         id="entry_fee"
                         aria-describedby="entry_fee">
-                    <small id="entry_fee" class="form-text text-muted">Validation error</small>
+                    {{ elIf('<span class="alert alert-danger mb-2 mt-2">$self</span>', getErrorFor('entry_fee'), hasErrorFor('entry_fee')) }}
                 </div>
                 <div class="col-6">
                     <label for="name">Perkill:</label>
@@ -88,6 +89,7 @@
                         class="form-control"
                         id="perkill"
                         aria-describedby="perkill">
+                        {{ elIf('<span class="alert alert-danger mb-2 mt-2">$self</span>', getErrorFor('perkill'), hasErrorFor('perkill')) }}
                 </div>
                 <div class="col-6">
                     <label for="name">Max Join:</label>
@@ -97,6 +99,7 @@
                         class="form-control"
                         id="max_join"
                         aria-describedby="max_join">
+                        {{ elIf('<span class="alert alert-danger mb-2 mt-2">$self</span>', getErrorFor('max_join'), hasErrorFor('max_join')) }}
                 </div>
                 <div class="col-6">
                     <label for="name">Min Join:</label>
@@ -106,6 +109,7 @@
                         class="form-control"
                         id="min_join"
                         aria-describedby="min_join">
+                        {{ elIf('<span class="alert alert-danger mb-2 mt-2">$self</span>', getErrorFor('min_join'), hasErrorFor('min_join')) }}
                 </div>
                 <div class="col-6">
                     <label for="name">Total Prize:</label>
@@ -115,6 +119,7 @@
                         class="form-control"
                         id="total_prize"
                         aria-describedby="total_prize">
+                    {{ elIf('<span class="alert alert-danger mb-2 mt-2">$self</span>', getErrorFor('total_prize'), hasErrorFor('total_prize')) }}
                 </div>
                 <div class="col-6">
                     <label for="name">Platform:</label>
@@ -124,6 +129,7 @@
                         <option value="mobile">Mobile</option>
                         <option value="pc">PC</option>
                     </select>
+                    {{ elIf('<span class="alert alert-danger mb-2 mt-2">$self</span>', getErrorFor('platform'), hasErrorFor('platform')) }}
                 </div>
                 
             </div>

@@ -117,9 +117,10 @@ class MatchController {
 	 * @param {Request} ctx.request
 	 * @param {Response} ctx.response
 	 */
-	async store ({ request, response }) {
+	async store ({ request, session, response }) {
 		const rules = {
 			product_id: 'required',
+			map_id: 'required',
 			start_at: 'required',
 			start_time: 'required',
 			match_name: 'required',
@@ -134,9 +135,12 @@ class MatchController {
 		}
 		const validation = await validate(request.all(), rules);
 		if (validation.fails()) {
-			// return validation.messages()
-			return "Insert Form data error";
-		}
+			session
+				.withErrors(validation.messages())
+				// .flashExcept(['password'])
+
+				return response.redirect('back')
+			}
 
 		const match = new Match()
 

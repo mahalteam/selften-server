@@ -5,7 +5,7 @@ const Model = use('Model')
 
 class Matchuser extends Model {
 	static get table () {
-	    return 'match_user'
+	    return 'match_users'
 	}
 	matches(){
         return this.belongsTo('App/Models/Match', 'match_id');

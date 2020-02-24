@@ -14,7 +14,7 @@
                 <div class="col-6">
                     <label for="product">Product</label>
                     <select name="product_id" class="form-control" id="product">
-                        <option>Select One</option>
+                        <option value="">Select One</option>
                         @each(product in products)
                             <option value="{{product.id}}">{{product.name}}</option>
                         @endeach
@@ -24,7 +24,7 @@
                 <div class="col-6">
                     <label for="map">Maps:</label>
                     <select name="map_id" class="form-control" id="map">
-                        <option>Select One</option>
+                        <option value="">Select One</option>
                         @each(map in maps)
                             <option value="{{map.id}}">{{map.name}}</option>
                         @endeach
@@ -51,26 +51,6 @@
                         aria-describedby="start_at">
                 </div>
                 <div class="col-6">
-                    <label for="name">In Time:</label>
-                    <input
-                         type="text"
-                        name="in_time"
-                        class="form-control"
-                        id="in_time"
-                        aria-describedby="in_time">
-                    <small id="in_time" class="form-text text-muted">Validation error</small>
-                </div>
-                <div class="col-6">
-                    <label for="name">End Time:</label>
-                    <input
-                         type="text"
-                        name="end_time"
-                        class="form-control"
-                        id="end_time"
-                        aria-describedby="end_time">
-                    <small id="end_time" class="form-text text-muted">Validation error</small>
-                </div>
-                <div class="col-6">
                     <label for="name">Match Name:</label>
                     <input
                         type="text"
@@ -83,7 +63,7 @@
                 <div class="col-6">
                     <label for="name">Type :</label>
                     <select name="type" class="form-control">
-                        <option>Select One</option>
+                        <option value="">Select One</option>
                         <option value="solo">Solo</option>
                         <option value="duo">Duo</option>
                         <option value="squad">Squad</option>
@@ -139,7 +119,7 @@
                 <div class="col-6">
                     <label for="name">Platform:</label>
                     <select name="platform" class="form-control">
-                        <option>Select One</option>
+                        <option value="">Select One</option>
                         <option value="all">All</option>
                         <option value="mobile">Mobile</option>
                         <option value="pc">PC</option>

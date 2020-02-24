@@ -42,7 +42,7 @@ class MatchController {
 	}
 
 	async singlematch ({ params,request, response, view }) {
-		const match = await Match.query().with('product').with('users').with('map').with('prizes').where('id',params.id).where('status', 'upcoming').orWhere('status', 'ongoing').fetch();
+		const match = await Match.query().with('product').with('users').with('map').with('prizes').where('id',params.id).fetch();
 		response.json(match)
 	}
 
@@ -122,19 +122,19 @@ class MatchController {
 			product_id: 'required',
 			start_at: 'required',
 			start_time: 'required',
-			in_time: 'required',
-			end_time: 'required',
 			match_name: 'required',
 			type: 'required',
 			entry_fee: 'required',
 			perkill: 'required',
 			max_join: 'required',
 			min_join: 'required',
+			platform: 'required',
 			total_prize: 'required',
 
 		}
 		const validation = await validate(request.all(), rules);
 		if (validation.fails()) {
+			// return validation.messages()
 			return "Insert Form data error";
 		}
 
@@ -154,6 +154,7 @@ class MatchController {
 		match.min_join = request.input('min_join')
 		match.room_id = request.input('room_id')
 		match.total_prize = request.input('total_prize')
+		match.platform = request.input('platform')
 		match.password = request.input('password')
 		await match.save()
 		return response.redirect('match');
@@ -210,8 +211,6 @@ class MatchController {
 			product_id: 'required',
 			start_at: 'required',
 			start_time: 'required',
-			in_time: 'required',
-			end_time: 'required',
 			match_name: 'required',
 			type: 'required',
 			entry_fee: 'required',
@@ -219,21 +218,21 @@ class MatchController {
 			max_join: 'required',
 			min_join: 'required',
 			room_id: 'required',
+			platform: 'required',
 			password: 'required'
 
 		}
 		const validation = await validate(request.all(), rules);
 		if (validation.fails()) {
-			console.log(validation.messages());
-			return "Insert Form data error";
+			return validation.messages()
+			// console.log(validation.messages());
+			// return "Insert Form data error";
 		}
 
 		match.product_id = request.input('product_id')
 		match.map_id = request.input('map_id')
 		match.start_at = request.input('start_at')
 		match.start_time = request.input('start_time')
-		match.in_time = request.input('in_time')
-		match.end_time = request.input('end_time')
 		match.match_name = request.input('match_name')
 		match.perkill = request.input('perkill')
 		match.entryfee = request.input('entry_fee')
@@ -242,6 +241,7 @@ class MatchController {
 		match.max_join = request.input('max_join')
 		match.min_join = request.input('min_join')
 		match.room_id = request.input('room_id')
+		match.platform = request.input('platform')
 		match.password = request.input('password')
 
 		var abc = await match.save();

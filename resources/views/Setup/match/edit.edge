@@ -18,9 +18,13 @@
                         name="product_id"
                         class="form-control"
                         id="product">
-                        <option>Select One</option>
+                        <option value="">Select One</option>
                         @each(product in products)
+                        @if(product.id == match.product_id)
+                          <option value="{{product.id}}" selected>{{product.name}}</option>
+                        @else
                             <option value="{{product.id}}">{{product.name}}</option>
+                        @endif
                         @endeach
                     </select>
                 </div>
@@ -29,9 +33,13 @@
                     <select name="map_id"
                         value="{{match.map_id}}"
                         class="form-control" id="map">
-                        <option>Select One</option>
+                        <option value="">Select One</option>
                         @each(map in maps)
-                            <option value="{{map.id}}">{{map.name}}</option>
+                            @if(map.id == match.map_id)
+                                <option value="{{map.id}}" selected>{{map.name}}</option>
+                            @else
+                                <option value="{{map.id}}">{{map.name}}</option>
+                            @endif
                         @endeach
                     </select>
                 </div>
@@ -56,26 +64,6 @@
                         aria-describedby="start_at">
                 </div>
                 <div class="col-6">
-                    <label for="name">In Time:</label>
-                    <input
-                        value="{{match.in_time}}"
-                        type="text"
-                        name="in_time"
-                        class="form-control"
-                        id="in_time"
-                        aria-describedby="in_time">
-                </div>
-                <div class="col-6">
-                    <label for="name">End Time:</label>
-                    <input
-                        value="{{match.end_time}}"
-                        type="text"
-                        name="end_time"
-                        class="form-control"
-                        id="end_time"
-                        aria-describedby="end_time">
-                </div>
-                <div class="col-6">
                     <label for="name">Match Name:</label>
                     <input
                         value="{{match.match_name}}"
@@ -87,13 +75,22 @@
                 </div>
                 <div class="col-6">
                     <label for="name">Type :</label>
-                    <input
-                        value="{{match.type}}"
-                        type="text"
-                        name="type"
-                        class="form-control"
-                        id="type"
-                        aria-describedby="type">
+                    <select name="type" class="form-control">
+                        <option value="">Select One</option>
+                            @if(match.type == 'solo')
+                                <option value="solo" selected>Solo</option>
+                                <option value="duo">Duo</option>
+                                <option value="squad">Squad</option>
+                            @elseif(match.type == 'duo')
+                                <option value="solo">Solo</option>
+                                <option value="duo" selected>Duo</option>
+                                <option value="squad">Squad</option>
+                            @elseif(match.type == 'squad')
+                                <option value="solo">Solo</option>
+                                <option value="duo">Duo</option>
+                                <option value="squad" selected>Squad</option>
+                            @endif
+                    </select>
                 </div>
                 <div class="col-6">
                     <label for="name">Entry Fee:</label>
@@ -164,6 +161,25 @@
                         class="form-control"
                         id="password"
                         aria-describedby="password">
+                </div>
+                <div class="col-6">
+                    <label for="name">Platform:</label>
+                    <select name="platform" class="form-control">
+                        <option value="">Select One</option>
+                            @if(match.platform == 'all')
+                                <option value="all" selected>All</option>
+                                <option value="mobile">Mobile</option>
+                                <option value="pc">PC</option>
+                            @elseif(match.platform == 'mobile')
+                                <option value="all">All</option>
+                                <option value="mobile" selected>Mobile</option>
+                                <option value="pc">PC</option>
+                            @elseif(match.platform == 'pc')
+                                <option value="all">All</option>
+                                <option value="mobile">Mobile</option>
+                                <option value="pc" selected>PC</option>
+                            @endif
+                    </select>
                 </div>
             </div>
             <br>

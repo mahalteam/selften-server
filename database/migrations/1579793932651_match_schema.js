@@ -11,8 +11,6 @@ class MatchSchema extends Schema {
       table.integer('map_id')
       table.date('start_at')
       table.string('start_time')
-      table.string('in_time')
-      table.string('end_time')
       table.string('match_name')
       table.integer('perkill')
       table.integer('entryfee')

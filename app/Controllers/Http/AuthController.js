@@ -8,9 +8,20 @@ class AuthController {
 
 		let user = await User.create(request.all())
 
+		const rules = {
+	      email: 'required|email|unique:users,email',
+	      password: 'required'
+	    }
+
+	    const validation = await validate(request.all(), rules)
+
+	    if (validation.fails()) {
+	      return response.json(validation.messages())
+	    }
+
 		//generate token for user;
 		let token = await auth.generate(user)
-
+		user = await User.findBy('id', user.id)
 		Object.assign(user, token)
 
 		return response.json(user)

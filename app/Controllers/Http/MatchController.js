@@ -153,6 +153,7 @@ class MatchController {
 		match.max_join = request.input('max_join')
 		match.min_join = request.input('min_join')
 		match.room_id = request.input('room_id')
+		match.total_prize = request.input('total_prize')
 		match.password = request.input('password')
 		await match.save()
 		return response.redirect('match');
@@ -237,13 +238,14 @@ class MatchController {
 		match.perkill = request.input('perkill')
 		match.entryfee = request.input('entry_fee')
 		match.type = request.input('type')
+		match.total_prize = request.input('total_prize')
 		match.max_join = request.input('max_join')
 		match.min_join = request.input('min_join')
 		match.room_id = request.input('room_id')
 		match.password = request.input('password')
 
-		await match.save()
-		return response.redirect('match');
+		var abc = await match.save();
+		return response.redirect('/match');
 	}
 
 	/**

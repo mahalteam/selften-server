@@ -137,7 +137,7 @@ class MatchController {
 		if (validation.fails()) {
 			session
 				.withErrors(validation.messages())
-				// .flashExcept(['password'])
+				.flashExcept()
 
 				return response.redirect('back')
 			}

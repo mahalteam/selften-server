@@ -20,13 +20,16 @@
                         id="product">
                         <option value="">Select One</option>
                         @each(product in products)
-                        @if(product.id == match.product_id)
+                        @if(old('product_id', '') == product.id)
+                            <option value="{{product.id}}" selected>{{product.name}}</option>
+                        @elseif(product.id == match.product_id)
                           <option value="{{product.id}}" selected>{{product.name}}</option>
                         @else
                             <option value="{{product.id}}">{{product.name}}</option>
                         @endif
                         @endeach
                     </select>
+                        {{ elIf('<span class="alert alert-danger lh-6 mb-2 mt-2">$self</span>', getErrorFor('product_id'), hasErrorFor('product_id')) }}
                 </div>
                 <div class="col-6">
                     <label for="map">Maps:</label>
@@ -35,16 +38,28 @@
                         class="form-control" id="map">
                         <option value="">Select One</option>
                         @each(map in maps)
-                            @if(map.id == match.map_id)
+                            @if(old('map_id', '') == map.id)
+                                <option value="{{map.id}}" selected>{{map.name}}</option>
+                            @elseif(map.id == match.map_id)
                                 <option value="{{map.id}}" selected>{{map.name}}</option>
                             @else
                                 <option value="{{map.id}}">{{map.name}}</option>
                             @endif
                         @endeach
                     </select>
+                        {{ elIf('<span class="alert alert-danger lh-6 mb-2 mt-2">$self</span>', getErrorFor('map_id'), hasErrorFor('map_id')) }}
                 </div>
                 <div class="col-6">
                     <label for="name">Start At:</label>
+                    @if(old('start_at', '') != '')
+                    <input
+                        type="date"
+                        name="start_at"
+                        class="form-control"
+                        id="start_at"
+                        aria-describedby="start_at"
+                        value="{{ old('start_at', '') }}">
+                    @else 
                     <input
                         value="{{match.start_at}}"
                         type="date"
@@ -52,19 +67,41 @@
                         class="form-control"
                         id="start_at"
                         aria-describedby="start_at">
+                    @endif
+                        {{ elIf('<span class="alert alert-danger lh-6 mb-2 mt-2">$self</span>', getErrorFor('start_at'), hasErrorFor('start_at')) }}
                 </div>
                 <div class="col-6">
                     <label for="name">Start Time:</label>
+                     @if(old('start_time', '') != '')
                     <input
+                        type="text"
+                        name="start_time"
+                        class="form-control"
+                        id="start_time"
+                        aria-describedby="start_at"
+                        value="{{ old('start_time', '') }}">
+                    @else
+                        <input
                         value="{{match.start_time}}"
                         type="text"
                         name="start_time"
                         class="form-control"
                         id="start_time"
                         aria-describedby="start_at">
+                    @endif
+                        {{ elIf('<span class="alert alert-danger lh-6 mb-2 mt-2">$self</span>', getErrorFor('start_time'), hasErrorFor('start_time')) }}
                 </div>
                 <div class="col-6">
                     <label for="name">Match Name:</label>
+                    @if(old('entry_fee', '') != '')
+                    <input
+                        type="text"
+                        name="match_name"
+                        class="form-control"
+                        id="match_name"
+                        aria-describedby="match_name"
+                        value="{{ old('match_name', '') }}">
+                    @else 
                     <input
                         value="{{match.match_name}}"
                         type="text"
@@ -72,12 +109,26 @@
                         class="form-control"
                         id="match_name"
                         aria-describedby="match_name">
+                    @endif
+                        {{ elIf('<span class="alert alert-danger lh-6 mb-2 mt-2">$self</span>', getErrorFor('match_name'), hasErrorFor('match_name')) }}
                 </div>
                 <div class="col-6">
                     <label for="name">Type :</label>
                     <select name="type" class="form-control">
                         <option value="">Select One</option>
-                            @if(match.type == 'solo')
+                            @if(old('type', '') == 'solo')
+                                <option value="solo" selected>Solo</option>
+                                <option value="duo">Duo</option>
+                                <option value="squad">Squad</option>
+                            @elseif(old('type', '') == 'duo')
+                                <option value="solo">Solo</option>
+                                <option value="duo" selected>Duo</option>
+                                <option value="squad">Squad</option>
+                            @elseif(old('type', '') == 'squad')
+                                <option value="solo">Solo</option>
+                                <option value="duo">Duo</option>
+                                <option value="squad" selected>Squad</option>
+                            @elseif(match.type == 'solo')
                                 <option value="solo" selected>Solo</option>
                                 <option value="duo">Duo</option>
                                 <option value="squad">Squad</option>
@@ -89,11 +140,25 @@
                                 <option value="solo">Solo</option>
                                 <option value="duo">Duo</option>
                                 <option value="squad" selected>Squad</option>
+                            @else
+                                <option value="solo">Solo</option>
+                                <option value="duo">Duo</option>
+                                <option value="squad">Squad</option>
                             @endif
                     </select>
+                        {{ elIf('<span class="alert alert-danger lh-6 mb-2 mt-2">$self</span>', getErrorFor('type'), hasErrorFor('type')) }}
                 </div>
                 <div class="col-6">
                     <label for="name">Entry Fee:</label>
+                    @if(old('entry_fee', '') != '')
+                    <input
+                        type="number"
+                        name="entry_fee"
+                        class="form-control"
+                        id="entry_fee"
+                        aria-describedby="entry_fee"
+                        value="{{ old('entry_fee', '') }}">
+                    @else 
                     <input
                         value="{{match.entryfee}}"
                         type="number"
@@ -101,9 +166,20 @@
                         class="form-control"
                         id="entry_fee"
                         aria-describedby="entry_fee">
+                    @endif
+                        {{ elIf('<span class="alert alert-danger lh-6 mb-2 mt-2">$self</span>', getErrorFor('entry_fee'), hasErrorFor('entry_fee')) }}
                 </div>
                 <div class="col-6">
                     <label for="name">Perkill:</label>
+                    @if(old('perkill', '') != '')
+                    <input
+                        type="text"
+                        name="perkill"
+                        class="form-control"
+                        id="perkill"
+                        aria-describedby="perkill"
+                        value="{{ old('perkill', '') }}">
+                    @else 
                     <input
                         value="{{match.perkill}}"
                         type="text"
@@ -111,9 +187,20 @@
                         class="form-control"
                         id="perkill"
                         aria-describedby="perkill">
+                    @endif
+                        {{ elIf('<span class="alert alert-danger lh-6 mb-2 mt-2">$self</span>', getErrorFor('perkill'), hasErrorFor('perkill')) }}
                 </div>
                 <div class="col-6">
                     <label for="name">Max Join:</label>
+                    @if(old('max_join', '') != '')
+                    <input
+                        type="text"
+                        name="max_join"
+                        class="form-control"
+                        id="max_join"
+                        aria-describedby="max_join"
+                        value="{{ old('start_at', '') }}">
+                    @else
                     <input
                         value="{{match.max_join}}"
                         type="text"
@@ -121,19 +208,41 @@
                         class="form-control"
                         id="max_join"
                         aria-describedby="max_join">
+                    @endif
+                        {{ elIf('<span class="alert alert-danger lh-6 mb-2 mt-2">$self</span>', getErrorFor('max_join'), hasErrorFor('max_join')) }}
                 </div>
                 <div class="col-6">
                     <label for="name">Total Prize:</label>
-                    <input
+                    @if(old('total_prize', '') != '')
+                        <input
+                            type="text"
+                            name="total_prize"
+                            class="form-control"
+                            id="total_prize"
+                            aria-describedby="total_prize"
+                            value="{{ old('total_prize', '') }}">
+                    @else
+                        <input
                         type="text"
                         value="{{match.total_prize}}"
                         name="total_prize"
                         class="form-control"
                         id="total_prize"
                         aria-describedby="total_prize">
+                    @endif
+                        {{ elIf('<span class="alert alert-danger lh-6 mb-2 mt-2">$self</span>', getErrorFor('total_prize'), hasErrorFor('total_prize')) }}
                 </div>
                 <div class="col-6">
                     <label for="name">Min Join:</label>
+                    @if(old('min_join', '') != '')
+                    <input
+                        type="text"
+                        name="min_join"
+                        class="form-control"
+                        id="min_join"
+                        aria-describedby="min_join"
+                        value="{{ old('min_join', '') }}">
+                    @else 
                     <input
                         value="{{match.min_join}}"
                         type="text"
@@ -141,9 +250,20 @@
                         class="form-control"
                         id="min_join"
                         aria-describedby="min_join">
+                    @endif
+                        {{ elIf('<span class="alert alert-danger lh-6 mb-2 mt-2">$self</span>', getErrorFor('min_join'), hasErrorFor('min_join')) }}
                 </div>
                 <div class="col-6">
                     <label for="name">Room Id:</label>
+                    @if(old('room_id', '') != '')
+                        <input
+                            type="text"
+                            name="room_id"
+                            class="form-control"
+                            id="room_id"
+                            aria-describedby="room_id"
+                            value="{{ old('room_id', '') }}">
+                    @else
                     <input
                         value="{{match.room_id}}"
                         type="text"
@@ -151,9 +271,20 @@
                         class="form-control"
                         id="room_id"
                         aria-describedby="room_id">
+                    @endif
+                        {{ elIf('<span class="alert alert-danger lh-6 mb-2 mt-2">$self</span>', getErrorFor('room_id'), hasErrorFor('room_id')) }}
                 </div>
                 <div class="col-6">
                     <label for="name">Password:</label>
+                    @if(old('password', '') != '')
+                    <input
+                        type="text"
+                        name="password"
+                        class="form-control"
+                        id="password"
+                        aria-describedby="password"
+                        value="{{ old('password', '') }}">
+                    @else
                     <input
                         value="{{match.password}}"
                         type="text"
@@ -161,12 +292,26 @@
                         class="form-control"
                         id="password"
                         aria-describedby="password">
+                    @endif
+                        {{ elIf('<span class="alert alert-danger lh-6 mb-2 mt-2">$self</span>', getErrorFor('password'), hasErrorFor('password')) }}
                 </div>
                 <div class="col-6">
                     <label for="name">Platform:</label>
                     <select name="platform" class="form-control">
                         <option value="">Select One</option>
-                            @if(match.platform == 'all')
+                            @if(old('platform', '') == 'all')
+                                <option value="all" selected>All</option>
+                                <option value="mobile">Mobile</option>
+                                <option value="pc">PC</option>
+                            @elseif(old('platform', '') == 'mobile')
+                                <option value="all">All</option>
+                                <option value="mobile" selected>Mobile</option>
+                                <option value="pc">PC</option>
+                            @elseif(old('platform', '') == 'pc')
+                                <option value="all">All</option>
+                                <option value="mobile">Mobile</option>
+                                <option value="pc" selected>PC</option>
+                            @elseif(match.platform == 'all')
                                 <option value="all" selected>All</option>
                                 <option value="mobile">Mobile</option>
                                 <option value="pc">PC</option>
@@ -178,8 +323,13 @@
                                 <option value="all">All</option>
                                 <option value="mobile">Mobile</option>
                                 <option value="pc" selected>PC</option>
+                            @else
+                                <option value="all">All</option>
+                                <option value="mobile">Mobile</option>
+                                <option value="pc">PC</option>
                             @endif
                     </select>
+                    {{ elIf('<span class="alert alert-danger lh-6 mb-2 mt-2">$self</span>', getErrorFor('platform'), hasErrorFor('platform')) }}
                 </div>
             </div>
             <br>

@@ -5973,6 +5973,7 @@ a.close.disabled {
   transform: translateX(100%);
 }
 
+
 .carousel-item-prev:not(.carousel-item-right),
 .active.carousel-item-left {
   transform: translateX(-100%);
@@ -7435,6 +7436,9 @@ button.bg-dark:focus {
 .mt-0,
 .my-0 {
   margin-top: 0 !important;
+}
+.lh-6{
+    line-height: 60px !important;
 }
 
 .mr-0,

@@ -206,7 +206,7 @@ class MatchController {
 	 * @param {Request} ctx.request
 	 * @param {Response} ctx.response
 	 */
-	async update ({ params, request, response }) {
+	async update ({ params, session, request, response }) {
 		const match = await Match.find(params.id)
 		if (!match){
 			return "No match for this id";
@@ -228,9 +228,11 @@ class MatchController {
 		}
 		const validation = await validate(request.all(), rules);
 		if (validation.fails()) {
-			return validation.messages()
-			// console.log(validation.messages());
-			// return "Insert Form data error";
+			session
+			.withErrors(validation.messages())
+				.flashExcept()
+
+				return response.redirect('back')
 		}
 
 		match.product_id = request.input('product_id')

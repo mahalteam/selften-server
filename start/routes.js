@@ -45,6 +45,7 @@ Route.group(() => {
 	Route.post('/login', 'AuthController.login')
 	Route.get('/matchproduct', 'ProductController.matchproduct')
 	Route.get('/match/:id', 'MatchController.matchbyid')
+	Route.get('/match/', 'MatchController.matchbyid')
 	Route.get('/singlematch/:id', 'MatchController.singlematch')
 	Route.post('/join/:id', 'MatchController.join')
 	Route.post('/addwallet', 'TransactionController.index')

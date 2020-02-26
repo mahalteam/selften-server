@@ -37,6 +37,7 @@ Route.group(() => {
 	Route.resource('map', 'MapController');
 	Route.resource('banner', 'BannerController');
 	Route.resource('prize', 'PrizeController');
+	Route.resource('paymentMethod', 'PaymentMethodController');
 })
 
 // api
@@ -47,6 +48,7 @@ Route.group(() => {
 	Route.get('/match/:id', 'MatchController.matchbyid')
 	Route.get('/match/', 'MatchController.matchbyid')
 	Route.get('/singlematch/:id', 'MatchController.singlematch')
+	Route.get('/paymentMethod', 'PaymentMethodController.paymentMethod')
 	Route.post('/join/:id', 'MatchController.join')
 	Route.post('/addwallet', 'TransactionController.index')
 }).prefix('api')

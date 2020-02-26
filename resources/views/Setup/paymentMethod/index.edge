@@ -23,7 +23,7 @@
 	  <tbody> 
 	  	@each(paymentMethod in paymentMethods)
 		    <tr>
-		      <th scope="row">1</th>
+		      <th scope="row">{{ paymentMethod.id }}</th>
               <td>{{ paymentMethod.name }}</td>
               <td><img src="{{ 'uploads/payment/'+paymentMethod.logo }}" width="50px" /></td>
               <td>{{ paymentMethod.info }}</td>

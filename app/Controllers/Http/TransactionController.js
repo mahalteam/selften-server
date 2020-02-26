@@ -4,6 +4,7 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 const Transaction = use('App/Models/Transaction');
+const Database = use('Database')
 /**
  * Resourceful controller for interacting with transactions
  */
@@ -38,6 +39,15 @@ class TransactionController {
   async create ({ request, response, view }) {
   }
 
+  async show ({ request, response, view }) {
+    const transaction = await Transaction.all();
+    return view.render('Setup/transaction/index',
+			{
+			    transactions: transaction.rows,
+			}
+		);
+  }
+
   /**
    * Create/save a new transaction.
    * POST transactions
@@ -46,7 +56,14 @@ class TransactionController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
+  async store ({ request, response, view }) {
+    const transaction = await Database.table('transactions').orderBy('id', 'desc');
+    // return transaction;
+    return view.render('Setup/transaction/index',
+			{
+			    transactions: transaction,
+			}
+		);
   }
 
   /**
@@ -71,6 +88,10 @@ class TransactionController {
    * @param {View} ctx.view
    */
   async edit ({ params, request, response, view }) {
+    const id = params.id;
+		// Console.log(id);
+		const transaction = await Transaction.find(id);
+		return transaction;
   }
 
   /**
@@ -82,6 +103,12 @@ class TransactionController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
+    const id = await params.id;
+    const transaction = await Transaction.find(id);
+    transaction.status = request.input('status')
+
+    await transaction.save();
+		return response.redirect('/transaction');
   }
 
   /**

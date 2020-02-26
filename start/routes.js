@@ -32,6 +32,9 @@ Route.group(() => {
 	Route.get('/playerupdate/:id', 'MatchController.playerupdate')
 	Route.post('/playerUpdateStore', 'MatchController.playerUpdateStore')
 	Route.get('/update/:id', 'MatchController.updatestatus')
+	Route.get('/transaction', 'TransactionController.store')
+	Route.get('/transactionEdit/:id', 'TransactionController.edit')
+	Route.post('/transactionUpdate/:id', 'TransactionController.update')
 	Route.resource('product', 'ProductController');
 	Route.resource('match', 'MatchController');
 	Route.resource('map', 'MapController');

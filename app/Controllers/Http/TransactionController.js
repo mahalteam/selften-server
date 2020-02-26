@@ -22,7 +22,8 @@ class TransactionController {
 		const transaction= new Transaction();
 		transaction.user_id=request.input('user_id')
 		transaction.purpose=request.input('purpose')
-		transaction.number=request.input('user_id')
+		transaction.amount=request.input('amount')
+		transaction.number=request.input('number')
 		transaction.paymentmethod_id=request.input('paymentmethod')
 		transaction.status='pending'
 		transaction.save();

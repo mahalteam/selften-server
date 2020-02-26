@@ -9,6 +9,8 @@
 	      <th scope="col">#</th>
           <th scope="col">User ID</th>
           <th scope="col">Amount</th>
+          <th scope="col">Number</th>
+          <th scope="col">Purpose</th>
           <th scope="col">Status</th>
 	      <th scope="col">Action</th>
 	    </tr>
@@ -19,6 +21,8 @@
 		      <th scope="row">{{ transaction.id }}</th>
               <td>{{ transaction.user_id }}</td>
               <td>{{ transaction.amount }}</td>
+              <td>{{ transaction.number }}</td>
+              <td>{{ transaction.purpose }}</td>
               <td>{{ transaction.status }}</td>
 			  <td><a href="#" onclick="myfunction({{transaction.id}})" class="btn btn-primary" data-toggle="modal" data-target="#examplemodel1" data-whatever="@mdo">Edit</a></td>
 		    </tr>

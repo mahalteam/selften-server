@@ -31,7 +31,7 @@ class TransactionController {
 	}
 
 	async usertransaction({ params,request, response, view }){
-		const transaction= await Transaction.query().where('user_id',params.id).fetch();
+		const transaction= await Transaction.query().where('user_id',params.id).orderBy('id', 'desc').fetch();
 		response.send(transaction);
 	}
 

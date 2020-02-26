@@ -1,0 +1,153 @@
+@layout('layout')
+
+@section('body')
+<div class="container">
+	<!-- Page Heading -->
+	<div class="text-right">
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal5">
+		  	Create
+		</button>
+	</div>
+	<br>
+	<table class="table table-success">
+	  <thead>
+	    <tr>
+	      <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Logo</th>
+          <th scope="col">Information</th>
+	      <th scope="col">Action</th>
+	    </tr>
+	  </thead>
+	  <tbody> 
+	  	@each(paymentMethod in paymentMethods)
+		    <tr>
+		      <th scope="row">1</th>
+              <td>{{ paymentMethod.name }}</td>
+              <td><img src="{{ 'uploads/payment/'+paymentMethod.logo }}" width="50px" /></td>
+              <td>{{ paymentMethod.info }}</td>
+			  <td><a href="#" onclick="myfunction({{paymentMethod.id}})" class="btn btn-primary" data-toggle="modal" data-target="#examplemodel1" data-whatever="@mdo">Edit</a></td>
+			  <td>
+					<form action="paymentMethod/{{paymentMethod.id}}?_method=DELETE" method="POST">
+						{{ csrfField() }}
+						<input type="submit" value="Delete" class="btn btn-danger">
+					</form>
+				</td>
+		    </tr>
+	    @endeach
+	  </tbody>
+	</table>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  	<div class="modal-dialog" role="document">
+  		<form method="post" action="/paymentMethod" enctype="multipart/form-data">
+	    	<div class="modal-content">
+		      	<div class="modal-header">
+		        	<h5 class="modal-title" id="exampleModalLabel">Create PaymentMethod</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+		      	</div>
+		      	<div class="modal-body">
+		        	<div class="card-body">
+			       
+				            <div class="form-row">
+				                <div class="col-6">
+				                    <label for="name">Name</label>
+                                    <input type="text" name="name" class="form-control" id="name" aria-describedby="nameInput" required>
+                                    {{ elIf('<span class="alert lh-6 alert-danger mb-2 mt-2">$self</span>', getErrorFor('name'), hasErrorFor('name')) }}
+                                </div>
+                                <div class="col-6">
+				                    <label for="file">Logo</label>
+                                    <input type="file" name="logo" class="form-control" id="logo" aria-describedby="logoInput" required>
+                                    {{ elIf('<span class="alert lh-6 alert-danger mb-2 mt-2">$self</span>', getErrorFor('logo'), hasErrorFor('logo')) }}
+                                </div>
+                                <div class="col-6">
+				                    <label for="info">Information</label>
+                                    <textarea id="info" name="info" rows="4" cols="50" required></textarea>
+                                    {{ elIf('<span class="alert lh-6 alert-danger mb-2 mt-2">$self</span>', getErrorFor('info'), hasErrorFor('info')) }}
+				                </div>
+				            </div>
+			       
+			    	</div>
+		      	</div>
+		      	<div class="modal-footer">
+		        	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        	<button type="submit" class="btn btn-primary">Save changes</button>
+		      	</div>
+	    	</div>
+     	</form>
+  	</div>
+</div>
+
+{{--  ajax request to edit data fetch in database   --}}
+
+<script>
+
+function myfunction(id){
+	$.ajax({
+		type: 'GET',
+		url:'/paymentMethod/'+id+'/edit',
+
+		success: function(response){
+			var data = response;
+			console.log(data);
+            $('#update_name').val(data.name);
+            $('#update_info').val(data.info);
+            $('#update_id').val(data.id);
+            $('#update_status').val(data.status)
+			$('#paymentMethod_update').attr('action', '/paymentMethod/'+data.id+'?_method=put');
+		}
+	})
+}
+
+</script>
+
+{{--  Edit model   --}}
+
+
+<div class="modal fade" id="examplemodel1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Payment Method</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="paymentMethod_update" method="POST" action=""  enctype="multipart/form-data">
+          {{ csrfField() }}
+          <div class="form-group">
+              <input type="hidden"  id="update_id" name="id">
+            <input type="text" id="update_name" class="form-control" required name="name" placeholder="Name">
+          </div>
+          <div class="form-group">
+              <label for="file"></label>
+              <input type="file" name="logo" class="form-control" id="logo" aria-describedby="logoInput">
+          </div>
+          <div class="form-group">
+             <textarea id="update_info" name="info" rows="4" cols="50" required></textarea>
+          </div>
+          <div class="form-group">
+            <input type="number" id="update_status" class="form-control" required name="status" placeholder="Status">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        {{--  <button type="submit" class="btn btn-primary">Update</button>  --}}
+        <input type="submit" id="update" class="btn btn-primary" value="Edit">
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+@endsection

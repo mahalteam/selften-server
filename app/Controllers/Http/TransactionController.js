@@ -31,8 +31,8 @@ class TransactionController {
 	}
 
 	async usertransaction({ params,request, response, view }){
-		const transaction= Transaction.find(params.id);
-		response.json(transaction);
+		const transaction= await Transaction.query().where('user_id',params.id).fetch();
+		response.send(transaction);
 	}
 
 

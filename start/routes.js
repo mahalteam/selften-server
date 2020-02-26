@@ -49,6 +49,8 @@ Route.group(() => {
 	Route.get('/match/', 'MatchController.matchbyid')
 	Route.get('/singlematch/:id', 'MatchController.singlematch')
 	Route.get('/paymentMethod', 'PaymentMethodController.paymentMethod')
+	Route.get('/paymentMethod/:id', 'PaymentMethodController.paymentMethodbyid')
+	Route.get('/usertransaction/:id', 'TransactionController.usertransaction')
 	Route.post('/join/:id', 'MatchController.join')
 	Route.post('/addwallet', 'TransactionController.index')
 }).prefix('api')

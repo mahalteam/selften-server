@@ -12,6 +12,7 @@ const Match = use('App/Models/Match')
 const User = use('App/Models/User')
 const Product = use('App/Models/Product')
 const Maps = use('App/Models/Map')
+const Prize = use('App/Models/Prize')
 const Matchuser = use('App/Models/Matchuser')
 class MatchController {
 	/**
@@ -272,13 +273,14 @@ class MatchController {
 	}
 
 	async totalplayer({ params, request, response,view }){
-		const match = await Match.query().with('users').where('id',params.id).first();
-		const prizes = await Match.query().with('prizes').fetch();
+		const id = params.id;
+		const match = await Match.query().with('users').with('prizes').where('id',id).first();
+		// const prizes = await Match.query().with('prizes').fetch();
 		// return prizes;
+		// return match.users;
 		return view.render('Setup/match/totalplayer',
 			{
-				match: match.toJSON(),
-				prizes: prizes.toJSON()
+				match: match.toJSON()
 			}
 		);
 	}
@@ -286,9 +288,12 @@ class MatchController {
 
 	async playerupdate ({ request, response, view, params }) {
 		const id = params.id;
+		const pid = request.input('pid');
+		const prize = await Prize.find(id);
 		const matchuser = await Matchuser.find(id);
+		const data = [prize, matchuser];
 		// console.log(user);
-		return matchuser;
+		return data;
 	}
 
 	async playerUpdateStore ({ request, response}) {

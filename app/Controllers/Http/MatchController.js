@@ -273,9 +273,12 @@ class MatchController {
 
 	async totalplayer({ params, request, response,view }){
 		const match = await Match.query().with('users').where('id',params.id).first();
+		const prizes = await Match.query().with('prizes').fetch();
+		// return prizes;
 		return view.render('Setup/match/totalplayer',
 			{
-			    match: match.toJSON()
+				match: match.toJSON(),
+				prizes: prizes.toJSON()
 			}
 		);
 	}

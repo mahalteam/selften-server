@@ -9,35 +9,31 @@ const Database = use('Database')
  * Resourceful controller for interacting with transactions
  */
 class TransactionController {
-  /**
-   * Show a list of all transactions.
-   * GET transactions
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async index ({ request, response, view }) {
-    const transaction= new Transaction();
-    transaction.user_id=request.input('user_id')
-    transaction.amount=request.input('amount')
-    transaction.status='pending'
-    transaction.save();
-    response.json('success');
-  }
+	/**
+	 * Show a list of all transactions.
+	 * GET transactions
+	 *
+	 * @param {object} ctx
+	 * @param {Request} ctx.request
+	 * @param {Response} ctx.response
+	 * @param {View} ctx.view
+	 */
+	async index ({ request, response, view }) {
+		const transaction= new Transaction();
+		transaction.user_id=request.input('user_id')
+		transaction.purpose=request.input('purpose')
+		transaction.number=request.input('user_id')
+		transaction.paymentmethod_id=request.input('paymentmethod')
+		transaction.status='pending'
+		transaction.save();
+		response.json('success');
+	}
 
-  /**
-   * Render a form to be used for creating a new transaction.
-   * GET transactions/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async create ({ request, response, view }) {
-  }
+	async usertransaction({ params,request, response, view }){
+		const transaction= Transaction.find(params.id);
+		response.json(transaction);
+	}
+
 
   async show ({ request, response, view }) {
     const transaction = await Transaction.all();
@@ -64,18 +60,6 @@ class TransactionController {
 			    transactions: transaction,
 			}
 		);
-  }
-
-  /**
-   * Display a single transaction.
-   * GET transactions/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async show ({ params, request, response, view }) {
   }
 
   /**
@@ -110,17 +94,7 @@ class TransactionController {
     await transaction.save();
 		return response.redirect('/transaction');
   }
-
-  /**
-   * Delete a transaction with id.
-   * DELETE transactions/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async destroy ({ params, request, response }) {
-  }
+	
 }
 
 module.exports = TransactionController

@@ -55,12 +55,9 @@ class TransactionController {
 	 * @param {Response} ctx.response
 	 */
 	async store ({ request, response, view }) {
-		const transaction = await Database.table('transactions').orderBy('id', 'desc');
-		// return transaction;
-		return view.render('Setup/transaction/index',
-			{
-				transactions: transaction,
-			}
+		const page = request.get().page || 1
+		const transaction = await Transaction.query().orderBy('id', 'desc').paginate(page,10)
+		return view.render('Setup/transaction/index',{transactions: transaction.toJSON()}
 		);
 	}
 
@@ -92,16 +89,41 @@ class TransactionController {
 		const id = await params.id;
 		const transaction = await Transaction.find(id);
 		var status = request.input('status')
+		var old_status = request.input('old_status')
+
 		if(status=='completed' && transaction.purpose=='addwallet'){
-			let user = await User.find(transaction.user_id);
-			user.wallet=user.wallet+transaction.amount
-			await user.save();
+
+			if(old_status!='completed'){
+				let user = await User.find(transaction.user_id);
+				user.wallet=parseInt(user.wallet)+parseInt(transaction.amount)
+				await user.save();
+			}
+
 		}
-		if(status=='completed' && transaction.purpose=='withdraw'){
-			let user = await User.find(transaction.user_id);
-			user.earn_wallet=user.earn_wallet-transaction.amount
-			await user.save();
+
+		if((status=='padding' || status=='cancel') && transaction.purpose=='addwallet'){
+			if(old_status=='completed'){
+				let user = await User.find(transaction.user_id);
+				user.wallet=user.wallet-transaction.amount
+				await user.save();
+			}
 		}
+
+		// if(status=='completed' && transaction.purpose=='withdraw'){
+		// 	if(old_status!='completed'){
+		// 		let user = await User.find(transaction.user_id);
+		// 		user.earn_wallet=user.earn_wallet-transaction.amount
+		// 		await user.save();
+		// 	}
+		// }
+		if(status=='cancel' && transaction.purpose=='withdraw'){
+			if(old_status=='completed'){
+				let user = await User.find(transaction.user_id);
+				user.wallet=user.wallet+transaction.amount
+				await user.save();
+			}
+		}
+
 		transaction.status=status;
 		await transaction.save();
 		return response.redirect('/transaction');

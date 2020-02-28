@@ -50,6 +50,12 @@ class AuthController {
 			return response.json({message: 'These credentials do not match our records.'})
 		}
 	}
+
+	async updateuser({request, response,params}){
+		let user = await User.findBy('id', params.id)
+		return response.json(user)
+	}
+
 	async getPosts({request, response}) {
 		let posts = await Post.query().with('user').fetch()
 

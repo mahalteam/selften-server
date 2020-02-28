@@ -47,6 +47,7 @@ Route.group(() => {
 Route.group(() => {
 	Route.post('/register', 'AuthController.register')
 	Route.post('/login', 'AuthController.login')
+	Route.get('/updateuser/:id', 'AuthController.updateuser')
 	Route.get('/matchproduct', 'ProductController.matchproduct')
 	Route.get('/match/:id', 'MatchController.matchbyid')
 	Route.get('/match/', 'MatchController.matchbyid')

@@ -56,64 +56,70 @@ class MatchController {
 
 		const user = await User.find(user_id);
 		let wallet = user.wallet;
-		if(wallet-totalfee>=0){
-			user.wallet=user.wallet-totalfee
-			user.matchesplayed=user.matchesplayed+1
-			user.save();
-		}else{
-			user.wallet=0;
-			let current = totalfee-wallet;
-			user.matchesplayed=user.matchesplayed+1
-			user.earn_wallet=user.earn_wallet-current;
-			user.save();
-		}
+
+		if((wallet+user.earn_wallet)>=totalfee){
+
+			if(wallet-totalfee>=0){
+				user.wallet=user.wallet-totalfee
+				user.matchesplayed=user.matchesplayed+1
+				user.save();
+			}else{
+				user.wallet=0;
+				let current = totalfee-wallet;
+				user.matchesplayed=user.matchesplayed+1
+				user.earn_wallet=user.earn_wallet-current;
+				user.save();
+			}
 		
 		
-		if(type=='solo'){
-			const matchuser = new Matchuser();
-			matchuser.user_id=user_id
-			matchuser.match_id=match_id
-			matchuser.gamename=request.input('player1')
-			await matchuser.save()
-		}else if(type=='duo'){
-			
-			const matchuser = new Matchuser();
-			matchuser.user_id=user_id
-			matchuser.match_id=match_id
-			matchuser.gamename=request.input('player1')
-			await matchuser.save()
+			if(type=='solo'){
+				const matchuser = new Matchuser();
+				matchuser.user_id=user_id
+				matchuser.match_id=match_id
+				matchuser.gamename=request.input('player1')
+				await matchuser.save()
+			}else if(type=='duo'){
+				
+				const matchuser = new Matchuser();
+				matchuser.user_id=user_id
+				matchuser.match_id=match_id
+				matchuser.gamename=request.input('player1')
+				await matchuser.save()
 
-			const matchuser1 = new Matchuser();
-			matchuser1.user_id=user_id
-			matchuser1.match_id=match_id
-			matchuser1.gamename=request.input('player2')
-			await matchuser1.save()
+				const matchuser1 = new Matchuser();
+				matchuser1.user_id=user_id
+				matchuser1.match_id=match_id
+				matchuser1.gamename=request.input('player2')
+				await matchuser1.save()
+			}else{
+				const matchuser = new Matchuser();
+				matchuser.user_id=user_id
+				matchuser.match_id=match_id
+				matchuser.gamename=request.input('player1')
+				await matchuser.save()
+
+				const matchuser1 = new Matchuser();
+				matchuser1.user_id=user_id
+				matchuser1.match_id=match_id
+				matchuser1.gamename=request.input('player2')
+				await matchuser1.save()
+
+				const matchuser2 = new Matchuser();
+				matchuser2.user_id=user_id
+				matchuser2.match_id=match_id
+				matchuser2.gamename=request.input('player3')
+				await matchuser2.save()
+
+				const matchuser3 = new Matchuser();
+				matchuser3.user_id=user_id
+				matchuser3.match_id=match_id
+				matchuser3.gamename=request.input('player4')
+				await matchuser3.save()
+			}
+			response.json('success')
 		}else{
-			const matchuser = new Matchuser();
-			matchuser.user_id=user_id
-			matchuser.match_id=match_id
-			matchuser.gamename=request.input('player1')
-			await matchuser.save()
-
-			const matchuser1 = new Matchuser();
-			matchuser1.user_id=user_id
-			matchuser1.match_id=match_id
-			matchuser1.gamename=request.input('player2')
-			await matchuser1.save()
-
-			const matchuser2 = new Matchuser();
-			matchuser2.user_id=user_id
-			matchuser2.match_id=match_id
-			matchuser2.gamename=request.input('player3')
-			await matchuser2.save()
-
-			const matchuser3 = new Matchuser();
-			matchuser3.user_id=user_id
-			matchuser3.match_id=match_id
-			matchuser3.gamename=request.input('player4')
-			await matchuser3.save()
+			response.json('faliled')
 		}
-		response.json('success')
 	}
 
 	/**

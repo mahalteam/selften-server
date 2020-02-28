@@ -48,7 +48,7 @@ class MatchController {
 	}
 
 	async join ({ params,request, response, view }) {
-		const matchuser = new Matchuser();
+		
 		var type = request.input('type');
 		var totalfee = request.input('fee');
 		var user_id=request.input('user_id');
@@ -68,40 +68,48 @@ class MatchController {
 		
 		
 		if(type=='solo'){
+			const matchuser = new Matchuser();
 			matchuser.user_id=user_id
 			matchuser.match_id=match_id
 			matchuser.gamename=request.input('player1')
 			await matchuser.save()
 		}else if(type=='duo'){
+			
+			const matchuser = new Matchuser();
 			matchuser.user_id=user_id
 			matchuser.match_id=match_id
 			matchuser.gamename=request.input('player1')
 			await matchuser.save()
 
-			matchuser.user_id=user_id
-			matchuser.match_id=match_id
-			matchuser.gamename=request.input('player2')
-			await matchuser.save()
+			const matchuser1 = new Matchuser();
+			matchuser1.user_id=user_id
+			matchuser1.match_id=match_id
+			matchuser1.gamename=request.input('player2')
+			await matchuser1.save()
 		}else{
+			const matchuser = new Matchuser();
 			matchuser.user_id=user_id
 			matchuser.match_id=match_id
 			matchuser.gamename=request.input('player1')
 			await matchuser.save()
 
-			matchuser.user_id=user_id
-			matchuser.match_id=match_id
-			matchuser.gamename=request.input('player2')
-			await matchuser.save()
+			const matchuser1 = new Matchuser();
+			matchuser1.user_id=user_id
+			matchuser1.match_id=match_id
+			matchuser1.gamename=request.input('player2')
+			await matchuser1.save()
 
-			matchuser.user_id=user_id
-			matchuser.match_id=match_id
-			matchuser.gamename=request.input('player3')
-			await matchuser.save()
+			const matchuser2 = new Matchuser();
+			matchuser2.user_id=user_id
+			matchuser2.match_id=match_id
+			matchuser2.gamename=request.input('player3')
+			await matchuser2.save()
 
-			matchuser.user_id=user_id
-			matchuser.match_id=match_id
-			matchuser.gamename=request.input('player4')
-			await matchuser.save()
+			const matchuser3 = new Matchuser();
+			matchuser3.user_id=user_id
+			matchuser3.match_id=match_id
+			matchuser3.gamename=request.input('player4')
+			await matchuser3.save()
 		}
 		response.json('success')
 	}

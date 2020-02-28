@@ -24,7 +24,7 @@
 		      <td>{{ m.pivot.gamename }}</td>
 		      <td>{{ m.pivot.total_kill }}</td>
 		      <td>{{ m.pivot.total_earn }}</td>
-		      <td><a href=""  onclick="playerUpdate({{m.id}})" class="btn btn-sm btn-success"  data-toggle="modal" data-target="#exampleModalPlayerUpdate" data-whatever="@mdo">Update</a></td>
+		      <td><a href="" onclick="playerUpdate({{m.pivot.id}})" class="btn btn-sm btn-success"  data-toggle="modal" data-target="#exampleModalPlayerUpdate" data-whatever="@mdo">Update</a></td>
 		    </tr>
 		@endeach
 	  </tbody>
@@ -80,7 +80,7 @@ function playerUpdate(id){
 				  </select>
 	          </div>
 			
-			<input type="hidden"  id="id" name="id">
+			<input type="text"  id="id" name="id">
               
         
       </div>

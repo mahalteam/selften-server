@@ -9,7 +9,7 @@ class Match extends Model {
 	}
 
 	users () {
-	    return this.belongsToMany('App/Models/User').pivotTable('match_users').withPivot(['gamename','gameid','total_kill','total_earn'])
+	    return this.belongsToMany('App/Models/User').pivotTable('match_users').withPivot(['id','gamename','gameid','total_kill','total_earn','prize'])
 	}
 
 	prizes () {

@@ -16,6 +16,7 @@
 	    </tr>
 	  </thead>
 	  <tbody> 
+		@each((p,index) in match.prizes)
 	  	@each((m,index) in match.users)
 		    <tr>
 		      <th scope="row">{{ index+1 }}</th>
@@ -24,9 +25,10 @@
 		      <td>{{ m.pivot.gamename }}</td>
 		      <td>{{ m.pivot.total_kill }}</td>
 		      <td>{{ m.pivot.total_earn }}</td>
-		      <td><a href=""  onclick="playerUpdate({{m.id}})" class="btn btn-sm btn-success"  data-toggle="modal" data-target="#exampleModalPlayerUpdate" data-whatever="@mdo">Update</a></td>
+		      <td><a href=""  onclick="playerUpdate({{m.id}},{{p.id}})" class="btn btn-sm btn-success"  data-toggle="modal" data-target="#exampleModalPlayerUpdate" data-whatever="@mdo">Update</a></td>
 		    </tr>
-	    @endeach
+		@endeach
+		@endeach
 	  </tbody>
 	</table>
 </div>
@@ -35,17 +37,29 @@
 <script>
 
 
-function playerUpdate(id){
+function playerUpdate(id, pid){
     $.ajax({    //create an ajax request to display.php
         type: "GET",
-        url: "/playerupdate/"+id,             
+		url: "/playerupdate/"+id,
+		data: {
+			pid: pid	
+		},             
         //dataType: "html",   //expect html to be returned                
         success: function(response){        
 		  var data = response;
-		  console.log(data); 
-		  $('#id').val(data.id);
-		  $('#kill').val(data.total_kill);
-		  $('#previous_earn').val(data.total_earn);
+		  console.log(data);
+		var str = "<select id='prize' name='prize' class='form-control'>";
+		for(i=1; i<=data[0].prize;i++)
+		{
+			str += "<option value='"+i+"'>Prize "+i+"</option>";
+		}
+		$('#prize').html(str);
+		str += "</select>";
+		$('#prize_show').html(str);
+		
+		  $('#id').val(data[1].id);
+		  $('#kill').val(data[1].total_kill);
+		  $('#previous_earn').val(data[1].total_earn);
           $('#exampleModal').modal('hide');
         }
     });
@@ -69,6 +83,9 @@ function playerUpdate(id){
           {{ csrfField() }}
           <div class="form-group">
             <input type="text" id="kill" class="form-control" required name="kill" placeholder="Enter Kill">
+		  </div>
+		  <div class="form-group" id="prize_show">
+			  
           </div>
 			
 			  <input type="hidden"  id="id" name="id">

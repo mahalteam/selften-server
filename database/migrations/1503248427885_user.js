@@ -16,6 +16,7 @@ class UserSchema extends Schema {
       table.integer('scores', 10).default(0)
       table.integer('matchesplayed', 10).default(0)
       table.integer('totalkills', 10).default(0)
+      table.integer('propoints', 10).default(0)
       table.integer('winamounts', 10).default(0)
       table.timestamps()
     })

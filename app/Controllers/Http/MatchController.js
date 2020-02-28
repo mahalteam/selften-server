@@ -287,44 +287,53 @@ class MatchController {
 
 
 	async playerupdate ({ request, response, view, params }) {
-		const id = params.id;
-		const pid = request.input('pid');
-		const prize = await Prize.find(id);
-		const matchuser = await Matchuser.find(id);
-		const data = [prize, matchuser];
-		// console.log(user);
-		return data;
+		const prize = await Matchuser.query().with('matches').where('id',params.id).first();
+		return response.send(prize);
 	}
 
 	async playerUpdateStore ({ request, response}) {
-		//collect update data
-    const match_user_info = request.collect(['kill', 'id', 'previous_earn']);
-	const id = match_user_info[0].id;
-	const previous_earn = match_user_info[0].previous_earn;
-    // find match user
-	const collectmatchuser = await Matchuser.find(id);
-	//belongsTo used to select metch data
-	const user_match = await Matchuser.query().with('matches').fetch();
-	const user_match_data = user_match.toJSON();
-	const perkill = user_match_data[0].matches.perkill;
-	const m_id = user_match_data[0].matches.id;
-	//belongsTo used to select User data
-	const match_player = await Matchuser.query().with('users').fetch();
-	const match_player_data = match_player.toJSON();
-	const tottal_earn_wallet = match_player_data[0].users.earn_wallet;
-	const player_id =  match_player_data[0].users.id;
+	//collect update data
+	const id = request.input('id');
+	const previous_earn = request.input('previous_earn');
+	const kill = request.input('kill');
+	const oldkill = request.input('oldkill');
+	const oldprize = request.input('oldprize');
+
+	const matchuser = await Matchuser.find(id);
+	const match = await Match.find(matchuser.match_id);
+
+	const perkill =match.perkill;
+	const m_id = match.id;
+
+
 	// find match user
-	const collectuser = await User.find(player_id);
-	const new_earn_wallet = (tottal_earn_wallet - previous_earn) + match_user_info[0].kill * perkill;
-	collectuser.earn_wallet = new_earn_wallet;
+	const user = await User.find(matchuser.user_id);
+
+	if(oldkill>0){
+		let wallet = (oldkill * perkill);
+		user.earn_wallet = user.earn_wallet-wallet;
+		user.totalkills  = user.totalkills-oldkill;
+		await user.save()
+	}
+
+	if(oldprize>0){
+		user.earn_wallet = user.earn_wallet-oldprize;
+		await user.save()
+	}
+
+	const new_earn_wallet = (parseInt(kill * perkill))+parseInt(previous_earn);
+
+	user.earn_wallet = parseInt(user.earn_wallet)+parseInt(new_earn_wallet);
+	user.totalkills  = parseInt(user.totalkills)+parseInt(kill);
 	// return match_player;
 	// return perkill;
-	collectmatchuser.total_kill = match_user_info[0].kill;
-	collectmatchuser.total_earn = match_user_info[0].kill * perkill;
+	matchuser.prize = previous_earn;
+	matchuser.total_kill = kill;
+	matchuser.total_earn = (parseInt(kill * perkill))+parseInt(previous_earn);
 	// return collectmatchuser;
 	//save match user data and user earn_wallet
-	await collectmatchuser.save()
-	await collectuser.save()
+	await matchuser.save()
+	await user.save()
     response.redirect('/totalplayer/'+m_id)
   }
 

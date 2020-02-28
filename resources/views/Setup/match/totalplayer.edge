@@ -16,8 +16,7 @@
 	    </tr>
 	  </thead>
 	  <tbody> 
-		@each((p,index) in match.prizes)
-	  	@each((m,index) in match.users)
+		@each((m,index) in match.users)
 		    <tr>
 		      <th scope="row">{{ index+1 }}</th>
 		      <td>{{ m.username }}</td>
@@ -25,9 +24,8 @@
 		      <td>{{ m.pivot.gamename }}</td>
 		      <td>{{ m.pivot.total_kill }}</td>
 		      <td>{{ m.pivot.total_earn }}</td>
-		      <td><a href=""  onclick="playerUpdate({{m.id}},{{p.id}})" class="btn btn-sm btn-success"  data-toggle="modal" data-target="#exampleModalPlayerUpdate" data-whatever="@mdo">Update</a></td>
+		      <td><a href=""  onclick="playerUpdate({{m.id}})" class="btn btn-sm btn-success"  data-toggle="modal" data-target="#exampleModalPlayerUpdate" data-whatever="@mdo">Update</a></td>
 		    </tr>
-		@endeach
 		@endeach
 	  </tbody>
 	</table>
@@ -37,30 +35,17 @@
 <script>
 
 
-function playerUpdate(id, pid){
+function playerUpdate(id){
     $.ajax({    //create an ajax request to display.php
         type: "GET",
 		url: "/playerupdate/"+id,
-		data: {
-			pid: pid	
-		},             
-        //dataType: "html",   //expect html to be returned                
         success: function(response){        
-		  var data = response;
-		  console.log(data);
-		var str = "<select id='prize' name='prize' class='form-control'>";
-		for(i=1; i<=data[0].prize;i++)
-		{
-			str += "<option value='"+i+"'>Prize "+i+"</option>";
-		}
-		$('#prize').html(str);
-		str += "</select>";
-		$('#prize_show').html(str);
-		
-		  $('#id').val(data[1].id);
-		  $('#kill').val(data[1].total_kill);
-		  $('#previous_earn').val(data[1].total_earn);
-          $('#exampleModal').modal('hide');
+			var data = response;
+		  	$('#id').val(data.id);
+		  	$('#kill').val(data.total_kill);
+		  	$('#oldkill').val(data.total_kill);
+		  	$('#oldprize').val(data.prize);
+          	$('#exampleModal').modal('hide');
         }
     });
 }
@@ -81,15 +66,21 @@ function playerUpdate(id, pid){
       <div class="modal-body">
         <form  method="POST" action="/playerUpdateStore/">
           {{ csrfField() }}
-          <div class="form-group">
-            <input type="text" id="kill" class="form-control" required name="kill" placeholder="Enter Kill">
-		  </div>
-		  <div class="form-group" id="prize_show">
-			  
-          </div>
+	          <div class="form-group">
+	            <input type="text" id="kill" class="form-control" required name="kill" placeholder="Enter Kill">
+	            <input type="hidden" id="oldkill" class="form-control" required name="oldkill" placeholder="Enter Kill">
+	            <input type="hidden" id="oldprize" class="form-control" required name="oldprize" placeholder="Enter Kill">
+			  </div>
+			  <div class="form-group" id="prize_show">
+				  <select name="previous_earn" class="form-control" id="">
+				  	<option value="0">Select Prize</option>
+				  	@each((m,index) in match.prizes)
+						<option value="{{ m.prize }}">{{ m.lavel }}</option>
+				  	@endeach
+				  </select>
+	          </div>
 			
-			  <input type="hidden"  id="id" name="id">
-			  <input type="hidden"  id="previous_earn" name="previous_earn">
+			<input type="hidden"  id="id" name="id">
               
         
       </div>

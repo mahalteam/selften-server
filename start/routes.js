@@ -17,11 +17,16 @@
 const Route = use('Route')
 
 Route.group(() => {
-    Route.get('/register', 'AdminController.registerview')
-    Route.post('/registerstore', 'AdminController.register').validator('Register')
-    // Route.post('/registerstore', 'AuthController.register')
-    Route.get('/loginview', 'AdminController.loginview')
-    Route.post('/login', 'AdminController.login')
+    Route.get('register', 'Auth/RegisterController.showRegisterForm').middleware([
+	  'authenticated'
+	])
+	Route.post('register', 'Auth/RegisterController.register').as('register')
+	Route.get('register/confirm/:token', 'Auth/RegisterController.confirmEmail')
+	Route.get('login', 'Auth/LoginController.showLoginForm').middleware([
+	  'authenticated'
+	])
+	Route.post('login', 'Auth/LoginController.login').as('login')
+	Route.get('logout', 'Auth/AuthenticatedController.logout')
 })
 
 Route.group(() => {
@@ -45,8 +50,9 @@ Route.group(() => {
 
 // api
 Route.group(() => {
-	Route.post('/register', 'AuthController.register')
+	Route.post('/register', 'AuthController.register1')
 	Route.post('/login', 'AuthController.login')
+	Route.post('/forgotpassword', 'AuthController.forgotPassword')
 	Route.get('/updateuser/:id', 'AuthController.updateuser')
 	Route.get('/matchproduct', 'ProductController.matchproduct')
 	Route.get('/match/:id', 'MatchController.matchbyid')
@@ -57,4 +63,8 @@ Route.group(() => {
 	Route.get('/usertransaction/:id', 'TransactionController.usertransaction')
 	Route.post('/join/:id', 'MatchController.join')
 	Route.post('/addwallet', 'TransactionController.index')
+	
+	Route.post('password/email', 'Auth/PasswordResetController.sendResetLinkEmail')
+	Route.get('password/reset/:token', 'Auth/PasswordResetController.showResetForm')
+	Route.post('password/reset', 'Auth/PasswordResetController.reset')
 }).prefix('api')

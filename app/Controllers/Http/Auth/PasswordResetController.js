@@ -73,6 +73,7 @@ class PasswordResetController {
 			password: 'required'
 		})
 
+
 		if (validation.fails()) {
 			session
 				.withErrors(validation.messages())
@@ -92,7 +93,7 @@ class PasswordResetController {
 
 			if (!token) {
 				// display error message
-				notification= {
+				let notification = {
 					type: 'error',
 					message: 'This password reset token does not exist.'
 				}
@@ -106,7 +107,7 @@ class PasswordResetController {
 			await PasswordReset.query().where('email', user.email).delete()
 
 			// display success message
-			notification= {
+			let notification= {
 				type: 'success',
 				message: 'Your password has been reset!'
 			}
@@ -114,7 +115,7 @@ class PasswordResetController {
 			return response.send(notification)
 		} catch (error) {
 			// display error message
-			notification={
+			let notification={
 				type: 'error',
 				message: 'Sorry, there is no user with this email address.'
 			}

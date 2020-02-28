@@ -53,7 +53,7 @@ class PasswordResetController {
 			return response.send(notification)
 		} catch (error) {
 				let notification = {
-					type: 'danger',
+					type: 'error',
 					message: 'Sorry, there is no user with this email address.'
 				}
 
@@ -70,15 +70,14 @@ class PasswordResetController {
 		const validation = await validateAll(request.all(), {
 			token: 'required',
 			email: 'required',
-			password: 'required|confirmed'
+			password: 'required'
 		})
 
 		if (validation.fails()) {
 			session
 				.withErrors(validation.messages())
-				.flashExcept(['password', 'password_confirmation'])
 
-			return response.send('back')
+			return response.send(validation.messages())
 		}
 
 		try {
@@ -94,7 +93,7 @@ class PasswordResetController {
 			if (!token) {
 				// display error message
 				notification= {
-					type: 'danger',
+					type: 'error',
 					message: 'This password reset token does not exist.'
 				}
 				return response.send(notification)
@@ -116,7 +115,7 @@ class PasswordResetController {
 		} catch (error) {
 			// display error message
 			notification={
-				type: 'danger',
+				type: 'error',
 				message: 'Sorry, there is no user with this email address.'
 			}
 			return response.send(notification)

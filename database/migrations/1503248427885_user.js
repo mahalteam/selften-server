@@ -9,6 +9,7 @@ class UserSchema extends Schema {
       table.increments()
       table.string('username', 80).notNullable()
       table.string('account_status', 80).notNullable()
+      table.integer('is_admin').default(0)
       table.string('phone', 80).notNullable()
       table.string('email', 254).notNullable().unique()
       table.string('password', 60).notNullable()

@@ -50,7 +50,7 @@ class AuthController {
 		let user = await Persona.register(payload)
 
 	  	// optional
-	  	let token= await auth.generate(user);
+	  	let token= await auth.authenticator('jwt').generate(user);
 	  	user = await User.findBy('id', user.id)
 		Object.assign(user, token)
 		return response.json(user)
@@ -61,9 +61,9 @@ class AuthController {
 		let {email, password} = request.all();
 
 		try {
-			if (await auth.attempt(email, password)) {
+			if (await auth.authenticator('jwt').attempt(email, password)) {
 				let user = await User.findBy('email', email)
-				let token = await auth.generate(user)
+				let token = await auth.authenticator('jwt').generate(user)
 
 				Object.assign(user, token)
 				return response.json(user)
@@ -81,7 +81,7 @@ class AuthController {
 	  const payload = request.only(['uid', 'password'])
 	  const user = await Persona.verify(payload)
 
-	  await auth.login(user)
+	  await auth.authenticator('jwt').login(user)
 	  response.redirect('/dashboard')
 	}
 

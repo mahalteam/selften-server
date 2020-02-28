@@ -17,14 +17,10 @@
 const Route = use('Route')
 
 Route.group(() => {
-    Route.get('register', 'Auth/RegisterController.showRegisterForm').middleware([
-	  'authenticated'
-	])
+    Route.get('register', 'Auth/RegisterController.showRegisterForm')
 	Route.post('register', 'Auth/RegisterController.register').as('register')
 	Route.get('register/confirm/:token', 'Auth/RegisterController.confirmEmail')
-	Route.get('login', 'Auth/LoginController.showLoginForm').middleware([
-	  'authenticated'
-	])
+	Route.get('login', 'Auth/LoginController.showLoginForm')
 	Route.post('login', 'Auth/LoginController.login').as('login')
 	Route.get('logout', 'Auth/AuthenticatedController.logout')
 })
@@ -46,7 +42,7 @@ Route.group(() => {
 	Route.resource('banner', 'BannerController');
 	Route.resource('prize', 'PrizeController');
 	Route.resource('paymentMethod', 'PaymentMethodController');
-})
+}).middleware(['auth'])
 
 // api
 Route.group(() => {

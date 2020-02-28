@@ -51,6 +51,7 @@ Route.group(() => {
 	Route.post('/forgotpassword', 'AuthController.forgotPassword')
 	Route.get('/updateuser/:id', 'AuthController.updateuser')
 	Route.get('/matchproduct', 'ProductController.matchproduct')
+	Route.get('/banner', 'BannerController.all')
 	Route.get('/match/:id', 'MatchController.matchbyid')
 	Route.get('/match/', 'MatchController.matchbyid')
 	Route.get('/singlematch/:id', 'MatchController.singlematch')

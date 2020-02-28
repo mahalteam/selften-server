@@ -11,6 +11,12 @@ class BannerController {
         return view.render('Setup/Banner/index',{banners: banner.rows});
     }
 
+    async all ({ request, response, view }){
+        const banner = await Banner.all();
+        response.send(banner);
+        return
+    }
+
     async create ({ request, response, view }) {
         const banner = await Banner.all();
         return view.render('Setup.Banner.create',{banner: 'product'});

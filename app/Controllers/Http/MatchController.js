@@ -97,6 +97,11 @@ class MatchController {
 			matchuser.match_id=match_id
 			matchuser.gamename=request.input('player3')
 			await matchuser.save()
+
+			matchuser.user_id=user_id
+			matchuser.match_id=match_id
+			matchuser.gamename=request.input('player4')
+			await matchuser.save()
 		}
 		response.json('success')
 	}

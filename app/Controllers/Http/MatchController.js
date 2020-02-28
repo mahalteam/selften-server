@@ -55,8 +55,17 @@ class MatchController {
 		var match_id=request.input('match_id');
 
 		const user = await User.find(user_id);
-		user.wallet=user.wallet-totalfee
-		user.save();
+		let wallet = user.wallet;
+		if(wallet-totalfee>=0){
+			user.wallet=user.wallet-totalfee
+			user.save();
+		}else{
+			user.wallet=0;
+			let current = totalfee-wallet;
+			user.earn_wallet=user.earn_wallet-current;
+			user.save();
+		}
+		
 		
 		if(type=='solo'){
 			matchuser.user_id=user_id

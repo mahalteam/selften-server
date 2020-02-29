@@ -35,15 +35,35 @@
 			      <td>{{ m.max_join }}</td>
 			      <td>{{ m.entryfee }} BDT</td>
 			      <td>
-		      		<select name="" class="statusdata" onchange="updatestatus(this,'{{ m.id }}')">
+					@if(m.status=='cancel')
+		      		<select name="" disabled class="statusdata" onchange="updatestatus(this,'{{ m.id }}')">
 		      			<option value="upcoming" {{ m.status=='upcoming' ? 'selected' : '' }}>Upcoming</option>
 		      			<option value="ongoing" {{ m.status=='ongoing' ? 'selected' : '' }}>Ongoing</option>
 		      			<option value="result" {{ m.status=='result' ? 'selected' : '' }}>Result</option>
 		      			<option value="cancel" {{ m.status=='cancel' ? 'selected' : '' }}>Cancel</option>
-		      		</select>
+					  </select>
+					@elseif(m.status=='result')
+		      		<select name="" disabled class="statusdata" onchange="updatestatus(this,'{{ m.id }}')">
+		      			<option value="upcoming" {{ m.status=='upcoming' ? 'selected' : '' }}>Upcoming</option>
+		      			<option value="ongoing" {{ m.status=='ongoing' ? 'selected' : '' }}>Ongoing</option>
+		      			<option value="result" {{ m.status=='result' ? 'selected' : '' }}>Result</option>
+		      			<option value="cancel" {{ m.status=='cancel' ? 'selected' : '' }}>Cancel</option>
+					  </select>
+					  @else
+					  <select name="" class="statusdata" onchange="updatestatus(this,'{{ m.id }}')">
+		      			<option value="upcoming" {{ m.status=='upcoming' ? 'selected' : '' }}>Upcoming</option>
+		      			<option value="ongoing" {{ m.status=='ongoing' ? 'selected' : '' }}>Ongoing</option>
+		      			<option value="result" {{ m.status=='result' ? 'selected' : '' }}>Result</option>
+		      			<option value="cancel" {{ m.status=='cancel' ? 'selected' : '' }}>Cancel</option>
+					  </select>
+					  @endif
 			      </td>
 			      <td>
-			      	<a href="match/{{ m.id }}/edit" class="btn btn-success">Edit</a>
+					@if(m.status=='cancel')
+					  <a href="match/{{ m.id }}/edit" style="display: none" class="btn btn-success">Edit</a>
+					@else
+					<a href="match/{{ m.id }}/edit" class="btn btn-success">Edit</a>
+					@endif
 			      	<a href="totalplayer/{{ m.id }}" class="btn btn-secondary">Total User Join</a>
 			      	<form method="POST" action="/match/{{m.id}}?_method=delete" style="display: inline;">
 						<button type="submit" class="btn btn-danger">Delete</button>

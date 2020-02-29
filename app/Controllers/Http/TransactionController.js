@@ -21,14 +21,36 @@ class TransactionController {
 	 */
 	async index ({ request, response, view }) {
 		const transaction= new Transaction();
-		transaction.user_id=request.input('user_id')
-		transaction.purpose=request.input('purpose')
-		transaction.amount=request.input('amount')
-		transaction.number=request.input('number')
-		transaction.paymentmethod_id=request.input('paymentmethod')
-		transaction.status='pending'
-		transaction.save();
+		let purpose= request.input('purpose')
+		let user_id= request.input('user_id')
+		let amount= request.input('amount')
+		if(purpose=='withdraw'){
+			const user = User.find(user_id);
+			if(user.earn_wallet>=amount){
+				transaction.user_id=user_id
+				transaction.purpose=purpose;
+				transaction.amount=request.input('amount')
+				transaction.number=request.input('number')
+				transaction.paymentmethod_id=request.input('paymentmethod')
+				transaction.status='pending'
+				await transaction.save();
+				user.earn_wallet=user.earn_wallet-amount
+				await user.save()
+			}else{
+				response.json('You do not have enough balance');
+				return 
+			}
+		}else{
+			transaction.user_id=user_id
+			transaction.purpose=purpose;
+			transaction.amount=request.input('amount')
+			transaction.number=request.input('number')
+			transaction.paymentmethod_id=request.input('paymentmethod')
+			transaction.status='pending'
+			await transaction.save();
+		}
 		response.json('success');
+		return
 	}
 
 	async usertransaction({ params,request, response, view }){

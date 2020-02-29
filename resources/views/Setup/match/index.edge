@@ -88,12 +88,15 @@
 			})
 			.done(function(re) {
 				console.log(re);
+				// location.reload();
 			})
 			.fail(function() {
 				console.log("error");
+				// location.reload();
 			})
 			.always(function() {
 				console.log("complete");
+				location.reload();
 			});
 			
 		}

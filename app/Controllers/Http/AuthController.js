@@ -85,7 +85,7 @@ class AuthController {
 					Object.assign(user, token)
 					return response.json(user)
 				}else{
-					return response.json({message: 'These credentials do not match our records.'})
+					return response.json({message: 'These credentials do not match our records..'})
 				}
 			}
 			else{

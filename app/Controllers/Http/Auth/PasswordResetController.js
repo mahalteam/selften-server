@@ -83,7 +83,7 @@ class PasswordResetController {
 
 		try {
 			// get user by the provider email
-			const user = await User.findBy('email', request.input('email')).first();
+			const user = await User.findBy('email', request.input('email'))
 
 			// check if password reet token exist for user
 			const token = await PasswordReset.query()

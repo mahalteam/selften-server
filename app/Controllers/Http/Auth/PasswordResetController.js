@@ -80,11 +80,10 @@ class PasswordResetController {
 
 			return response.send(validation.messages())
 		}
-
+		let savepass='';
 		try {
 			// get user by the provider email
 			const user = await User.findBy('email', request.input('email'))
-
 			// check if password reet token exist for user
 			const token = await PasswordReset.query()
 				.where('email', user.email)
@@ -100,9 +99,9 @@ class PasswordResetController {
 				return response.send(notification)
 			}
 
-			user.password = await Hash.make(request.input('password'))
+			// let savepass = await Hash.make(request.input('password'))
+			user.password = request.input('password')
 			await user.save()
-
 			// delete password reset token
 			await PasswordReset.query().where('email', user.email).delete()
 

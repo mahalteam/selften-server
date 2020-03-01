@@ -3,6 +3,7 @@
 const User = use('App/Models/User');
 const { validate } = use('Validator');
 const Persona = use('Persona')
+const Hash = use('Hash')
 class AuthController {
 
 	async register({request, auth, response}) {
@@ -61,14 +62,35 @@ class AuthController {
 		let {email, password} = request.all();
 
 		try {
-			if (await auth.authenticator('jwt').attempt(email, password)) {
-				let user = await User.findBy('email', email)
-				let token = await auth.authenticator('jwt').generate(user)
+			// if (await auth.authenticator('jwt').attempt(email, password)) {
+			// 	let user = await User.findBy('email', email)
+			// 	let token = await auth.authenticator('jwt').generate(user)
 
-				Object.assign(user, token)
-				return response.json(user)
+			// 	Object.assign(user, token)
+			// 	return response.json(user)
+			// }
+
+			// retrieve user base on the form data
+			const user = await User.query()
+				.where('email', email)
+				.first()
+
+			if (user) {
+				// verify password
+				const passwordVerified = await Hash.verify(password, user.password)
+
+				if (passwordVerified) {
+					let token = await auth.authenticator('jwt').generate(user)
+
+					Object.assign(user, token)
+					return response.json(user)
+				}else{
+					return response.json({message: 'These credentials do not match our records..'})
+				}
 			}
-
+			else{
+				return response.json({message: 'These credentials do not match our records.'})
+			}
 
 		}
 		catch (e) {

@@ -16,6 +16,8 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
+Route.get('/hastext', 'HomeController.hastext')
+
 Route.group(() => {
     Route.get('register', 'Auth/RegisterController.showRegisterForm')
 	Route.post('register', 'Auth/RegisterController.register').as('register')

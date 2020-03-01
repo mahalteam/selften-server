@@ -25,7 +25,7 @@ class MatchController {
 	 * @param {View} ctx.view
 	 */
 	async index ({ request, response, view }) {
-		const match = await Match.query().with('product').with('users').fetch();
+		const match = await Match.query().with('product').with('users').orderBy('id', 'desc').fetch();
 		const product = await Product.all();
 		const maps = await Maps.all();
 		return view.render('Setup/match/index',

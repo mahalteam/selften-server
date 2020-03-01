@@ -179,8 +179,8 @@ class MatchController {
 		match.map_id = request.input('map_id')
 		match.start_at = request.input('start_at')
 		match.start_time = request.input('start_time')
-		match.in_time = request.input('in_time')
-		match.end_time = request.input('end_time')
+		// match.in_time = request.input('in_time')
+		// match.end_time = request.input('end_time')
 		match.match_name = request.input('match_name')
 		match.perkill = request.input('perkill')
 		match.entryfee = request.input('entry_fee')
@@ -365,7 +365,27 @@ class MatchController {
   	}
 
 	async updatestatus({ params, request, response,view }){
+		const cheak_status = request.input('status');
 		var match = Match.query().where('id', params.id).update({ status: request.input('status') });
+
+		// console.log(cheak_status);
+		if( cheak_status=='cancel')
+		{
+			const match1 = await Match.find(params.id);
+			const match1_user = await match1.users().fetch()
+			const match1_users = match1_user.rows;
+			const entry_fee = match1.entryfee;
+			// console.log(match1);
+			// console.log(entry_fee);
+			for(var i=0; i<match1_users.length; i++)
+			{
+				const update_earn_wallet = match1_users[i].earn_wallet + entry_fee;
+				await User.query().where('id', match1_users[i].id).update({ earn_wallet: update_earn_wallet });
+				// console.log(update_earn_wallet);
+				// console.log(match1_users[i].id);
+			}
+		}
+		// console.log(entry_fee);
 		return match;
 	}
 }

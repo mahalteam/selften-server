@@ -31,6 +31,7 @@
     "@adonisjs/shield": "^1.0.8",
     "@adonisjs/validator": "^5.0.6",
     "mysql": "^2.18.0",
+    "persona": "^3.2.0",
     "random-string": "^0.2.0"
   },
   "devDependencies": {},

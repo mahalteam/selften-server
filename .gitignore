@@ -1,7 +1,7 @@
 # Node modules
 node_modules
 package-lock.json
-/resources/views/login.edge
+resources/views/auth/login.edge
 # Adonis directory for storing tmp files
 tmp
 

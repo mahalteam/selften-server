@@ -75,7 +75,13 @@ function playerUpdate(id){
 				  <select name="previous_earn" class="form-control" id="">
 				  	<option value="0">Select Prize</option>
 				  	@each((m,index) in match.prizes)
-						<option value="{{ m.prize }}">{{ m.lavel }}</option>
+				  		@if(match.type=='solo')
+							<option value="{{ m.prize }}">{{ m.lavel }}</option>
+						@elseif(match.type=='duo')
+							<option value="{{ m.prize/2 }}">{{ m.lavel }}</option>
+						@elseif(match.type=='squad')
+							<option value="{{ m.prize/4 }}">{{ m.lavel }}</option>
+						@endif
 				  	@endeach
 				  </select>
 	          </div>

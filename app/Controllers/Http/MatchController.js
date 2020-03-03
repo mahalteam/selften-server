@@ -351,6 +351,9 @@ class MatchController {
 		const new_earn_wallet = (parseInt(kill * perkill))+parseInt(previous_earn);
 
 		user.earn_wallet = parseInt(user.earn_wallet)+parseInt(new_earn_wallet);
+
+		// user.earn_wallet
+
 		user.totalkills  = parseInt(user.totalkills)+parseInt(kill);
 		// return match_player;
 		// return perkill;

@@ -16,7 +16,10 @@
                     <select name="match_id" class="form-control" id="match_id">
                         <option>Select One</option>
                         @each(match in matchs)
-                            <option value="{{match.id}}">{{match.match_name}}</option>
+                            @if(match.status=='result' || match.status=='cancel')
+                            @else
+                                <option value="{{match.id}}">{{match.match_name}}</option>
+                            @endif
                         @endeach
                     </select>
                     <small class="form-text text-muted">Validation error</small>

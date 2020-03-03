@@ -40,7 +40,7 @@ class PrizeController {
 	 * @param {View} ctx.view
 	 */
 	async create ({ request, response, view }) {
-		const matchs = await Match.all();
+		const matchs = await Match.query().orderBy('id', 'desc').fetch();
 		return view.render('Setup.Prize.create',
 			{
 				matchs: matchs.rows
@@ -99,7 +99,7 @@ class PrizeController {
 	 * @param {View} ctx.view
 	 */
 	async edit ({ params, request, response, view }) {
-		const matchs = await Match.all();
+		const matchs = await Match.query().orderBy('id', 'desc').fetch();
 		const prize = await Prize.find(params.id);
 		return view.render('Setup.Prize.edit',
 			{

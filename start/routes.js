@@ -36,6 +36,7 @@ Route.group(() => {
 	Route.post('/playerUpdateStore', 'MatchController.playerUpdateStore')
 	Route.get('/update/:id', 'MatchController.updatestatus')
 	Route.get('/transaction', 'TransactionController.store')
+	Route.get('/orders', 'OrderController.index')
 	Route.get('/transactionEdit/:id', 'TransactionController.edit')
 	Route.post('/transactionUpdate/:id', 'TransactionController.update')
 	Route.resource('product', 'ProductController');
@@ -62,6 +63,7 @@ Route.group(() => {
 	Route.get('/usertransaction/:id', 'TransactionController.usertransaction')
 	Route.post('/join/:id', 'MatchController.join')
 	Route.post('/addwallet', 'TransactionController.index')
+	Route.post('/order', 'OrderController.store')
 	
 	Route.post('password/email', 'Auth/PasswordResetController.sendResetLinkEmail')
 	Route.get('password/reset/:token', 'Auth/PasswordResetController.showResetForm')

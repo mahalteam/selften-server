@@ -31,6 +31,9 @@ class ProductController {
 
 		product.name = request.input('product_name')
 		product.rules = request.input('rules');
+		product.price = request.input('price');
+		product.start_at = request.input('start_at');
+		product.end_at = request.input('end_at');
 		product.logo = fileName
 		product.isactiveforsale = request.input('for_sale', 0)
 		product.isactiveformatch = request.input('for_match', 0)
@@ -74,6 +77,9 @@ class ProductController {
 		const fileName = await this._uploadLogo(request);
 		product.name = request.input('product_name')
 		product.rules = request.input('rules');
+		product.price = request.input('price');
+		product.start_at = request.input('start_at');
+		product.end_at = request.input('end_at');
 		product.isactiveforsale = request.input('for_sale', 0)
 		product.isactiveformatch = request.input('for_match', 0)
 		product.isactivefortopup = request.input('for_top_up', 0)

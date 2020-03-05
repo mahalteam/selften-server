@@ -13,15 +13,31 @@
     <div class="card-body">
         <form method="post" action="/product" enctype="multipart/form-data">
             <div class="form-row">
-                <div class="col-6">
+                <div class="col-3">
                     <label for="name">Name</label>
                     <input type="text" name="product_name" class="form-control" id="name" aria-describedby="nameInput">
                     <small id="nameInput" class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
-                <div class="col-6">
+                <div class="col-3">
+                    <label for="images">Price</label>
+                    <input type="text" name="price" class="form-control datetimepicker" id="">
+                </div>
+                
+                <div class="col-3">
+                    <label for="images">Start Date</label>
+                    <input id="datepicker" name="start_at" class="datepicker" width="276" />
+                </div>
+
+                <div class="col-3">
+                    <label for="images">End Date</label>
+                    <input id="datepicker1" class="datepicker1" name="end_at" width="276" />
+                </div>
+
+                <div class="col-3">
                     <label for="images">Logo</label>
                     <input type="file" name="logo_img" class="form-control-file" id="images">
                 </div>
+                
                 <div class="col-12">
                     <label for="rules">Rules</label>
                     <textarea name="rules" id="rules"></textarea>
@@ -44,9 +60,8 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+
     </div>
   </div>
-
-</div>
 @endsection
        

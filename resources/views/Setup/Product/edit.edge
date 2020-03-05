@@ -11,7 +11,7 @@
     <div class="card-body">
         <form method="POST" action="/product/{{product.id}}?_method=put" enctype="multipart/form-data">
             <div class="form-row">
-                <div class="col-6">
+                <div class="col-3">
                     <label for="name">Name</label>
                     <input
                         type="text"
@@ -21,6 +21,20 @@
                         value="{{product.name}}"
                         aria-describedby="nameInput">
                     <small id="nameInput" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                 <div class="col-3">
+                    <label for="images">Price</label>
+                    <input type="text" value="{{product.price}}" name="price" class="form-control datetimepicker" id="">
+                </div>
+                
+                <div class="col-3">
+                    <label for="images">Start Date</label>
+                    <input id="datepicker" name="start_at" value="{{product.start_at}}" class="datepicker" width="276" />
+                </div>
+
+                <div class="col-3">
+                    <label for="images">End Date</label>
+                    <input id="datepicker1" class="datepicker1"  value="{{product.end_at}}" name="end_at" width="276" />
                 </div>
                 <div class="col-6">
                     <label for="images">Logo</label>

@@ -12,6 +12,9 @@
 	    <tr>
 	      <th scope="col">#</th>
 	      <th scope="col">Name</th>
+	      <th scope="col">Price</th>
+	      <th scope="col">Start at</th>
+	      <th scope="col">End at</th>
 	      <th scope="col">Logo</th>
 	      <th scope="col">rules</th>
 	      <th scope="col">Action</th>
@@ -22,6 +25,9 @@
 		    <tr>
 		      <td scope="row">{{ index+1 }}</td>
 		      <td>{{ product.name }}</td>
+		      <td>{{ product.price }}</td>
+		      <td>{{ product.start_at }}</td>
+		      <td>{{ product.end_at }}</td>
 		      <td><img src="{{ 'uploads/product/'+product.logo }}" width="50px" /></td>
 		      <td>{{ product.rules }}</td>
 		   	 <td class="d-flex">

@@ -46,6 +46,12 @@ class OrderController {
 	 * @param {Response} ctx.response
 	 */
 	async store ({ request, response }) {
+		const order = new Order(); 
+		order.product_id=request.input('product_id')
+		order.user_id=request.input('user_id')
+		order.amount=request.input('amount')
+		order.date=request.input('date')
+		await order.save()
 		return request.all();
 	}
 

@@ -43,6 +43,11 @@ class ProductController {
 		return response.redirect('product');
 	}
 
+	async offerproduct ({params, request, response, view}){
+		const product = await Product.query().where('isactiveforsale',1).fetch();
+		return response.send(product);
+	}
+
 	async show ({ params, request, response, view }) {
 	}
 

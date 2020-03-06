@@ -64,7 +64,8 @@ Route.group(() => {
 	Route.post('/join/:id', 'MatchController.join')
 	Route.post('/addwallet', 'TransactionController.index')
 	Route.post('/order', 'OrderController.store')
-	
+	Route.get('/offerproduct', 'ProductController.offerproduct')
+
 	Route.post('password/email', 'Auth/PasswordResetController.sendResetLinkEmail')
 	Route.get('password/reset/:token', 'Auth/PasswordResetController.showResetForm')
 	Route.post('password/reset', 'Auth/PasswordResetController.reset')

@@ -52,7 +52,7 @@ class OrderController {
 		order.amount=request.input('amount')
 		order.date=request.input('date')
 		await order.save()
-		return request.all();
+		return 'success';
 	}
 
 	/**

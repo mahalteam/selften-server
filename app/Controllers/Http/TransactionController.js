@@ -59,7 +59,7 @@ class TransactionController {
 				return
 			}
 		}else{
-			response.json('error');
+			response.json('Please Refresh The Page And Send Again');
 		}
 	}
 

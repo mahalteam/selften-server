@@ -13,16 +13,21 @@
 	  <thead>
 	    <tr>
 	      <th scope="col">#</th>
+	      <th scope="col">Id</th>
 	      <th scope="col">Name</th>
 	      <th scope="col">Email</th>
+	      <th scope="col">Wallet</th>
+	      <th scope="col">Earn Wallet</th>
 	    </tr>
 	  </thead>
 	  <tbody> 
-	  	@each(user in users)
+	  	@each((user,index) in users)
 		    <tr>
-		      <th scope="row">1</th>
+		      <th scope="row">{{ index+1 }}</th>
+		      <td>{{ user.id }}</td>
 		      <td>{{ user.username }}</td>
-		      <td>{{ user.email }}</td>
+		      <td>{{ user.wallet }}</td>
+		      <td>{{ user.earn_wallet }}</td>
 		    </tr>
 	    @endeach
 	  </tbody>

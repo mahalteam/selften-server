@@ -120,6 +120,7 @@ class TransactionController {
 		const id = await params.id;
 		const transaction = await Transaction.find(id);
 		var status = request.input('status')
+		var page = request.input('page')
 		var old_status = request.input('old_status')
 
 		if(status=='completed' && transaction.purpose=='addwallet'){
@@ -157,7 +158,7 @@ class TransactionController {
 
 		transaction.status=status;
 		await transaction.save();
-		return response.redirect('/transaction');
+		return response.redirect('/transaction?page='+page);
 	}
 	
 }

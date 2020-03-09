@@ -91,6 +91,7 @@ function myfunction(id){
 				<div class="modal-body">
 					{{ csrfField() }}
 					<div class="form-group">
+						<input type="hidden"  name="page" value="{{ page }}">
 						<input type="hidden"  id="update_id" name="id">
 						<input type="hidden"  id="old_status" name="old_status">
 						<select name="status" id="update_status" class="form-control" required>

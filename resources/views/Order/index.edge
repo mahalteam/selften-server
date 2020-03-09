@@ -12,7 +12,6 @@
 				<th scope="col">Number</th>
 				<th scope="col">Purpose</th>
 				<th scope="col">Status</th>
-				{{-- <th scope="col">Action</th> --}}
 			</tr>
 		</thead>
 		<tbody>
@@ -24,11 +23,11 @@
 					<td>{{ transaction.number }}</td>
 					<td>{{ transaction.purpose }}</td>
 					<td>{{ transaction.status }}</td>
-				{{-- 	<td>
+					<td>
 						@if(transaction.status!='cancel' && transaction.status!='completed')
 							<a href="#" onclick="myfunction({{transaction.id}})" class="btn btn-primary" data-toggle="modal" data-target="#examplemodel1" data-whatever="@mdo">Edit</a>
 						@endif
-					</td> --}}
+					</td> 
 				</tr>
 			@endeach
 			

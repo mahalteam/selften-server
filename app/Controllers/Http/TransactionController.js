@@ -20,44 +20,53 @@ class TransactionController {
 	 * @param {View} ctx.view
 	 */
 	async index ({ request, response, view }) {
-		const transaction= new Transaction();
 		let purpose= request.input('purpose')
 		let user_id= request.input('user_id')
 		let amount= request.input('amount')
-		if(purpose=='withdraw'){
-			const user = User.find(user_id);
-			if(user.earn_wallet>=amount){
-				transaction.user_id=user_id
-				transaction.purpose=purpose;
-				transaction.amount=request.input('amount')
-				transaction.number=request.input('number')
-				transaction.paymentmethod_id=request.input('paymentmethod')
-				transaction.status='pending'
-				await transaction.save();
-				user.earn_wallet=user.earn_wallet-amount
-				await user.save()
+
+		if(user_id && amount>0){
+			const dd = await Transaction.query().where('user_id',user_id).where('status','pending').getCount();
+			if(dd>0){
+				response.json('You Have Already A Pending Order. Please Completed To Add Another Order');
 			}else{
-				response.json('You do not have enough balance');
-				return 
+				const transaction= new Transaction();
+				if(purpose=='withdraw'){
+					const user = User.find(user_id);
+					if(user.earn_wallet>=amount){
+						transaction.user_id=user_id
+						transaction.purpose=purpose;
+						transaction.amount=request.input('amount')
+						transaction.number=request.input('number')
+						transaction.paymentmethod_id=request.input('paymentmethod')
+						transaction.status='pending'
+						await transaction.save();
+						user.earn_wallet=user.earn_wallet-amount
+						await user.save()
+					}else{
+						response.json('You do not have enough balance');
+						return 
+					}
+				}else{
+					transaction.user_id=user_id
+					transaction.purpose=purpose;
+					transaction.amount=request.input('amount')
+					transaction.number=request.input('number')
+					transaction.paymentmethod_id=request.input('paymentmethod')
+					transaction.status='pending'
+					await transaction.save();
+				}
+				response.json('success');
+				return
 			}
 		}else{
-			transaction.user_id=user_id
-			transaction.purpose=purpose;
-			transaction.amount=request.input('amount')
-			transaction.number=request.input('number')
-			transaction.paymentmethod_id=request.input('paymentmethod')
-			transaction.status='pending'
-			await transaction.save();
+			response.json('error');
 		}
-		response.json('success');
-		return
 	}
 
 	async usertransaction({ params,request, response, view }){
 		const transaction= await Transaction.query().where('user_id',params.id).orderBy('id', 'desc').limit(15).fetch();
 		response.send(transaction);
 	}
-
 
 	async show ({ request, response, view }) {
 		const transaction = await Transaction.all();

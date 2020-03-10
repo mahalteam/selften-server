@@ -51,7 +51,7 @@ class OrderController {
 		order.user_id=request.input('user_id')
 		order.amount=request.input('amount')
 		order.date=request.input('date')
-		await order.save()
+		// await order.save()
 		return 'success';
 	}
 

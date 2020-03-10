@@ -15,12 +15,10 @@
                     <label for="match_id">Match</label>
                     <select name="match_id" class="form-control" id="match_id">
                         <option>Select One</option>
-                        @each(match in matchs)
                             @if(match.status=='result' || match.status=='cancel')
                             @else
-                                <option value="{{match.id}}">{{match.match_name}}</option>
+                                <option value="{{match.id}}" selected>{{match.match_name}}</option>
                             @endif
-                        @endeach
                     </select>
                 </div>
                 <div class="col-6">

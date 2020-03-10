@@ -39,11 +39,11 @@ class PrizeController {
 	 * @param {Response} ctx.response
 	 * @param {View} ctx.view
 	 */
-	async create ({ request, response, view }) {
-		const matchs = await Match.query().orderBy('id', 'desc').fetch();
+	async create ({params, request, response, view }) {
+		const matchs = await Match.find(params.id);
 		return view.render('Setup.Prize.create',
 			{
-				matchs: matchs.rows
+				match: matchs
 			}
 		);
 	}
@@ -67,14 +67,16 @@ class PrizeController {
 			return "Insert Form data error";
 		}
 
+		let match_id = request.input('match_id')
+
 		const prize = new Prize()
 
-		prize.match_id = request.input('match_id')
+		prize.match_id = match_id
 		prize.prize = request.input('prize')
 		prize.lavel = request.input('lavel')
 
 		await prize.save()
-		return response.redirect('prize');
+		return response.redirect('/matchprize/'+match_id);
 	}
 
 	/**
@@ -99,11 +101,11 @@ class PrizeController {
 	 * @param {View} ctx.view
 	 */
 	async edit ({ params, request, response, view }) {
-		const matchs = await Match.query().orderBy('id', 'desc').fetch();
 		const prize = await Prize.find(params.id);
+		const match = await Match.find(prize.match_id);
 		return view.render('Setup.Prize.edit',
 			{
-				matchs: matchs.rows,
+				match,
 				prize
 			}
 		);
@@ -130,13 +132,13 @@ class PrizeController {
 		if (validation.fails()) {
 			return "Insert Form data error";
 		}
-
-		prize.match_id = request.input('match_id')
+		let match_id = request.input('match_id');
+		prize.match_id = match_id
 		prize.prize = request.input('prize')
 		prize.lavel = request.input('lavel')
 
 		await prize.save()
-		return response.redirect('prize');
+		return response.redirect('/matchprize/'+match_id);
 	}
 
 	/**
@@ -148,13 +150,13 @@ class PrizeController {
 	 * @param {Response} ctx.response
 	 */
 	async destroy ({ params, request, response }) {
-		console.log(params.id)
 		const prize =await Prize.find(params.id);
+		let id = prize.match_id;
 		if(!prize) {
 			return "no prize for this id"
 		}
 		await prize.delete();
-		return response.redirect('/prize');
+		return response.redirect('/matchprize/'+id);
 	}
 }
 

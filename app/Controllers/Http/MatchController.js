@@ -37,6 +37,16 @@ class MatchController {
 		);
 	}
 
+	async matchprize ({ params ,request, response, view }){
+		const prize = await Prize.query().with('match').where('match_id',params.id).fetch();
+		return view.render('Setup.Prize.index',
+			{
+				prize: prize.toJSON(),
+				match_id:params.id
+			}
+		);
+	}
+
 	async matchbyid ({ params,request, response, view }) {
 		const match = await Match.query().with('product').with('users').with('map').with('prizes').where('status', 'upcoming').orWhere('status', 'ongoing').orWhere('status', 'result').orderBy('id', 'desc').limit(35).fetch();
 		response.json(match)

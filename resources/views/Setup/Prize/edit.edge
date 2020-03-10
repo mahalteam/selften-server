@@ -15,14 +15,11 @@
                     <label for="match_id">Match</label>
                     <select name="match_id" class="form-control" id="match_id">
                         <option>Select One</option>
-                        @each(match in matchs)
-                            @if(match.status=='result' || match.status=='cancel')
-                            @else
-                                <option value="{{match.id}}">{{match.match_name}}</option>
-                            @endif
-                        @endeach
+                        @if(match.status=='result' || match.status=='cancel')
+                        @else
+                            <option value="{{match.id}}" selected>{{match.match_name}}</option>
+                        @endif
                     </select>
-                    <small class="form-text text-muted">Validation error</small>
                 </div>
                 <div class="col-6">
                     <label for="name">Lavel:</label>
@@ -33,7 +30,6 @@
                         value="{{prize.lavel}}"
                         id="lavel"
                         aria-describedby="lavel">
-                    <small class="form-text text-muted">Validation error</small>
                 </div>
                 <div class="col-6">
                     <label for="prize">Prize:</label>
@@ -44,7 +40,6 @@
                         id="prize"
                         value="{{prize.prize}}"
                         aria-describedby="prize">
-                    <small class="form-text text-muted">Validation error</small>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Update</button>

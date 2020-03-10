@@ -32,6 +32,7 @@ Route.group(() => {
 	Route.get('/table', 'HomeController.table')
 	Route.get('/users', 'UserController.index')
 	Route.get('/totalplayer/:id', 'MatchController.totalplayer')
+	Route.get('/matchprize/:id', 'MatchController.matchprize')
 	Route.get('/playerupdate/:id', 'MatchController.playerupdate')
 	Route.post('/playerUpdateStore', 'MatchController.playerUpdateStore')
 	Route.get('/update/:id', 'MatchController.updatestatus')
@@ -44,6 +45,7 @@ Route.group(() => {
 	Route.resource('map', 'MapController');
 	Route.resource('banner', 'BannerController');
 	Route.resource('prize', 'PrizeController');
+	Route.get('prize/create/:id', 'PrizeController.create');
 	Route.resource('paymentMethod', 'PaymentMethodController');
 }).middleware(['auth'])
 

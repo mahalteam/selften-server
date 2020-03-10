@@ -10,67 +10,68 @@
 	<div class="table-responsive">
 		<table class="table table-success">
 		  <thead>
-		    <tr>
-		      <th scope="col">#</th>
-		      <th scope="col">Game Name</th>
-		      <th scope="col">Name</th>
-		      <th scope="col">Start time</th>
-		      <th scope="col">Room ID/Pass</th>
-		      <th scope="col">Total Joined</th>
-		      <th scope="col">Max Join</th>
-		      <th scope="col">Entry fee</th>
-		      <th scope="col">Status</th>
-		      <th scope="col">Action</th>
-		    </tr>
+			<tr>
+			  <th scope="col">#</th>
+			  <th scope="col">Game Name</th>
+			  <th scope="col">Name</th>
+			  <th scope="col">Start time</th>
+			  <th scope="col">Room ID/Pass</th>
+			  <th scope="col">Total Joined</th>
+			  <th scope="col">Max Join</th>
+			  <th scope="col">Entry fee</th>
+			  <th scope="col">Status</th>
+			  <th scope="col">Action</th>
+			</tr>
 		  </thead>
 		  <tbody> 
-		  	@each((m,index) in match)
-			    <tr>
-			      <th scope="row">{{ index+1 }}</th>
-			      <td>{{ m.product.name }}</td>
-			      <td>{{ m.match_name }}</td>
-			      <td>{{ m.start_time }}</td>
-			      <td>{{ m.room_id }}/{{ m.password }}</td>
-			      <td>{{ m.users.length }}</td>
-			      <td>{{ m.max_join }}</td>
-			      <td>{{ m.entryfee }} BDT</td>
-			      <td>
+			@each((m,index) in match)
+				<tr>
+				  <th scope="row">{{ index+1 }}</th>
+				  <td>{{ m.product.name }}</td>
+				  <td>{{ m.match_name }}</td>
+				  <td>{{ m.start_time }}</td>
+				  <td>{{ m.room_id }}/{{ m.password }}</td>
+				  <td>{{ m.users.length }}</td>
+				  <td>{{ m.max_join }}</td>
+				  <td>{{ m.entryfee }} BDT</td>
+				  <td>
 					@if(m.status=='cancel')
-		      		<select name="" disabled class="statusdata" onchange="updatestatus(this,'{{ m.id }}')">
-		      			<option value="upcoming" {{ m.status=='upcoming' ? 'selected' : '' }}>Upcoming</option>
-		      			<option value="ongoing" {{ m.status=='ongoing' ? 'selected' : '' }}>Ongoing</option>
-		      			<option value="result" {{ m.status=='result' ? 'selected' : '' }}>Result</option>
-		      			<option value="cancel" {{ m.status=='cancel' ? 'selected' : '' }}>Cancel</option>
+					<select name="" disabled class="statusdata" onchange="updatestatus(this,'{{ m.id }}')">
+						<option value="upcoming" {{ m.status=='upcoming' ? 'selected' : '' }}>Upcoming</option>
+						<option value="ongoing" {{ m.status=='ongoing' ? 'selected' : '' }}>Ongoing</option>
+						<option value="result" {{ m.status=='result' ? 'selected' : '' }}>Result</option>
+						<option value="cancel" {{ m.status=='cancel' ? 'selected' : '' }}>Cancel</option>
 					  </select>
 					@elseif(m.status=='result')
-		      		<select name="" disabled class="statusdata" onchange="updatestatus(this,'{{ m.id }}')">
-		      			<option value="upcoming" {{ m.status=='upcoming' ? 'selected' : '' }}>Upcoming</option>
-		      			<option value="ongoing" {{ m.status=='ongoing' ? 'selected' : '' }}>Ongoing</option>
-		      			<option value="result" {{ m.status=='result' ? 'selected' : '' }}>Result</option>
-		      			<option value="cancel" {{ m.status=='cancel' ? 'selected' : '' }}>Cancel</option>
+					<select name="" disabled class="statusdata" onchange="updatestatus(this,'{{ m.id }}')">
+						<option value="upcoming" {{ m.status=='upcoming' ? 'selected' : '' }}>Upcoming</option>
+						<option value="ongoing" {{ m.status=='ongoing' ? 'selected' : '' }}>Ongoing</option>
+						<option value="result" {{ m.status=='result' ? 'selected' : '' }}>Result</option>
+						<option value="cancel" {{ m.status=='cancel' ? 'selected' : '' }}>Cancel</option>
 					  </select>
 					  @else
 					  <select name="" class="statusdata" onchange="updatestatus(this,'{{ m.id }}')">
-		      			<option value="upcoming" {{ m.status=='upcoming' ? 'selected' : '' }}>Upcoming</option>
-		      			<option value="ongoing" {{ m.status=='ongoing' ? 'selected' : '' }}>Ongoing</option>
-		      			<option value="result" {{ m.status=='result' ? 'selected' : '' }}>Result</option>
-		      			<option value="cancel" {{ m.status=='cancel' ? 'selected' : '' }}>Cancel</option>
+						<option value="upcoming" {{ m.status=='upcoming' ? 'selected' : '' }}>Upcoming</option>
+						<option value="ongoing" {{ m.status=='ongoing' ? 'selected' : '' }}>Ongoing</option>
+						<option value="result" {{ m.status=='result' ? 'selected' : '' }}>Result</option>
+						<option value="cancel" {{ m.status=='cancel' ? 'selected' : '' }}>Cancel</option>
 					  </select>
 					  @endif
-			      </td>
-			      <td>
+				  </td>
+				  <td>
 					@if(m.status=='cancel')
 					  <a href="match/{{ m.id }}/edit" style="display: none" class="btn btn-success">Edit</a>
 					@else
 					<a href="match/{{ m.id }}/edit" class="btn btn-success">Edit</a>
 					@endif
-			      	<a href="totalplayer/{{ m.id }}" class="btn btn-secondary">Total User Join</a>
-			      	<form method="POST" action="/match/{{m.id}}?_method=delete" style="display: inline;">
+					<a href="totalplayer/{{ m.id }}" class="btn btn-secondary">Total User Join</a>
+					<a href="matchprize/{{ m.id }}" class="btn btn-secondary">Prize</a>
+					<form method="POST" action="/match/{{m.id}}?_method=delete" style="display: inline;">
 						<button type="submit" class="btn btn-danger">Delete</button>
 					</form>
-			      </td>
-			    </tr>
-		    @endeach
+				  </td>
+				</tr>
+			@endeach
 		  </tbody>
 		</table>
 	</div>

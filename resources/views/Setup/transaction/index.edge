@@ -3,6 +3,10 @@
 @section('body')
 <div class="container">
 	<br>
+	<form action="/transaction" method="GET">
+		<input type="text" name="number" placeholder="Number" class="form-control">
+	</form>
+	<br>
 	<table class="table table-success">
 		<thead>
 			<tr>
@@ -17,7 +21,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			@each((transaction,index) in transactions.data)
+			@each((transaction,index) in transactions)
 				<tr>
 					<th scope="row">{{ transaction.id }}</th>
 					<td>{{ transaction.user_id }}</td>

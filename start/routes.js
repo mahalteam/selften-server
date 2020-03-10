@@ -59,6 +59,7 @@ Route.group(() => {
 	Route.get('/banner', 'BannerController.all')
 	Route.get('/match/:id', 'MatchController.matchbyid')
 	Route.get('/match/', 'MatchController.matchbyid')
+	Route.get('/matchs/:status', 'MatchController.matchbystatus')
 	Route.get('/singlematch/:id', 'MatchController.singlematch')
 	Route.get('/paymentMethod', 'PaymentMethodController.paymentMethod')
 	Route.get('/paymentMethod/:id', 'PaymentMethodController.paymentMethodbyid')

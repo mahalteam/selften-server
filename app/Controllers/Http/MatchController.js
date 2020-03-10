@@ -54,6 +54,8 @@ class MatchController {
 		var user_id=request.input('user_id');
 		var match_id=request.input('match_id');
 
+		
+		
 		const user = await User.find(user_id);
 		let wallet = user.wallet;
 

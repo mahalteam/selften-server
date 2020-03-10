@@ -95,7 +95,7 @@ class TransactionController {
 		}else{
 			transaction = await Transaction.query().orderBy('id', 'desc').paginate(page,10)
 		}
-		return view.render('Setup/transaction/index',{transactions: transaction.toJSON().data});
+		return view.render('Setup/transaction/index',{transactions: transaction.toJSON()});
 	}
 
 	/**

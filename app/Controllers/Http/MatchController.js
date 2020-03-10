@@ -54,12 +54,12 @@ class MatchController {
 	}
 
 	async matchbystatus ({ params,request, response, view }){
-		let match=[];
-		if(params.status=='result'){
+		// let match=[];
+		// if(params.status=='result'){
 			let match = await Match.query().with('product').with('users').with('map').with('prizes').where('status',params.status).orderBy('id', 'desc').limit(35).fetch();
-		}else{
-			let match = await Match.query().with('product').with('users').with('map').with('prizes').where('status',params.status).limit(35).fetch();
-		}
+		// }else{
+		// 	let match = await Match.query().with('product').with('users').with('map').with('prizes').where('status',params.status).limit(35).fetch();
+		// }
 		response.json(match)
 	}
 

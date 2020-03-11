@@ -37,6 +37,7 @@ Route.group(() => {
 	Route.post('/playerUpdateStore', 'MatchController.playerUpdateStore')
 	Route.get('/update/:id', 'MatchController.updatestatus')
 	Route.get('/transaction', 'TransactionController.store')
+	Route.get('/transactionwithdraw', 'TransactionController.transactionwithdraw')
 	Route.get('/orders', 'OrderController.index')
 	Route.get('/transactionEdit/:id', 'TransactionController.edit')
 	Route.post('/transactionUpdate/:id', 'TransactionController.update')

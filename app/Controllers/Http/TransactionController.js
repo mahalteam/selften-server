@@ -93,7 +93,20 @@ class TransactionController {
 			transaction= await Transaction.query().where('number',number).fetch()
 			return view.render('Setup/transaction/index',{transactions: transaction.toJSON()})
 		}else{
-			transaction = await Transaction.query().orderBy('id', 'desc').paginate(page,10)
+			transaction = await Transaction.query().orderBy('id', 'desc').where('purpose','addwallet').paginate(page,10)
+		}
+		return view.render('Setup/transaction/index',{transactions: transaction.toJSON()});
+	}
+
+	async transactionwithdraw ({ request, response, view }) {
+		const page = request.get().page || 1
+		const number = request.get().number;
+		let transaction=[];
+		if(number){
+			transaction= await Transaction.query().where('number',number).fetch()
+			return view.render('Setup/transaction/index',{transactions: transaction.toJSON()})
+		}else{
+			transaction = await Transaction.query().orderBy('id', 'desc').where('purpose','withdraw').paginate(page,10)
 		}
 		return view.render('Setup/transaction/index',{transactions: transaction.toJSON()});
 	}

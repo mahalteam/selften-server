@@ -4,6 +4,11 @@
 const Model = use('Model')
 
 class Transaction extends Model {
+
+	payment_method(){
+		return this.belongsTo('App/Models/PaymentMethod','paymentmethod_id')
+	}
+
 }
 
 module.exports = Transaction

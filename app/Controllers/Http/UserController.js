@@ -19,8 +19,15 @@ class UserController {
 	 * @param {View} ctx.view
 	 */
 	async index ({ request, response, view }) {
-		const user = await User.all();
-		return view.render('Setup/users/index',{users: user.rows});
+		const page = request.get().page || 1
+		const email = request.get().email;
+		let user=[];
+		if(email){
+			user = await User.query().where('email',email).fetch();
+		}else{
+			user = await User.query().paginate(page,10);
+		}
+		return view.render('Setup/users/index',{users: user.toJSON()});
 	}
 
 	/**

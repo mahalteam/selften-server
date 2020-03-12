@@ -31,6 +31,7 @@ class BannerController {
         }
 
         banner.note = request.input('banner_note')
+        banner.link = request.input('link')
         banner.banner = fileName
         banner.isactive = request.input('is_active', 0)
 
@@ -59,6 +60,7 @@ class BannerController {
         }
 
         banner.note = request.input('banner_note')
+        banner.link = request.input('link')
         banner.isactive = request.input('is_active')
         await banner.save();
 

@@ -12,6 +12,7 @@
 	    <tr>
 	      <th scope="col">#</th>
 	      <th scope="col">Name</th>
+	      <th scope="col">Link</th>
 	      <th scope="col">Image</th>
 	      <th scope="col">Action</th>
 	    </tr>
@@ -21,6 +22,7 @@
 		    <tr>
 		      <th scope="row">1</th>
 		      <td>{{ banner.note }}</td>
+		      <td>{{ banner.link }}</td>
 		      <td><img src="{{ 'uploads/banner/'+banner.banner }}" width="50px" /></td>
 		      <td class="d-flex">
 			  	<form method="POST" action="/banner/{{banner.id}}?_method=delete">

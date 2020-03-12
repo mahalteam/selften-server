@@ -31,7 +31,7 @@ class TransactionController {
 			}else{
 				const transaction= new Transaction();
 				if(purpose=='withdraw'){
-					const user = User.find(user_id);
+					const user = await User.find(user_id);
 					if(user.earn_wallet>=amount){
 						transaction.user_id=user_id
 						transaction.purpose=purpose;

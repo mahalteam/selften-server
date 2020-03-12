@@ -30,23 +30,34 @@ class TransactionController {
 				response.json('You Have Already A Pending Order. Please Completed To Add Another Order');
 			}else{
 				const transaction= new Transaction();
-				if(purpose=='withdraw'){
-					const user = await User.find(user_id);
-					if(user.earn_wallet>=amount){
-						transaction.user_id=user_id
-						transaction.purpose=purpose;
-						transaction.amount=request.input('amount')
-						transaction.number=request.input('number')
-						transaction.paymentmethod_id=request.input('paymentmethod')
-						transaction.status='pending'
-						await transaction.save();
-						user.earn_wallet=user.earn_wallet-amount
-						await user.save()
-					}else{
-						response.json('You do not have enough balance');
-						return 
-					}
-				}else{
+				transaction.user_id=user_id
+				transaction.purpose=purpose;
+				transaction.amount=request.input('amount')
+				transaction.number=request.input('number')
+				transaction.paymentmethod_id=request.input('paymentmethod')
+				transaction.status='pending'
+				await transaction.save();
+				response.json('success');
+				return
+			}
+		}else{
+			response.json('Please Refresh The Page And Send Again');
+		}
+	}
+
+	async withdrawwallet({ request, response, view }){
+		let purpose= request.input('purpose')
+		let user_id= request.input('user_id')
+		let amount= request.input('amount')
+
+		if(user_id && amount>0){
+			const dd = await Transaction.query().where('user_id',user_id).where('status','pending').getCount();
+			if(dd>0){
+				response.json('You Have Already A Pending Order. Please Completed To Add Another Order');
+			}else{
+				const transaction= new Transaction();
+				const user = await User.find(user_id);
+				if(user.earn_wallet>=amount){
 					transaction.user_id=user_id
 					transaction.purpose=purpose;
 					transaction.amount=request.input('amount')
@@ -54,6 +65,11 @@ class TransactionController {
 					transaction.paymentmethod_id=request.input('paymentmethod')
 					transaction.status='pending'
 					await transaction.save();
+					user.earn_wallet=user.earn_wallet-amount
+					await user.save()
+				}else{
+					response.json('You do not have enough balance');
+					return 
 				}
 				response.json('success');
 				return
@@ -168,7 +184,7 @@ class TransactionController {
 		// 	}
 		// }
 		if(status=='cancel' && transaction.purpose=='withdraw'){
-			if(old_status=='completed'){
+			if(old_status=='completed' || old_status=='pending'){
 				let user = await User.find(transaction.user_id);
 				user.wallet=user.wallet+transaction.amount
 				await user.save();

@@ -79,6 +79,15 @@ class MatchController {
 
 		let match = await Match.query().where('id',match_id).first();
 
+		if(type=='solo'){
+			matchuser=matchuser
+		}else if(type=='duo'){
+			matchuser=matchuser+1
+		}
+		else{
+			matchuser=matchuser+3
+		}
+
 		if(match.max_join>matchuser){
 			const user = await User.find(user_id);
 			let wallet = user.wallet;

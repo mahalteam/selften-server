@@ -46,6 +46,8 @@ Route.group(() => {
 	Route.resource('map', 'MapController');
 	Route.resource('banner', 'BannerController');
 	Route.resource('prize', 'PrizeController');
+	Route.resource('notice', 'NoticeController');
+	Route.resource('topuppackage', 'TopuppackageController');
 	Route.get('prize/create/:id', 'PrizeController.create');
 	Route.resource('paymentMethod', 'PaymentMethodController');
 }).middleware(['auth'])
@@ -57,6 +59,8 @@ Route.group(() => {
 	Route.post('/forgotpassword', 'AuthController.forgotPassword')
 	Route.get('/updateuser/:id', 'AuthController.updateuser')
 	Route.get('/matchproduct', 'ProductController.matchproduct')
+	Route.get('/notice', 'NoticeController.all')
+	Route.get('/topuppackage', 'TopuppackageController.all')
 	Route.get('/banner', 'BannerController.all')
 	Route.get('/match/:id', 'MatchController.matchbyid')
 	Route.get('/match/', 'MatchController.matchbyid')

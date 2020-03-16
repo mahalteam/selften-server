@@ -7,6 +7,7 @@ class TopuppackageSchema extends Schema {
   up () {
     this.create('topuppackages', (table) => {
       table.increments()
+      table.integer('product_id')
       table.string('name')
       table.integer('amount')
       table.timestamps()

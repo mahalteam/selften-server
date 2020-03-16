@@ -1,93 +1,61 @@
 'use strict'
 
-/** @typedef {import('@adonisjs/framework/src/Request')} Request */
-/** @typedef {import('@adonisjs/framework/src/Response')} Response */
-/** @typedef {import('@adonisjs/framework/src/View')} View */
-
-/**
- * Resourceful controller for interacting with topuppackages
- */
+const Topuppackage = use('App/Models/Topuppackage')
 class TopuppackageController {
-  /**
-   * Show a list of all topuppackages.
-   * GET topuppackages
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async index ({ request, response, view }) {
-  }
+	async index ({ request, response, view }) {
+		const topuppackage = await Topuppackage.all();
+		return view.render('Setup/Topuppackage/index',{topuppackages: topuppackage.rows});
+	}
 
-  /**
-   * Render a form to be used for creating a new topuppackage.
-   * GET topuppackages/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async create ({ request, response, view }) {
-  }
+	async all ({ request, response, view }){
+		const topuppackages = await Topuppackage.all();
+		response.send(topuppackages);
+		return
+	}
 
-  /**
-   * Create/save a new topuppackage.
-   * POST topuppackages
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async store ({ request, response }) {
-  }
+	async create ({ request, response, view }) {
+		const topuppackages = await Topuppackage.all();
+		return view.render('Setup.Topuppackage.create',{topuppackages: topuppackages});
+	}
 
-  /**
-   * Display a single topuppackage.
-   * GET topuppackages/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async show ({ params, request, response, view }) {
-  }
+	async store ({ request, response }) {
+		const topuppackages = new Topuppackage()
+		topuppackages.product_id = request.input('product_id')
+		topuppackages.name = request.input('name')
+		topuppackages.price = request.input('price')
+		await topuppackages.save()
+		return response.redirect('/topuppackages');
+	}
 
-  /**
-   * Render a form to update an existing topuppackage.
-   * GET topuppackages/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async edit ({ params, request, response, view }) {
-  }
+	async show ({ params, request, response, view }) {
+	}
 
-  /**
-   * Update topuppackage details.
-   * PUT or PATCH topuppackages/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async update ({ params, request, response }) {
-  }
+	async edit ({ params, request, response, view }) {
+		const topuppackages = await Topuppackage.find(params.id);
+		return view.render('Setup.Topuppackage.edit',{topuppackages: topuppackages});
+	}
 
-  /**
-   * Delete a topuppackage with id.
-   * DELETE topuppackages/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async destroy ({ params, request, response }) {
-  }
+	async update ({ params, request, response }) {
+		const topuppackages = await Topuppackage.find(params.id);
+		if (!Topuppackage){
+				return "No Topuppackage for this id";
+		}
+		topuppackages.product_id = request.input('product_id')
+		topuppackages.name = request.input('name')
+		topuppackages.price = request.input('price')
+		await Topuppackage.save();
+
+		return response.redirect('/Topuppackage');
+	}
+
+	async destroy ({ params, request, response }) {
+		const topuppackages = await Topuppackage.find(params.id)
+		if (!topuppackages) {
+				return "No Topuppackage for this id";
+		}
+		await topuppackages.delete();
+		return response.redirect('/Topuppackage');
+	}
 }
 
 module.exports = TopuppackageController

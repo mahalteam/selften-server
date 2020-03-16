@@ -1,0 +1,27 @@
+@layout('layout')
+
+@section('body')
+<div class="container-fluid">
+
+  <h1 class="h3 mb-4 text-gray-800">Setup Page</h1>
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Create Banner</h6>
+    </div>
+    <div class="card-body">
+        <form method="post" action="/notice" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="col-12">
+                    <label for="name">Notice</label>
+                    <textarea name="notice" id="" cols="30" rows="10" class="form-control"></textarea>
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+  </div>
+
+</div>
+@endsection
+       

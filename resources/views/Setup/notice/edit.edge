@@ -1,0 +1,24 @@
+@layout('layout')
+
+@section('body')
+<div class="container-fluid">
+
+  <h1 class="h3 mb-4 text-gray-800">Setup Page</h1>
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Edit Banner</h6>
+    </div>
+    <div class="card-body">
+        <form method="POST" action="/notice/{{notice.id}}?_method=put" enctype="multipart/form-data">
+            <div class="form-row">
+               <textarea name="notice" id="" cols="30" rows="10" class="form-control">{{notice.notice}}</textarea>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Edit</button>
+        </form>
+    </div>
+  </div>
+
+</div>
+@endsection
+       

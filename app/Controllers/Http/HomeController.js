@@ -1,7 +1,11 @@
 'use strict'
 const Hash = use('Hash')
+const User = use('App/Models/User');
+const Database = use('Database')
 class HomeController {
     index ({ view }) {
+        let wallet = Database.from('users').sum('wallet as wallet').sum('earn_wallet as earn_wallet').count('id as totaluser');
+        // return wallet;
         return view.render("index");
     }
     table ({view}) {

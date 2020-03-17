@@ -20,7 +20,7 @@ class OrderController {
 	 */
 	async index ({ request, response, view }) {
 		const page = request.get().page || 1
-		const order = await Order.query().orderBy('id', 'desc').paginate(page,10)
+		const order = await Order.query().with('user').with('topuppackage').orderBy('id', 'desc').paginate(page,10)
 		return view.render('/Order/index',{orders: order.toJSON()}
 		);
 	}
@@ -54,6 +54,23 @@ class OrderController {
 		// await order.save()
 		return 'success';
 	}
+
+	async package ({ request, response }) {
+		let packages = Order.query().where('user_id',request.input('user_id')).where('status','pending').getCount();
+		if(packages>0){
+			response.json('You Have Already A Pending Order. Please Completed To Add Another Order');
+		}else{
+			const order = new Order(); 
+			order.topuppackage_id=request.input('topuppackage_id')
+			order.user_id=request.input('user_id')
+			order.status=request.input('status')
+			order.amount=request.input('amount')
+			order.payment_method=request.input('payment_method')
+			await order.save()
+			return 'success';
+		}
+	}
+
 
 	/**
 	 * Display a single order.

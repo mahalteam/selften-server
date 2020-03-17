@@ -73,6 +73,7 @@ Route.group(() => {
 	Route.post('/addwallet', 'TransactionController.index')
 	Route.post('/withdrawwallet', 'TransactionController.withdrawwallet')
 	Route.post('/order', 'OrderController.store')
+	Route.post('/packageorder', 'OrderController.package')
 	Route.get('/offerproduct', 'ProductController.offerproduct')
 
 	Route.post('password/email', 'Auth/PasswordResetController.sendResetLinkEmail')

@@ -1,9 +1,17 @@
 'use strict'
 
 const Topuppackage = use('App/Models/Topuppackage')
+const { validate } = use('Validator');
+const Match = use('App/Models/Match')
+const User = use('App/Models/User')
+const Product = use('App/Models/Product')
+const Maps = use('App/Models/Map')
+const Prize = use('App/Models/Prize')
+const Matchuser = use('App/Models/Matchuser')
 class TopuppackageController {
 	async index ({ request, response, view }) {
 		const topuppackage = await Topuppackage.all();
+
 		return view.render('Setup/Topuppackage/index',{topuppackages: topuppackage.rows});
 	}
 
@@ -14,8 +22,11 @@ class TopuppackageController {
 	}
 
 	async create ({ request, response, view }) {
-		const topuppackages = await Topuppackage.all();
-		return view.render('Setup.Topuppackage.create',{topuppackages: topuppackages});
+		const products = await Product
+			.query()
+			.where('isactiveforsale', '1')
+			.fetch();
+		return view.render('Setup.Topuppackage.create',{products: products.rows});
 	}
 
 	async store ({ request, response }) {
@@ -24,7 +35,7 @@ class TopuppackageController {
 		topuppackages.name = request.input('name')
 		topuppackages.price = request.input('price')
 		await topuppackages.save()
-		return response.redirect('/topuppackages');
+		return response.redirect('/topuppackage');
 	}
 
 	async show ({ params, request, response, view }) {
@@ -32,7 +43,11 @@ class TopuppackageController {
 
 	async edit ({ params, request, response, view }) {
 		const topuppackages = await Topuppackage.find(params.id);
-		return view.render('Setup.Topuppackage.edit',{topuppackages: topuppackages});
+			const products = await Product
+			.query()
+			.where('isactiveforsale', '1')
+			.fetch();
+		return view.render('Setup.Topuppackage.edit',{topuppackages: topuppackages,products: products.rows});
 	}
 
 	async update ({ params, request, response }) {
@@ -43,9 +58,9 @@ class TopuppackageController {
 		topuppackages.product_id = request.input('product_id')
 		topuppackages.name = request.input('name')
 		topuppackages.price = request.input('price')
-		await Topuppackage.save();
+		await topuppackages.save();
 
-		return response.redirect('/Topuppackage');
+		return response.redirect('/topuppackage');
 	}
 
 	async destroy ({ params, request, response }) {
@@ -54,7 +69,7 @@ class TopuppackageController {
 				return "No Topuppackage for this id";
 		}
 		await topuppackages.delete();
-		return response.redirect('/Topuppackage');
+		return response.redirect('/topuppackage');
 	}
 }
 

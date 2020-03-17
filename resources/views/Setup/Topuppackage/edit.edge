@@ -9,11 +9,42 @@
       <h6 class="m-0 font-weight-bold text-primary">Edit Banner</h6>
     </div>
     <div class="card-body">
-        <form method="POST" action="/notice/{{notice.id}}?_method=put" enctype="multipart/form-data">
-            <div class="form-row">
-               <textarea name="notice" id="" cols="30" rows="10" class="form-control">{{notice.notice}}</textarea>
-            </div>
-            <br>
+        <form method="POST" action="/topuppackage/{{topuppackages.id}}?_method=put" enctype="multipart/form-data">
+             <div class="col-6">
+                    <label for="product">Product</label>
+                    <select name="product_id" class="form-control" id="product">
+                        <option value="">Select One</option>
+                        @each(product in products)
+                            @if(old('product_id', '') == product.id)
+                                <option value="{{product.id}}" selected>{{product.name}}</option>
+                            @else
+                                <option value="{{product.id}}">{{product.name}}</option>
+                            @endif
+                        @endeach
+                    </select>
+                        {{ elIf('<span class="alert lh-6 alert-danger mb-2 mt-2">$self</span>', getErrorFor('product_id'), hasErrorFor('product_id')) }}
+                </div>
+                <div class="col-6">
+                    <label for="name">Name</label>
+                    <input
+                        type="text"
+                        name="name"
+                        class="form-control"
+                        value="{{ topuppackages.name }}"
+                        aria-describedby="start_at">
+                    {{ elIf('<span class="alert lh-6 alert-danger lh-6 mb-2 mt-2">$self</span>', getErrorFor('name'), hasErrorFor('name')) }}
+                </div>
+                <div class="col-6">
+                    <label for="name">Price</label>
+                    <input
+                        type="text"
+                        name="price"
+                        class="form-control"
+                        value="{{ topuppackages.price }}"
+                        aria-describedby="start_at">
+                    {{ elIf('<span class="alert lh-6 alert-danger lh-6 mb-2 mt-2">$self</span>', getErrorFor('price'), hasErrorFor('price')) }}
+                </div>
+                <br>
             <button type="submit" class="btn btn-primary">Edit</button>
         </form>
     </div>

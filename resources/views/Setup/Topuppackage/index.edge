@@ -4,7 +4,7 @@
 <div class="container">
 	<!-- Page Heading -->
 	<div class="text-right">
-		<a href="/notice/create" class="btn btn-success">Create</a>
+		<a href="/topuppackage/create" class="btn btn-success">Create</a>
 	</div>
 	<br>
 	<table class="table table-success">
@@ -18,69 +18,22 @@
 	    </tr>
 	  </thead>
 	  <tbody> 
-	  	@each(n in notices)
+	  	@each(n in topuppackages)
 		    <tr>
 		      <th scope="row">1</th>
 		      <td>{{ n.product_id }}</td>
 		      <td>{{ n.name }}</td>
 		      <td>{{ n.price }}</td>
 		      <td class="d-flex">
-			  	<form method="POST" action="/notice/{{n.id}}?_method=delete">
+			  	<form method="POST" action="/topuppackage/{{n.id}}?_method=delete">
 					<button type="submit" class="btn btn-primary">Delete</button>
 				</form>
-				<a style="margin: 0px 10px;" href="/notice/{{n.id}}/edit" class="btn btn-success">edit</a>
+				<a style="margin: 0px 10px;" href="/topuppackage/{{n.id}}/edit" class="btn btn-success">edit</a>
 			  </td>
 		    </tr>
 	    @endeach
 	  </tbody>
 	</table>
-</div>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-         <div class="card-body">
-	        <form method="post" action="/product" enctype="multipart/form-data">
-	            <div class="form-row">
-	                <div class="col-6">
-	                    <label for="name">Name</label>
-	                    <input type="text" name="product_name" class="form-control" id="name" aria-describedby="nameInput">
-	                    <small id="nameInput" class="form-text text-muted">We'll never share your email with anyone else.</small>
-	                </div>
-	                <div class="col-6">
-	                    <label for="images">Logo</label>
-	                    <input type="file" name="logo_img" class="form-control-file" id="images">
-	                </div>
-	            </div>
-	            <div class="form-check">
-	              <input type="checkbox" name="for_sale" value="1" class="form-check-input" id="isactiveforsale">
-	              <label class="form-check-label" for="isactiveforsale">Is active for sale</label>
-	            </div>
-	            <div class="form-check">
-	                <input type="checkbox" name="for_match" value="1" class="form-check-input" id="isactiveformatch">
-	                <label class="form-check-label" for="isactiveformatch">Is active for match</label>
-	            </div>
-	            <div class="form-check">
-	                <input type="checkbox" name="for_top_up" value="1" class="form-check-input" id="isactivefortopup">
-	                <label class="form-check-label" for="isactivefortopup">Is active for top up</label>
-	            </div>
-	            <button type="submit" class="btn btn-primary">Submit</button>
-	        </form>
-	    </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
 </div>
 
 @endsection

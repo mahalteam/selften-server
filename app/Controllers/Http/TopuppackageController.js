@@ -24,7 +24,7 @@ class TopuppackageController {
 	async create ({ request, response, view }) {
 		const products = await Product
 			.query()
-			.where('isactiveforsale', '1')
+			.where('isactivefortopup', '1')
 			.fetch();
 		return view.render('Setup.Topuppackage.create',{products: products.rows});
 	}
@@ -45,7 +45,7 @@ class TopuppackageController {
 		const topuppackages = await Topuppackage.find(params.id);
 			const products = await Product
 			.query()
-			.where('isactiveforsale', '1')
+			.where('isactivefortopup', '1')
 			.fetch();
 		return view.render('Setup.Topuppackage.edit',{topuppackages: topuppackages,products: products.rows});
 	}

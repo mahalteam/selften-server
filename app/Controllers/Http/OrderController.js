@@ -36,7 +36,7 @@ class OrderController {
 	 */
 	async create ({ request, response, view }) {
 	}
-
+ 
 	/**
 	 * Create/save a new order.
 	 * POST orders
@@ -55,17 +55,25 @@ class OrderController {
 		return 'success';
 	}
 
+	async OrderUpdate ({ request, response }){
+
+	}
+
 	async package ({ request, response }) {
-		let packages = Order.query().where('user_id',request.input('user_id')).where('status','pending').getCount();
-		if(packages>0){
+
+		let user_id= request.input('user_id')
+		let amount= request.input('amount')
+
+		const ddd = await Order.query().where('user_id',user_id).where('status','pending').getCount();
+		if(ddd>0){
 			response.json('You Have Already A Pending Order. Please Completed To Add Another Order');
 		}else{
 			const order = new Order(); 
 			order.topuppackage_id=request.input('topuppackage_id')
-			order.user_id=request.input('user_id')
+			order.user_id=user_id
 			order.status=request.input('status')
 			order.amount=request.input('amount')
-			order.payment_method=request.input('payment_method')
+			order.payment_mathod=request.input('payment_mathod')
 			await order.save()
 			return 'success';
 		}
@@ -94,6 +102,10 @@ class OrderController {
 	 * @param {View} ctx.view
 	 */
 	async edit ({ params, request, response, view }) {
+		const id = params.id;
+		// Console.log(id);
+		const transaction = await Order.find(id);
+		return transaction;
 	}
 
 	/**
@@ -105,6 +117,12 @@ class OrderController {
 	 * @param {Response} ctx.response
 	 */
 	async update ({ params, request, response }) {
+		const id = await params.id;
+		const transaction = await Order.find(id);
+		var status = request.input('status')
+		transaction.status=status;
+		await transaction.save();
+		return response.redirect('/orders');
 	}
 
 	/**

@@ -71,6 +71,7 @@ class OrderController {
 			const order = new Order(); 
 			order.topuppackage_id=request.input('topuppackage_id')
 			order.user_id=user_id
+			order.playerid=request.input('playerid')
 			order.status=request.input('status')
 			order.amount=request.input('amount')
 			order.payment_mathod=request.input('payment_mathod')

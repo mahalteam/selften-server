@@ -8,7 +8,8 @@
 			<tr>
 				<th scope="col">#</th>
 				<th scope="col">User ID</th>
-				<th scope="col">Email</th>
+				<th scope="col">Player ID</th>
+				<th scope="col">Phone</th>
 				<th scope="col">Amount</th>
 				<th scope="col">Topup package</th>
 				<th scope="col">Status</th>
@@ -19,6 +20,7 @@
 				<tr>
 					<th scope="row">{{ transaction.id }}</th>
 					<td>{{ transaction.user_id }}</td>
+					<td>{{ transaction.playerid }}</td>
 					<td>{{ transaction.user.email }}</td>
 					<td>{{ transaction.amount }}</td>
 					<td>{{ transaction.topuppackage.name }}</td>

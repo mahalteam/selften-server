@@ -8,6 +8,7 @@ class OrderSchema extends Schema {
     this.create('orders', (table) => {
       table.increments()
       table.integer('product_id')
+      table.integer('playerid')
       table.integer('topuppackage_id')
       table.enu('status',['pending','completed','cancel'])
       table.integer('user_id')

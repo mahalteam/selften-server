@@ -8,6 +8,10 @@ class Order extends Model {
 	    return this.belongsTo('App/Models/User')
 	}
 
+	paymentmathod () {
+	    return this.belongsTo('App/Models/PaymentMethod','payment_mathod')
+	}
+
 	topuppackage () {
 	    return this.belongsTo('App/Models/Topuppackage')
 	}

@@ -60,7 +60,7 @@ class OrderController {
 	}
 
 	async pendingorder ({params}){
-		const ddd = await Order.query().where('user_id',params.id).where('status','pending').fetch();
+		const ddd = await Order.query().with('paymentmathod').where('user_id',params.id).where('status','pending').first();
 		return ddd
 	}
 

@@ -45,8 +45,8 @@ class OrderController {
 	 * @param {Request} ctx.request
 	 * @param {Response} ctx.response
 	 */
-	async store ({ request, response }) {
-		const order = new Order(); 
+	async eventorder ({ request, response }) {
+		const order = new Eventorder(); 
 		order.product_id=request.input('product_id')
 		order.user_id=request.input('user_id')
 		order.amount=request.input('amount')

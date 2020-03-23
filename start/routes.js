@@ -50,6 +50,7 @@ Route.group(() => {
 	Route.resource('prize', 'PrizeController');
 	Route.resource('notice', 'NoticeController');
 	Route.resource('topuppackage', 'TopuppackageController');
+	Route.resource('topupinfo', 'TopupinfoController');
 	Route.get('prize/create/:id', 'PrizeController.create');
 	Route.resource('paymentMethod', 'PaymentMethodController');
 }).middleware(['auth'])
@@ -62,6 +63,7 @@ Route.group(() => {
 	Route.get('/updateuser/:id', 'AuthController.updateuser')
 	Route.get('/matchproduct', 'ProductController.matchproduct')
 	Route.get('/notice', 'NoticeController.all')
+	Route.get('/topupinfo', 'TopupinfoController.show')
 	Route.get('/topuppackage', 'TopuppackageController.all')
 	Route.get('/banner', 'BannerController.all')
 	Route.get('/match/:id', 'MatchController.matchbyid')

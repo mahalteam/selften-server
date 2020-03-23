@@ -1,0 +1,37 @@
+@layout('layout')
+
+@section('body')
+<div class="container-fluid">
+
+  <h1 class="h3 mb-4 text-gray-800">Setup Page</h1>
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Edit Banner</h6>
+    </div>
+    <div class="card-body">
+        <form method="POST" action="/topupinfo/{{topuppackages.id}}?_method=put" enctype="multipart/form-data">
+            <div class="col-12">
+                <label for="rules">content</label>
+                <textarea name="content" id="rules">{{ topuppackages.content }}</textarea>
+                <script>
+                        CKEDITOR.replace( 'rules' );
+                </script>
+            </div>
+            <div class="col-6">
+                <label for="name">banner</label>
+                <input
+                    type="file"
+                    name="banner"
+                    class="form-control"
+                    value="{{ topuppackages.banner }}"
+                    aria-describedby="start_at">
+                {{ elIf('<span class="alert lh-6 alert-danger lh-6 mb-2 mt-2">$self</span>', getErrorFor('banner'), hasErrorFor('banner')) }}
+            </div>
+            <button type="submit" class="btn btn-primary">Edit</button>
+        </form>
+    </div>
+  </div>
+
+</div>
+@endsection
+       

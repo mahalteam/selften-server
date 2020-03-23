@@ -59,6 +59,11 @@ class OrderController {
 
 	}
 
+	async pendingorder ({params}){
+		const ddd = await Order.query().where('user_id',params.id).where('status','pending').get();
+		return ddd
+	}
+
 	async package ({ request, response }) {
 
 		let user_id= request.input('user_id')
@@ -76,7 +81,7 @@ class OrderController {
 			order.amount=request.input('amount')
 			order.payment_mathod=request.input('payment_mathod')
 			await order.save()
-			return 'success';
+			return order;
 		}
 	}
 

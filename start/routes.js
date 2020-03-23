@@ -79,6 +79,7 @@ Route.group(() => {
 	Route.post('/order', 'OrderController.store')
 	Route.post('/packageorder', 'OrderController.package')
 	Route.get('/offerproduct', 'ProductController.offerproduct')
+	Route.get('/pendingorder/:id', 'OrderController.pendingorder')
 
 	Route.post('password/email', 'Auth/PasswordResetController.sendResetLinkEmail')
 	Route.get('password/reset/:token', 'Auth/PasswordResetController.showResetForm')

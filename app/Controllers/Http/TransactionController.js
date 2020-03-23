@@ -186,7 +186,7 @@ class TransactionController {
 		if(status=='cancel' && transaction.purpose=='withdraw'){
 			if(old_status=='completed' || old_status=='pending'){
 				let user = await User.find(transaction.user_id);
-				user.wallet=user.wallet+transaction.amount
+				user.earn_wallet=user.earn_wallet+transaction.amount
 				await user.save();
 			}
 		}

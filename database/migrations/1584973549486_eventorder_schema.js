@@ -3,25 +3,23 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 
-class OrderSchema extends Schema {
+class EventorderSchema extends Schema {
   up () {
-    this.create('orders', (table) => {
+    this.create('eventorders', (table) => {
       table.increments()
       table.integer('product_id')
-      table.string('phone')
-      table.integer('playerid')
-      table.integer('topuppackage_id')
-      table.enu('status',['pending','completed','cancel'])
       table.integer('user_id')
       table.float('amount')
       table.date('date')
+      table.integer('active')
+      table.integer('selected')
       table.timestamps()
     })
   }
 
   down () {
-    this.drop('orders')
+    this.drop('eventorders')
   }
 }
 
-module.exports = OrderSchema
+module.exports = EventorderSchema

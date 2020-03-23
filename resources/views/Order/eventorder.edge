@@ -3,10 +3,11 @@
 @section('body')
 <div class="container">
 	<br>
+	<a href="">Genera te</a>
 	<table class="table table-success">
 		<thead>
 			<tr>
-				<th scope="col">transaction id</th>
+				<th scope="col">#</th>
 				<th scope="col">User ID</th>
 				<th scope="col">Player ID</th>
 				<th scope="col">Phone</th>
@@ -16,12 +17,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			@each((transaction,index) in orders.data)
+			@each((transaction,index) in eventorder.data)
 				<tr>
 					<th scope="row">{{ transaction.id }}</th>
 					<td>{{ transaction.user_id }}</td>
 					<td>{{ transaction.playerid }}</td>
-					<td>{{ transaction.phone }}</td>
+					<td>{{ transaction.user.email }}</td>
 					<td>{{ transaction.amount }}</td>
 					<td>{{ transaction.topuppackage.name }}</td>
 					<td>{{ transaction.status }}</td>
@@ -51,7 +52,48 @@
 		    <a class="page-link" href="{{ orders.lastPage == orders.page ? '#' : '?page=' + (orders.page + 1) }}">Next</a>
 		  </li>
 		</ul>
+		
+		<h2>Selected User</h2>
+		<table class="table table-success">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">User ID</th>
+				<th scope="col">Player ID</th>
+				<th scope="col">Phone</th>
+				<th scope="col">Amount</th>
+				<th scope="col">Topup package</th>
+				<th scope="col">Status</th>
+			</tr>
+		</thead>
+		<tbody>
+			@each((transaction,index) in selectedorder)
+				<tr>
+					<th scope="row">{{ transaction.id }}</th>
+					<td>{{ transaction.user_id }}</td>
+					<td>{{ transaction.playerid }}</td>
+					<td>{{ transaction.user.email }}</td>
+					<td>{{ transaction.amount }}</td>
+					<td>{{ transaction.topuppackage.name }}</td>
+					<td>{{ transaction.status }}</td>
+					<td>
+						@if(transaction.status!='cancel' && transaction.status!='completed')
+							<a href="#" onclick="myfunction({{transaction.id}})" class="btn btn-primary" data-toggle="modal" data-target="#examplemodel1" data-whatever="@mdo">Edit</a>
+						@endif
+					</td> 
+				</tr>
+			@endeach
+			
+		
+
+		</tbody>
+	</table>
+
 	</div>
+
+
+
+
 
 
 

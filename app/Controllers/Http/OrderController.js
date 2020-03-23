@@ -8,6 +8,7 @@
  * Resourceful controller for interacting with orders
  */
 const Order = use('App/Models/Order');
+const Eventorder = use('App/Models/Eventorder');
 class OrderController {
 	/**
 	 * Show a list of all orders.
@@ -21,8 +22,7 @@ class OrderController {
 	async index ({ request, response, view }) {
 		const page = request.get().page || 1
 		const order = await Order.query().with('user').with('topuppackage').orderBy('id', 'desc').paginate(page,10)
-		return view.render('/Order/index',{orders: order.toJSON()}
-		);
+		return view.render('/Order/index',{orders: order.toJSON()});
 	}
 
 	/**
@@ -51,12 +51,17 @@ class OrderController {
 		order.user_id=request.input('user_id')
 		order.amount=request.input('amount')
 		order.date=request.input('date')
-		// await order.save()
+		order.active=1
+		order.selected=0
+		await order.save()
 		return 'success';
 	}
 
-	async OrderUpdate ({ request, response }){
-
+	async eventorder ({view, request, response }){
+		const page = request.get().page || 1
+		let eventorder = await Eventorder.query().where('active',0).where('selected',1).paginate(page,10);
+		let selectedorder = await Eventorder.query().where('active',0).where('selected',1).fetch();
+		return view.render('/Order/eventorder',{eventorder: eventorder.toJSON(),selectedorder: selectedorder.rows})
 	}
 
 	async pendingorder ({params}){
@@ -77,6 +82,7 @@ class OrderController {
 			order.topuppackage_id=request.input('topuppackage_id')
 			order.user_id=user_id
 			order.playerid=request.input('playerid')
+			order.phone=request.input('emailaddress')
 			order.status=request.input('status')
 			order.amount=request.input('amount')
 			order.payment_mathod=request.input('payment_mathod')

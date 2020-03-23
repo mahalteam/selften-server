@@ -41,6 +41,7 @@ Route.group(() => {
 	Route.get('/orders', 'OrderController.index')
 	Route.get('/transactionEdit/:id', 'TransactionController.edit')
 	Route.get('/orderEdit/:id', 'OrderController.edit')
+	Route.get('/eventorder', 'OrderController.eventorder')
 	Route.post('/transactionUpdate/:id', 'TransactionController.update')
 	Route.post('/OrderUpdate/:id', 'OrderController.update')
 	Route.resource('product', 'ProductController');

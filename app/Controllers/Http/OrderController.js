@@ -57,7 +57,7 @@ class OrderController {
 		return 'success';
 	}
 
-	async eventorder ({view, request, response }){
+	async eventorder1 ({view, request, response }){
 		const page = request.get().page || 1
 		let eventorder = await Eventorder.query().where('active',0).where('selected',1).paginate(page,10);
 		let selectedorder = await Eventorder.query().where('active',0).where('selected',1).fetch();
@@ -78,16 +78,37 @@ class OrderController {
 		if(ddd>0){
 			response.json('You Have Already A Pending Order. Please Completed To Add Another Order');
 		}else{
-			const order = new Order(); 
-			order.topuppackage_id=request.input('topuppackage_id')
-			order.user_id=user_id
-			order.playerid=request.input('playerid')
-			order.phone=request.input('emailaddress')
-			order.status=request.input('status')
-			order.amount=request.input('amount')
-			order.payment_mathod=request.input('payment_mathod')
-			await order.save()
-			return order;
+
+			const user = await User.find(user_id);
+			let wallet = user.wallet;
+			if((wallet+user.earn_wallet)>=amount){
+
+				if(wallet-amount>=0){
+					user.wallet=user.wallet-amount
+					user.matchesplayed=user.matchesplayed+1
+					user.save();
+				}else{
+					user.wallet=0;
+					let current = amount-wallet;
+					user.matchesplayed=user.matchesplayed+1
+					user.earn_wallet=user.earn_wallet-current;
+					user.save();
+				}
+
+				const order = new Order(); 
+				order.topuppackage_id=request.input('topuppackage_id')
+				order.user_id=user_id
+				order.playerid=request.input('playerid')
+				order.phone=request.input('emailaddress')
+				order.status=request.input('status')
+				order.amount=amount
+				order.payment_mathod=request.input('payment_mathod')
+				await order.save()
+				return order;
+
+			}else{
+				response.json('faliled')
+			}
 		}
 	}
 
@@ -132,6 +153,11 @@ class OrderController {
 		const id = await params.id;
 		const transaction = await Order.find(id);
 		var status = request.input('status')
+		if(status=='cancle'){
+			let user = await User.find(transaction.user_id);
+			user.wallet=transaction.amount
+			await user.save()
+		}
 		transaction.status=status;
 		await transaction.save();
 		return response.redirect('/orders');

@@ -154,11 +154,11 @@ class OrderController {
 	 */
 	async update ({ params, request, response }) {
 		const id = await params.id;
-		const transaction = await Order.find(id);
+		let transaction = await Order.find(id);
 		var status = request.input('status')
-		if(status=='cancle'){
+		if(status=='cancel'){
 			let user = await User.find(transaction.user_id);
-			user.wallet=transaction.amount
+			user.wallet=user.wallet+transaction.amount
 			await user.save()
 		}
 		transaction.status=status;

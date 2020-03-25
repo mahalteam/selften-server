@@ -72,6 +72,7 @@ class OrderController {
 	async package ({ request, response }) {
 
 		let user_id= request.input('user_id')
+		return user_id;
 		let amount= request.input('amount')
 
 		const ddd = await Order.query().where('user_id',user_id).where('status','pending').getCount();

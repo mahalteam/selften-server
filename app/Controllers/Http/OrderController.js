@@ -86,12 +86,10 @@ class OrderController {
 
 				if(wallet-amount>=0){
 					user.wallet=user.wallet-amount
-					user.matchesplayed=user.matchesplayed+1
 					user.save();
 				}else{
 					user.wallet=0;
 					let current = amount-wallet;
-					user.matchesplayed=user.matchesplayed+1
 					user.earn_wallet=user.earn_wallet-current;
 					user.save();
 				}
@@ -124,7 +122,7 @@ class OrderController {
 	 * @param {View} ctx.view
 	 */
 	async show ({ params, request, response, view }) {
-		const ddd = await Order.query().where('user_id',params.id).limit(50).fetch();
+		const ddd = await Order.query().with('topuppackage').where('user_id',params.id).limit(50).fetch();
 		return ddd;
 	}
 

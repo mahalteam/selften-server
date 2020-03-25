@@ -8,6 +8,7 @@
  * Resourceful controller for interacting with orders
  */
 const Order = use('App/Models/Order');
+const User = use('App/Models/User');
 const Eventorder = use('App/Models/Eventorder');
 class OrderController {
 	/**
@@ -72,7 +73,6 @@ class OrderController {
 	async package ({ request, response }) {
 
 		let user_id= request.input('user_id')
-		return user_id;
 		let amount= request.input('amount')
 
 		const ddd = await Order.query().where('user_id',user_id).where('status','pending').getCount();

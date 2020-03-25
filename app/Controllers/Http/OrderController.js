@@ -66,7 +66,7 @@ class OrderController {
 	}
 
 	async pendingorder ({params}){
-		const ddd = await Order.query().with('paymentmathod').where('user_id',params.id).where('status','pending').first();
+		const ddd = await Order.query().with('paymentmathod').with('topuppackage').where('user_id',params.id).where('status','pending').first();
 		return ddd
 	}
 
@@ -103,6 +103,7 @@ class OrderController {
 				order.amount=amount
 				order.payment_mathod=request.input('payment_mathod')
 				await order.save()
+				order.topuppackage;
 				return order;
 
 			}else{

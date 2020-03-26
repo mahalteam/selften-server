@@ -10,6 +10,7 @@ class ProductSchema extends Schema {
 			table.string('name');
 			table.string('logo');
 			table.float('price').nullable();
+			table.float('offer_price').nullable();
 			table.datetime('start_at').nullable();
 			table.datetime('end_at').nullable();
 			table.text('rules');

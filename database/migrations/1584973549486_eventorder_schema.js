@@ -10,6 +10,7 @@ class EventorderSchema extends Schema {
       table.integer('product_id')
       table.integer('user_id')
       table.float('amount')
+      table.string('playerid')
       table.date('date')
       table.integer('active')
       table.integer('selected')

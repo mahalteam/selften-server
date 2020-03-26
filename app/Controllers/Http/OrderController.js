@@ -8,6 +8,7 @@
  * Resourceful controller for interacting with orders
  */
 const Order = use('App/Models/Order');
+const Product = use('App/Models/Product');
 const User = use('App/Models/User');
 const Eventorder = use('App/Models/Eventorder');
 class OrderController {
@@ -24,6 +25,48 @@ class OrderController {
 		const page = request.get().page || 1
 		const order = await Order.query().with('user').with('topuppackage').orderBy('id', 'desc').paginate(page,10)
 		return view.render('/Order/index',{orders: order.toJSON()});
+	}
+
+	async genarate({ request, response, view }) {
+
+		const ddd = await Eventorder.query().where('selected',0).where('active',1).fetch();
+
+		let seleted = ddd.rows[Math.floor(Math.random() * ddd.rows.length-1) + 1];
+
+		seleted.selected=1;
+		seleted.active=2;
+		await seleted.save();
+
+		let user = await User.find(seleted.user_id);
+		let product = await Product.find(seleted.product_id);
+
+
+		user.wallet=user.wallet+product.price
+
+		await user.save();
+
+		let user1 = await User.find(seleted.user_id);
+		user1.wallet=user1.wallet-product.offer_price
+
+		await user1.save();
+
+		response.redirect('/eventorder');
+	}
+
+	async close({ request, response, view }) {
+
+		const ddd = await Eventorder.query().where('active',1).orWhere('active',2).fetch();
+
+		ddd.rows.forEach(this.updateforclose);
+
+		response.redirect('/eventorder');
+	}
+
+	async updateforclose(item, index) {
+		const ddd = await Eventorder.find(item.id);
+		ddd.active=0;
+		await ddd.save();
+	  	return item;
 	}
 
 	/**
@@ -47,22 +90,47 @@ class OrderController {
 	 * @param {Response} ctx.response
 	 */
 	async eventorder ({ request, response }) {
-		const order = new Eventorder(); 
-		order.product_id=request.input('product_id')
-		order.user_id=request.input('user_id')
-		order.amount=request.input('amount')
-		order.date=request.input('date')
-		order.active=1
-		order.selected=0
-		await order.save()
-		return 'success';
+
+		let user_id= request.input('user_id')
+		let amount= request.input('amount')
+		const ddd = await Eventorder.query().where('user_id',user_id).where('active',1).orWhere('active',2).getCount();
+		if(ddd>0){
+			response.json('You Have Already A Pending Order. Please Completed To Add Another Order');
+		}else{
+			const user = await User.find(user_id);
+			let wallet = user.wallet;
+			if((wallet+user.earn_wallet)>=amount){
+
+			if(wallet-amount>=0){
+				user.wallet=user.wallet-amount
+				user.save();
+			}else{
+				user.wallet=0;
+				let current = amount-wallet;
+				user.earn_wallet=user.earn_wallet-current;
+				user.save();
+			}
+			const order = new Eventorder(); 
+			order.product_id=request.input('product_id')
+			order.user_id=user_id
+			order.amount=amount
+			order.playerid=request.input('playerid')
+			order.active=1
+			order.selected=0
+			await order.save()
+			return 'success';
+			}
+			else{
+				response.json('faliled')
+			}
+		}
 	}
 
 	async eventorder1 ({view, request, response }){
 		const page = request.get().page || 1
-		let eventorder = await Eventorder.query().where('active',0).where('selected',1).paginate(page,10);
-		let selectedorder = await Eventorder.query().where('active',0).where('selected',1).fetch();
-		return view.render('/Order/eventorder',{eventorder: eventorder.toJSON(),selectedorder: selectedorder.rows})
+		let eventorder = await Eventorder.query().with('user').where('active',1).where('selected',0).paginate(page,10);
+		let selectedorder = await Eventorder.query().with('user').where('active',2).where('selected',1).fetch();
+		return view.render('/Order/eventorder',{eventorder: eventorder.toJSON(),selectedorder: selectedorder.toJSON()})
 	}
 
 	async pendingorder ({params}){

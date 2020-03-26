@@ -54,7 +54,8 @@ class AuthController {
 	  	let token= await auth.authenticator('jwt').generate(user);
 	  	user = await User.findBy('id', user.id)
 		Object.assign(user, token)
-		return response.json(user)
+		response.json(user)
+		return
 	}
 
 	async login({request, auth, response}) {

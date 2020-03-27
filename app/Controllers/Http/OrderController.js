@@ -37,19 +37,6 @@ class OrderController {
 		seleted.active=2;
 		await seleted.save();
 
-		let user = await User.find(seleted.user_id);
-		let product = await Product.find(seleted.product_id);
-
-
-		user.wallet=user.wallet+product.price
-
-		await user.save();
-
-		let user1 = await User.find(seleted.user_id);
-		user1.wallet=user1.wallet-product.offer_price
-
-		await user1.save();
-
 		response.redirect('/eventorder');
 	}
 
@@ -63,6 +50,11 @@ class OrderController {
 	}
 
 	async updateforclose(item, index) {
+		let user = await User.find(item.user_id);
+		let product = await Product.find(item.product_id);
+		user.wallet=user.wallet+product.price
+		await user.save();
+
 		const ddd = await Eventorder.find(item.id);
 		ddd.active=0;
 		await ddd.save();

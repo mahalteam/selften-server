@@ -4,7 +4,6 @@
 <div class="container">
 	<!-- Page Heading -->
 	<div class="text-right">
-		{{-- <a href="/topupinfo/create" class="btn btn-success">Create</a> --}}
 	</div>
 	<br>
 	<table class="table table-success">
@@ -23,9 +22,7 @@
 		      <td>{{ n.content }}</td>
 		      <td>{{ n.banner }}</td>
 		      <td class="d-flex">
-			  {{-- 	<form method="POST" action="/topupinfo/{{n.id}}?_method=delete">
-					<button type="submit" class="btn btn-primary">Delete</button>
-				</form> --}}
+			 
 				<a style="margin: 0px 10px;" href="/topupinfo/{{n.id}}/edit" class="btn btn-success">edit</a>
 			  </td>
 		    </tr>

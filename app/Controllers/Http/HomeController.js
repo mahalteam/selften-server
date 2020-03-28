@@ -3,10 +3,9 @@ const Hash = use('Hash')
 const User = use('App/Models/User');
 const Database = use('Database')
 class HomeController {
-    index ({ view }) {
-        let wallet = Database.from('users').sum('wallet as wallet').sum('earn_wallet as earn_wallet').count('id as totaluser');
-        // return wallet;
-        return view.render("index");
+    async index ({ view }) {
+        let wallet = await Database.from('users').sum('wallet as wallet').sum('earn_wallet as earn_wallet').count('id as totaluser');
+        return view.render("index",{data:wallet[0]});
     }
     table ({view}) {
         return view.render("table");

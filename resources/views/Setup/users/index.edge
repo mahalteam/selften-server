@@ -57,21 +57,19 @@
 	  </tbody>
 	</table>
 
-		<ul class="pagination">
-		  <li class="page-item">
-		    <a class="page-link" href="{{ users.page == 1 ? '#' : '?page=' + (users.page - 1) }}">Previous</a>
-		  </li>
-		  @each(page in range(1, users.lastPage))
-		    <li class="page-item">
-		      <a class="page-link" href="?page={{ page }}">{{ page }}</a>
-		    </li>
-		  @endeach
-		  <li class="page-item">
-		    <a class="page-link" href="{{ users.lastPage == users.page ? '#' : '?page=' + (users.page + 1) }}">Next</a>
-		  </li>
-		</ul>
-	</div>
-
+	<ul class="pagination">
+	  <li class="page-item">
+	    <a class="page-link" href="{{ users.page == 1 ? '#' : '?page=' + (users.page - 1) }}">Previous</a>
+	  </li>
+	  @each(page in range(1, users.lastPage))
+	    <li class="page-item">
+	      <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+	    </li>
+	  @endeach
+	  <li class="page-item">
+	    <a class="page-link" href="{{ users.lastPage == users.page ? '#' : '?page=' + (users.page + 1) }}">Next</a>
+	  </li>
+	</ul>
 </div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -45,6 +45,7 @@ Route.group(() => {
 	Route.get('/eventorder/genarate', 'OrderController.genarate')
 	Route.get('/eventorder/close', 'OrderController.close')
 	Route.post('/transactionUpdate/:id', 'TransactionController.update')
+	Route.post('/transactionUpdatewitdrwo/:id', 'TransactionController.updatewitdrwo')
 	Route.post('/OrderUpdate/:id', 'OrderController.update')
 	Route.resource('product', 'ProductController');
 	Route.resource('match', 'MatchController');

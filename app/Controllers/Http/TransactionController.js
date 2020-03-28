@@ -124,7 +124,7 @@ class TransactionController {
 		}else{
 			transaction = await Transaction.query().with('payment_method').orderBy('id', 'desc').where('purpose','withdraw').paginate(page,10)
 		}
-		return view.render('Setup/transaction/index',{transactions: transaction.toJSON()});
+		return view.render('Setup/transaction/index1',{transactions: transaction.toJSON()});
 	}
 
 	/**
@@ -143,14 +143,51 @@ class TransactionController {
 		return transaction;
 	}
 
-	/**
-	 * Update transaction details.
-	 * PUT or PATCH transactions/:id
-	 *
-	 * @param {object} ctx
-	 * @param {Request} ctx.request
-	 * @param {Response} ctx.response
-	 */
+	async updatewitdrwo ({ params, request, response }) {
+		const id = await params.id;
+		const transaction = await Transaction.find(id);
+		var status = request.input('status')
+		var page = request.input('page')
+		var old_status = request.input('old_status')
+
+		if(status=='completed' && transaction.purpose=='addwallet'){
+
+			if(old_status!='completed'){
+				let user = await User.find(transaction.user_id);
+				user.wallet=parseInt(user.wallet)+parseInt(transaction.amount)
+				await user.save();
+			}
+
+		}
+
+		if((status=='padding' || status=='cancel') && transaction.purpose=='addwallet'){
+			if(old_status=='completed'){
+				let user = await User.find(transaction.user_id);
+				user.wallet=user.wallet-transaction.amount
+				await user.save();
+			}
+		}
+
+		// if(status=='completed' && transaction.purpose=='withdraw'){
+		// 	if(old_status!='completed'){
+		// 		let user = await User.find(transaction.user_id);
+		// 		user.earn_wallet=user.earn_wallet-transaction.amount
+		// 		await user.save();
+		// 	}
+		// }
+		if(status=='cancel' && transaction.purpose=='withdraw'){
+			if(old_status=='completed' || old_status=='pending'){
+				let user = await User.find(transaction.user_id);
+				user.earn_wallet=user.earn_wallet+transaction.amount
+				await user.save();
+			}
+		}
+
+		transaction.status=status;
+		await transaction.save();
+		return response.redirect('/transactionwithdraw?page='+page);
+	}
+
 	async update ({ params, request, response }) {
 		const id = await params.id;
 		const transaction = await Transaction.find(id);

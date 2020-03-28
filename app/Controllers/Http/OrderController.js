@@ -183,7 +183,12 @@ class OrderController {
 	 * @param {View} ctx.view
 	 */
 	async show ({ params, request, response, view }) {
-		const ddd = await Order.query().with('topuppackage').where('user_id',params.id).limit(50).fetch();
+		const ddd = await Order.query().with('topuppackage').where('user_id',params.id).orderBy('id','desc').limit(50).fetch();
+		return ddd;
+	}
+
+	async offerorder ({ params, request, response, view }) {
+		const ddd = await Eventorder.query().where('user_id',params.id).orderBy('id','desc').limit(50).fetch();
 		return ddd;
 	}
 

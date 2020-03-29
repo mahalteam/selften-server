@@ -10,7 +10,16 @@
 	</div>
 	<br>
 	<form action="/users" method="GET">
-		<input type="text" name="email" placeholder="Email" class="form-control">
+		<div class="row">
+			<div class="col-md-6">
+				<input type="text" name="email" placeholder="Email" class="form-control">
+			</div>
+			<div class="col-md-6">
+				<input type="text" name="user_id" placeholder="Use id" class="form-control">
+			</div>
+			<br><br>
+			<button type="submit">submit</button>
+		</div>
 	</form>
 	<br>
 	<table class="table table-success">
@@ -37,7 +46,7 @@
 		      <td>{{ user.wallet }}</td>
 		      <td>{{ user.earn_wallet }}</td>
 		      <td>{{ user.created_at }}</td>
-		      <td><a href="" class="btn btn-success btn-sm">View</a></td>
+		      <td><a href="/userview/{{user.id}}" class="btn btn-success btn-sm">View</a></td>
 		    </tr>
 	    @endeach
 	    @else
@@ -57,7 +66,7 @@
 	  </tbody>
 	</table>
 
-	<ul class="pagination">
+	<ul class="pagination" style="overflow-x: scroll;">
 	  <li class="page-item">
 	    <a class="page-link" href="{{ users.page == 1 ? '#' : '?page=' + (users.page - 1) }}">Previous</a>
 	  </li>

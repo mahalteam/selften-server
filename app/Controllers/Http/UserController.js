@@ -21,10 +21,14 @@ class UserController {
 	async index ({ request, response, view }) {
 		const page = request.get().page || 1
 		const email = request.get().email;
+		const user_id = request.get().user_id;
 		let user=[];
 		if(email){
 			user = await User.query().where('email',email).fetch();
-		}else{
+		}else if(user_id){
+			user = await User.query().where('id',user_id).fetch();
+		}
+		else{
 			user = await User.query().paginate(page,10);
 		}
 		return view.render('Setup/users/index',{users: user.toJSON()});
@@ -63,6 +67,12 @@ class UserController {
 	 * @param {View} ctx.view
 	 */
 	async show ({ params, request, response, view }) {
+
+ 		let user = User.find(params)
+
+ 		return user;
+		return view.render('Setup/users/singleuser',{user: user.rows});
+
 	}
 
 	/**

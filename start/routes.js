@@ -31,6 +31,7 @@ Route.group(() => {
 	Route.get('/', 'HomeController.index')
 	Route.get('/table', 'HomeController.table')
 	Route.get('/users', 'UserController.index')
+	Route.get('/userview/:id', 'UserController.show')
 	Route.get('/totalplayer/:id', 'MatchController.totalplayer')
 	Route.get('/matchprize/:id', 'MatchController.matchprize')
 	Route.get('/playerupdate/:id', 'MatchController.playerupdate')

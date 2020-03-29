@@ -17,7 +17,7 @@
 |     Also you can preload files by calling `preLoad('path/to/file')` method.
 |     Make sure to pass relative path from the project root.
 */
-const nDate = new Date().toLocaleString('en-US', {
+new Date().toISOString('en-US', {
   timeZone: 'Asia/Dhaka'
 });
 

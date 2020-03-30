@@ -170,7 +170,7 @@ class TransactionController {
 		var page = request.input('page')
 		var old_status = request.input('old_status')
 
-		if(status=='completed' && transaction.purpose=='addwallet' && transaction.status=='padding'){
+		if(status=='completed' && transaction.purpose=='addwallet' && transaction.status=='pending'){
 
 			if(old_status!='completed'){
 				let user = await User.find(transaction.user_id);
@@ -180,7 +180,7 @@ class TransactionController {
 
 		}
 
-		if((status=='padding' || status=='cancel') && transaction.purpose=='addwallet' && transaction.status=='completed'){
+		if((status=='pending' || status=='cancel') && transaction.purpose=='addwallet' && transaction.status=='completed'){
 			if(old_status=='completed'){
 				let user = await User.find(transaction.user_id);
 				user.wallet=user.wallet-transaction.amount

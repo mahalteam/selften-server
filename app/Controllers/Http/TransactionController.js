@@ -150,31 +150,6 @@ class TransactionController {
 		var page = request.input('page')
 		var old_status = request.input('old_status')
 
-		if(status=='completed' && transaction.purpose=='addwallet'){
-
-			if(old_status!='completed'){
-				let user = await User.find(transaction.user_id);
-				user.wallet=parseInt(user.wallet)+parseInt(transaction.amount)
-				await user.save();
-			}
-
-		}
-
-		if((status=='padding' || status=='cancel') && transaction.purpose=='addwallet'){
-			if(old_status=='completed'){
-				let user = await User.find(transaction.user_id);
-				user.wallet=user.wallet-transaction.amount
-				await user.save();
-			}
-		}
-
-		// if(status=='completed' && transaction.purpose=='withdraw'){
-		// 	if(old_status!='completed'){
-		// 		let user = await User.find(transaction.user_id);
-		// 		user.earn_wallet=user.earn_wallet-transaction.amount
-		// 		await user.save();
-		// 	}
-		// }
 		if(status=='cancel' && transaction.purpose=='withdraw'){
 			if(old_status=='completed' || old_status=='pending'){
 				let user = await User.find(transaction.user_id);
@@ -195,7 +170,7 @@ class TransactionController {
 		var page = request.input('page')
 		var old_status = request.input('old_status')
 
-		if(status=='completed' && transaction.purpose=='addwallet'){
+		if(status=='completed' && transaction.purpose=='addwallet' && transaction.status=='padding'){
 
 			if(old_status!='completed'){
 				let user = await User.find(transaction.user_id);
@@ -205,25 +180,10 @@ class TransactionController {
 
 		}
 
-		if((status=='padding' || status=='cancel') && transaction.purpose=='addwallet'){
+		if((status=='padding' || status=='cancel') && transaction.purpose=='addwallet' && transaction.status=='completed'){
 			if(old_status=='completed'){
 				let user = await User.find(transaction.user_id);
 				user.wallet=user.wallet-transaction.amount
-				await user.save();
-			}
-		}
-
-		// if(status=='completed' && transaction.purpose=='withdraw'){
-		// 	if(old_status!='completed'){
-		// 		let user = await User.find(transaction.user_id);
-		// 		user.earn_wallet=user.earn_wallet-transaction.amount
-		// 		await user.save();
-		// 	}
-		// }
-		if(status=='cancel' && transaction.purpose=='withdraw'){
-			if(old_status=='completed' || old_status=='pending'){
-				let user = await User.find(transaction.user_id);
-				user.earn_wallet=user.earn_wallet+transaction.amount
 				await user.save();
 			}
 		}

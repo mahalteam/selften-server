@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "test": "node ace test"
+    "start": "node server.js",
+    "watch": "pm2 restart server.js --name app"
   },
   "keywords": [
     "adonisjs",

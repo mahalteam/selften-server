@@ -7,6 +7,7 @@
 	  <thead>
 	    <tr>
 	      <th scope="col">#</th>
+	      <th scope="col">id</th>
 	      <th scope="col">Name</th>
 	      <th scope="col">email</th>
 	      <th scope="col">Game Name</th>
@@ -19,6 +20,7 @@
 		@each((m,index) in match.users)
 		    <tr>
 		      <th scope="row">{{ index+1 }}</th>
+		      <td>{{ m.id }}</td>
 		      <td>{{ m.username }}</td>
 		      <td>{{ m.email }}</td>
 		      <td>{{ m.pivot.gamename }}</td>

@@ -96,15 +96,16 @@ class MatchController {
 				if(wallet-totalfee>=0){
 					user.wallet=user.wallet-totalfee
 					user.matchesplayed=user.matchesplayed+1
-					user.save();
+					await user.save();
 				}else{
 					user.wallet=0;
 					let current = totalfee-wallet;
 					user.matchesplayed=user.matchesplayed+1
 					user.earn_wallet=user.earn_wallet-current;
-					user.save();
+					await user.save();
 				}
 				
+
 			
 				if(type=='solo'){
 					const matchuser = new Matchuser();
@@ -112,6 +113,10 @@ class MatchController {
 					matchuser.match_id=match_id
 					matchuser.gamename=request.input('player1')
 					await matchuser.save()
+
+					user.leaderboard=user.leaderboard+15;
+					await user.save()
+
 				}else if(type=='duo'){
 					
 					const matchuser = new Matchuser();
@@ -125,6 +130,10 @@ class MatchController {
 					matchuser1.match_id=match_id
 					matchuser1.gamename=request.input('player2')
 					await matchuser1.save()
+
+					user.leaderboard=user.leaderboard+30;
+					await user.save()
+
 				}else{
 					const matchuser = new Matchuser();
 					matchuser.user_id=user_id
@@ -149,6 +158,9 @@ class MatchController {
 					matchuser3.match_id=match_id
 					matchuser3.gamename=request.input('player4')
 					await matchuser3.save()
+
+					user.leaderboard=user.leaderboard+45;
+					await user.save()
 				}
 				response.json('success')
 			}
@@ -377,7 +389,7 @@ class MatchController {
 		if(oldkill>0){
 			let wallet = (oldkill * perkill);
 			user.earn_wallet = user.earn_wallet-wallet;
-			user.leaderboard = user.leaderboard-(oldkill*15);
+			user.leaderboard = user.leaderboard-(oldkill*5);
 			user.totalkills  = user.totalkills-oldkill;
 			await user.save()
 		}
@@ -394,7 +406,7 @@ class MatchController {
 		// user.earn_wallet
 
 		user.totalkills  = parseInt(user.totalkills)+parseInt(kill);
-		user.leaderboard = kill*15;
+		user.leaderboard = kill*5;
 		// return match_player;
 		// return perkill;
 		matchuser.prize = previous_earn;

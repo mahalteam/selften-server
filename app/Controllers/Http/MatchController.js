@@ -377,6 +377,7 @@ class MatchController {
 		if(oldkill>0){
 			let wallet = (oldkill * perkill);
 			user.earn_wallet = user.earn_wallet-wallet;
+			user.leaderboard = user.leaderboard-(oldkill*15);
 			user.totalkills  = user.totalkills-oldkill;
 			await user.save()
 		}
@@ -393,6 +394,7 @@ class MatchController {
 		// user.earn_wallet
 
 		user.totalkills  = parseInt(user.totalkills)+parseInt(kill);
+		user.leaderboard = kill*15;
 		// return match_player;
 		// return perkill;
 		matchuser.prize = previous_earn;

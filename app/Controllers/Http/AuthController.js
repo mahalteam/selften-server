@@ -63,28 +63,22 @@ class AuthController {
 		let {email, password} = request.all();
 
 		try {
-			// if (await auth.authenticator('jwt').attempt(email, password)) {
-			// 	let user = await User.findBy('email', email)
-			// 	let token = await auth.authenticator('jwt').generate(user)
-
-			// 	Object.assign(user, token)
-			// 	return response.json(user)
-			// }
-
-			// retrieve user base on the form data
 			const user = await User.query()
 				.where('email', email)
 				.first()
 
 			if (user) {
-				// verify password
 				const passwordVerified = await Hash.verify(password, user.password)
 
 				if (passwordVerified) {
-					let token = await auth.authenticator('jwt').generate(user)
+					if(!user.is_banned){
+						let token = await auth.authenticator('jwt').generate(user)
 
-					Object.assign(user, token)
-					return response.json(user)
+						Object.assign(user, token)
+						return response.json(user)
+					}else{
+						return response.json({message: 'Your Account Is Banned From SelfTen'})
+					}
 				}else{
 					return response.json({message: 'These credentials do not match our records..'})
 				}

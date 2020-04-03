@@ -44,6 +44,16 @@ class UserController {
 		response.send(users);
 	}
 
+	async banned({ request, response, view,params }){
+		await User.query().where('id',params.id).update({ is_banned: 1 });
+		response.redirect('/users');
+	}
+
+	async unbanned({ request, response, view,params }){
+		await User.query().where('id',params.id).update({ is_banned: 0 });
+		response.redirect('/users');
+	}
+
 	/**
 	 * Render a form to be used for creating a new user.
 	 * GET users/create

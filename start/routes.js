@@ -33,6 +33,8 @@ Route.group(() => {
 	Route.get('/users', 'UserController.index')
 	Route.get('/resetleaderboard', 'UserController.resetleaderboard')
 	Route.get('/userview/:id', 'UserController.show')
+	Route.get('/banned/:id', 'UserController.banned')
+	Route.get('/unbanned/:id', 'UserController.unbanned')
 	Route.get('/totalplayer/:id', 'MatchController.totalplayer')
 	Route.get('/matchprize/:id', 'MatchController.matchprize')
 	Route.get('/playerupdate/:id', 'MatchController.playerupdate')

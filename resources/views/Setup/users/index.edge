@@ -2,13 +2,6 @@
 
 @section('body')
 <div class="container">
-	<!-- Page Heading -->
-	<div class="text-right">
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-		  	Create
-		</button>
-	</div>
-	<br>
 	<form action="/users" method="GET">
 		<div class="row">
 			<div class="col-md-6">
@@ -17,8 +10,9 @@
 			<div class="col-md-6">
 				<input type="text" name="user_id" placeholder="Use id" class="form-control">
 			</div>
-			<br><br>
-			<button type="submit">submit</button>
+			<div class="col-md-12 text-right mt-3">
+				<button type="submit" class="btn btn-success">submit</button>
+			</div>
 		</div>
 	</form>
 	<br>
@@ -80,52 +74,4 @@
 	  </li>
 	</ul>
 </div>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-         <div class="card-body">
-	        <form method="post" action="/product" enctype="multipart/form-data">
-	            <div class="form-row">
-	                <div class="col-6">
-	                    <label for="name">Name</label>
-	                    <input type="text" name="product_name" class="form-control" id="name" aria-describedby="nameInput">
-	                    <small id="nameInput" class="form-text text-muted">We'll never share your email with anyone else.</small>
-	                </div>
-	                <div class="col-6">
-	                    <label for="images">Logo</label>
-	                    <input type="file" name="logo_img" class="form-control-file" id="images">
-	                </div>
-	            </div>
-	            <div class="form-check">
-	              <input type="checkbox" name="for_sale" value="1" class="form-check-input" id="isactiveforsale">
-	              <label class="form-check-label" for="isactiveforsale">Is active for sale</label>
-	            </div>
-	            <div class="form-check">
-	                <input type="checkbox" name="for_match" value="1" class="form-check-input" id="isactiveformatch">
-	                <label class="form-check-label" for="isactiveformatch">Is active for match</label>
-	            </div>
-	            <div class="form-check">
-	                <input type="checkbox" name="for_top_up" value="1" class="form-check-input" id="isactivefortopup">
-	                <label class="form-check-label" for="isactivefortopup">Is active for top up</label>
-	            </div>
-	            <button type="submit" class="btn btn-primary">Submit</button>
-	        </form>
-	    </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 @endsection

@@ -34,6 +34,16 @@ class UserController {
 		return view.render('Setup/users/index',{users: user.toJSON()});
 	}
 
+	async resetleaderboard ({request, response, view}){
+		await User.query().update({ leaderboard: 0 });
+		response.redirect('/users');
+	}
+
+	async leaderboard ({request, response, view}){
+		let users = await User.query().orderBy('leaderboard','desc').fetch();
+		response.send(users);
+	}
+
 	/**
 	 * Render a form to be used for creating a new user.
 	 * GET users/create

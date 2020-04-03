@@ -31,6 +31,7 @@ Route.group(() => {
 	Route.get('/', 'HomeController.index')
 	Route.get('/table', 'HomeController.table')
 	Route.get('/users', 'UserController.index')
+	Route.get('/resetleaderboard', 'UserController.resetleaderboard')
 	Route.get('/userview/:id', 'UserController.show')
 	Route.get('/totalplayer/:id', 'MatchController.totalplayer')
 	Route.get('/matchprize/:id', 'MatchController.matchprize')
@@ -87,6 +88,7 @@ Route.group(() => {
 	Route.get('/myorder/:id', 'OrderController.show')
 	Route.get('/offerorder/:id', 'OrderController.offerorder')
 	Route.get('/pendingorder/:id', 'OrderController.pendingorder')
+	Route.get('/leaderboard', 'UserController.leaderboard')
 
 	Route.post('password/email', 'Auth/PasswordResetController.sendResetLinkEmail')
 	Route.get('password/reset/:token', 'Auth/PasswordResetController.showResetForm')

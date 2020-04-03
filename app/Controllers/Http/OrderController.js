@@ -42,9 +42,14 @@ class OrderController {
 
 	async close({ request, response, view }) {
 
-		const ddd = await Eventorder.query().where('active',1).orWhere('active',2).fetch();
+		const ddd = await Eventorder.query().where('active',1).where('selected',0).fetch();
 
 		ddd.rows.forEach(this.updateforclose);
+
+		let ddd1 = await Eventorder.query().where('active',2).where('selected',1).fetch();
+
+		ddd1.rows.forEach(this.updateforclose1);
+
 
 		response.redirect('/eventorder');
 	}
@@ -58,6 +63,14 @@ class OrderController {
 		const ddd = await Eventorder.find(item.id);
 		ddd.active=0;
 		await ddd.save();
+	  	return item;
+	}
+
+
+	async updateforclose1(item, index) {
+		let ddd1 = await Eventorder.find(item.id);
+		ddd1.active=0;
+		await ddd1.save();
 	  	return item;
 	}
 

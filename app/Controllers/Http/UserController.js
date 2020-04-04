@@ -40,7 +40,7 @@ class UserController {
 	}
 
 	async leaderboard ({request, response, view}){
-		let users = await User.query().orderBy('leaderboard','desc').fetch();
+		let users = await User.query().orderBy('leaderboard','desc').limit(100).fetch();
 		response.send(users);
 	}
 

@@ -89,7 +89,7 @@ class MatchController {
 		}
 
 		if(match.max_join>matchuser){
-			const user = await User.find(user_id);
+			let user = await User.find(user_id);
 			let wallet = user.wallet;
 			if((wallet+user.earn_wallet)>=totalfee){
 
@@ -104,8 +104,6 @@ class MatchController {
 					user.earn_wallet=user.earn_wallet-current;
 					await user.save();
 				}
-				
-
 			
 				if(type=='solo'){
 					const matchuser = new Matchuser();
@@ -113,10 +111,9 @@ class MatchController {
 					matchuser.match_id=match_id
 					matchuser.gamename=request.input('player1')
 					await matchuser.save()
-
-					user.leaderboard=user.leaderboard+15;
-					await user.save()
-
+					let user1 = await User.find(user_id);
+					user1.leaderboard=user1.leaderboard+15;
+					await user1.save()
 				}else if(type=='duo'){
 					
 					const matchuser = new Matchuser();
@@ -130,9 +127,9 @@ class MatchController {
 					matchuser1.match_id=match_id
 					matchuser1.gamename=request.input('player2')
 					await matchuser1.save()
-
-					user.leaderboard=user.leaderboard+30;
-					await user.save()
+					let user1 = await User.find(user_id);
+					user1.leaderboard=user1.leaderboard+30;
+					await user1.save()
 
 				}else{
 					const matchuser = new Matchuser();
@@ -158,9 +155,9 @@ class MatchController {
 					matchuser3.match_id=match_id
 					matchuser3.gamename=request.input('player4')
 					await matchuser3.save()
-
-					user.leaderboard=user.leaderboard+45;
-					await user.save()
+					let user1 = await User.find(user_id);
+					user1.leaderboard=user1.leaderboard+45;
+					await user1.save()
 				}
 				response.json('success')
 			}
@@ -381,6 +378,12 @@ class MatchController {
 
 		const perkill =match.perkill;
 		const m_id = match.id;
+
+		// if get first prize leader board will update
+		// console.log(m_id)
+		// console.log(previous_earn)
+		// let prize = await Prize.query().where('match_id',m_id).where('prize',previous_earn).first();
+		// console.log(prize)
 
 
 		// find match user

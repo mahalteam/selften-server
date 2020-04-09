@@ -104,9 +104,13 @@ class TransactionController {
 	async store ({ request, response, view }) {
 		const page = request.get().page || 1
 		const number = request.get().number;
+		const user_id = request.get().user_id;
 		let transaction=[];
 		if(number){
 			transaction= await Transaction.query().with('payment_method').where('number',number).fetch()
+			return view.render('Setup/transaction/index',{transactions: transaction.toJSON()})
+		}else if(user_id){
+			transaction= await Transaction.query().with('payment_method').where('user_id',user_id).fetch()
 			return view.render('Setup/transaction/index',{transactions: transaction.toJSON()})
 		}else{
 			transaction = await Transaction.query().with('payment_method').orderBy('id', 'desc').where('purpose','addwallet').paginate(page,10)

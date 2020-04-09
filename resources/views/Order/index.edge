@@ -2,6 +2,16 @@
 
 @section('body')
 <div class="container">
+	<form action="/orders" method="GET">
+		<div class="row">
+			<div class="col-md-12">
+				<input type="text" name="user_id" placeholder="Use id" class="form-control">
+			</div>
+			<div class="col-md-12 text-right mt-3">
+				<button type="submit" class="btn btn-success">submit</button>
+			</div>
+		</div>
+	</form>
 	<br>
 	<table class="table table-success">
 		<thead>

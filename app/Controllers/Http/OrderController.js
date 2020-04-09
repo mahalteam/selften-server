@@ -23,7 +23,13 @@ class OrderController {
 	 */
 	async index ({ request, response, view }) {
 		const page = request.get().page || 1
-		const order = await Order.query().with('user').with('topuppackage').orderBy('id', 'desc').paginate(page,10)
+		const user_id = request.get().user_id;
+		let order = [] ; 
+		if(user_id){
+			order = await Order.query().where('user_id',user_id).paginate(page,10);
+		}else{
+		 	order = await Order.query().with('user').with('topuppackage').orderBy('id', 'desc').paginate(page,10)
+		}
 		return view.render('/Order/index',{orders: order.toJSON()});
 	}
 

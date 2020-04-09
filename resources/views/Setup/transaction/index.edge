@@ -4,7 +4,19 @@
 <div class="container">  
 	<br>
 	<form action="/transaction" method="GET">
-		<input type="text" name="number" placeholder="Number" class="form-control">
+		<div class="row">
+			<div class="col-md-6">
+				<input type="text" name="number" placeholder="Number" class="form-control">
+			</div>
+
+			<div class="col-md-6">
+				 <input type="text" name="user_id" placeholder="user_id" class="form-control">
+			</div>
+
+			<div class="col-md-12 text-right mt-3">
+				<button type="submit" class="btn btn-success">submit</button>
+			</div>
+		</div>
 	</form> 
 	<br>
 	<table class="table table-success">

@@ -409,7 +409,7 @@ class MatchController {
 		// user.earn_wallet
 
 		user.totalkills  = parseInt(user.totalkills)+parseInt(kill);
-		user.leaderboard = kill*5;
+		user.leaderboard = user.leaderboard+kill*5;
 		// return match_player;
 		// return perkill;
 		matchuser.prize = previous_earn;

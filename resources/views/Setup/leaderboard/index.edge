@@ -1,0 +1,34 @@
+@layout('layout')
+
+@section('body')
+<div class="container">
+	<!-- Page Heading -->
+	<div class="text-right">
+	</div>
+	<br>
+	<table class="table table-success">
+	  <thead>
+	    <tr>
+	      <th scope="col">#</th>
+	      <th scope="col">content</th>
+	      <th scope="col">Banner</th>
+	      <th scope="col">Action</th>
+	    </tr>
+	  </thead>
+	  <tbody> 
+	  	@each(n in leaderboardinfo)
+		    <tr>
+		      <th scope="row">1</th>
+		      <td>{{ n.content }}</td>
+		      <td>{{ n.banner }}</td>
+		      <td class="d-flex">
+			 
+				<a style="margin: 0px 10px;" href="/leaderboardinfo/{{n.id}}/edit" class="btn btn-success">edit</a>
+			  </td>
+		    </tr>
+	    @endeach
+	  </tbody>
+	</table>
+</div>
+
+@endsection

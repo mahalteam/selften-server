@@ -59,6 +59,7 @@ Route.group(() => {
 	Route.resource('notice', 'NoticeController');
 	Route.resource('topuppackage', 'TopuppackageController');
 	Route.resource('topupinfo', 'TopupinfoController');
+	Route.resource('leaderboardinfo', 'LeaderboardinfoController');
 	Route.get('prize/create/:id', 'PrizeController.create');
 	Route.resource('paymentMethod', 'PaymentMethodController');
 }).middleware(['auth'])

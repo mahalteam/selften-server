@@ -54,6 +54,13 @@ class UserController {
 		response.redirect('/users');
 	}
 
+	async change({ request, response, view, params }){
+		let user = await User.findBy('id', params.id)
+		user.username=request.input('username')
+		user.save();
+		response.send('success');
+	}
+
 	/**
 	 * Render a form to be used for creating a new user.
 	 * GET users/create

@@ -85,6 +85,7 @@ Route.group(() => {
 	Route.get('/usertransaction/:id', 'TransactionController.usertransaction')
 	Route.post('/join/:id', 'MatchController.join')
 	Route.post('/addwallet', 'TransactionController.index')
+	Route.post('/change/:id', 'UserController.change')
 	Route.post('/withdrawwallet', 'TransactionController.withdrawwallet')
 	Route.post('/order', 'OrderController.eventorder')
 	Route.post('/packageorder', 'OrderController.package')

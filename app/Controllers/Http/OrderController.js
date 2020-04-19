@@ -26,7 +26,7 @@ class OrderController {
 		const user_id = request.get().user_id;
 		let order = [] ; 
 		if(user_id){
-			order = await Order.query().where('user_id',user_id).paginate(page,10);
+			order = await Order.query().with('user').with('topuppackage').where('user_id',user_id).paginate(page,10);
 		}else{
 		 	order = await Order.query().with('user').with('topuppackage').orderBy('id', 'desc').paginate(page,10)
 		}

@@ -84,6 +84,11 @@ class TransactionController {
 		response.send(transaction);
 	}
 
+	async cancelalltransaction({request, response, view}){
+		const transaction= await Transaction.query().where('status','pending').where('purpose','addwallet').update({ status: 'cancel' });
+		return response.redirect('back');
+	}
+
 	async show ({ request, response, view }) {
 		const transaction = await Transaction.all();
 		return view.render('Setup/transaction/index',
@@ -162,7 +167,8 @@ class TransactionController {
 
 		transaction.status=status;
 		await transaction.save();
-		return response.redirect('/transactionwithdraw?page='+page);
+		return response.redirect('back');
+		// return response.redirect('/transactionwithdraw?page='+page);
 	}
 
 	async update ({ params, request, response }) {
@@ -192,7 +198,8 @@ class TransactionController {
 
 		transaction.status=status;
 		await transaction.save();
-		return response.redirect('/transaction?page='+page);
+		// return response.redirect('/transaction?page='+page);
+		return response.redirect('back');
 	}
 	
 }

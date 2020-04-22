@@ -34,6 +34,7 @@ Route.group(() => {
 	Route.get('/resetleaderboard', 'UserController.resetleaderboard')
 	Route.get('/userview/:id', 'UserController.show')
 	Route.get('/banned/:id', 'UserController.banned')
+	Route.get('/cancelalltransaction', 'TransactionController.cancelalltransaction')
 	Route.get('/unbanned/:id', 'UserController.unbanned')
 	Route.get('/totalplayer/:id', 'MatchController.totalplayer')
 	Route.get('/matchprize/:id', 'MatchController.matchprize')

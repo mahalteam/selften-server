@@ -246,7 +246,7 @@ class OrderController {
 		}
 		transaction.status=status;
 		await transaction.save();
-		return response.redirect('/orders');
+		return response.redirect('back');
 	}
 
 	/**

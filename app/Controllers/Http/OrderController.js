@@ -157,7 +157,10 @@ class OrderController {
 		const ddd = await Order.query().where('user_id',user_id).where('status','pending').getCount();
 		if(ddd>0){
 			response.json('You Have Already A Pending Order. Please Completed To Add Another Order');
-		}else{
+		}else if(1){
+			response.json('Stock Out');
+		}
+		else{
 
 			const user = await User.find(user_id);
 			let wallet = user.wallet;

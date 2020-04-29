@@ -179,6 +179,9 @@ class OrderController {
 
 				const order = new Order(); 
 				order.topuppackage_id=request.input('topuppackage_id')
+				order.name=request.input('name')
+				order.ingameid=request.input('ingameid')
+				order.ingamepassword=request.input('ingamepassword')
 				order.user_id=user_id
 				order.playerid=request.input('playerid')
 				order.phone=request.input('emailaddress')
@@ -206,7 +209,7 @@ class OrderController {
 	 * @param {View} ctx.view
 	 */
 	async show ({ params, request, response, view }) {
-		const ddd = await Order.query().with('topuppackage').where('user_id',params.id).orderBy('id','desc').limit(50).fetch();
+		const ddd = await Order.query().where('user_id',params.id).orderBy('id','desc').limit(50).fetch();
 		return ddd;
 	}
 

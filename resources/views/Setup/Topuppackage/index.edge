@@ -14,6 +14,7 @@
 	      <th scope="col">Product</th>
 	      <th scope="col">Name</th>
 	      <th scope="col">Price</th>
+	      <th scope="col">Type</th>
 	      <th scope="col">Action</th>
 	    </tr>
 	  </thead>
@@ -24,6 +25,13 @@
 		      <td>{{ n.product_id }}</td>
 		      <td>{{ n.name }}</td>
 		      <td>{{ n.price }}</td>
+		      <td>
+		      	@if(n.type==1)
+		      		Id Code
+		      	@elseif(n.type==2)
+					Id Game
+		      	@endif
+		      </td>
 		      <td class="d-flex">
 			  	<form method="POST" action="/topuppackage/{{n.id}}?_method=delete">
 					<button type="submit" class="btn btn-primary">Delete</button>

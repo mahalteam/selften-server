@@ -58,6 +58,7 @@ class TopuppackageController {
 		}
 		topuppackages.product_id = request.input('product_id')
 		topuppackages.name = request.input('name')
+		topuppackages.type = request.input('type')
 		topuppackages.price = request.input('price')
 		await topuppackages.save();
 

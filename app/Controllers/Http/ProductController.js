@@ -48,6 +48,11 @@ class ProductController {
 		return response.send(product);
 	}
 
+	async topupproduct ({params, request, response, view}){
+		const product = await Product.query().where('isactivefortopup',1).fetch();
+		return response.send(product);
+	}
+
 	async show ({ params, request, response, view }) {
 	}
 

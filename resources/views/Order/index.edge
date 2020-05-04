@@ -19,6 +19,8 @@
 				<th scope="col">transaction id</th>
 				<th scope="col">User ID</th>
 				<th scope="col">Player ID</th>
+				<th scope="col">Email</th>
+				<th scope="col">Password</th>
 				<th scope="col">Amount</th>
 				<th scope="col">Topup package</th>
 				<th scope="col">Phone</th>
@@ -32,6 +34,8 @@
 					<th scope="row">{{ transaction.id }}</th>
 					<td>{{ transaction.user_id }}</td>
 					<td>{{ transaction.playerid }}</td>
+					<td>{{ transaction.ingameid }}</td>
+					<td>{{ transaction.ingamepassword }}</td>
 					<td>{{ transaction.amount }}</td>
 					<td>{{ transaction.name }}</td>
 					<td>{{ transaction.user.phone }}</td>

@@ -76,7 +76,7 @@ Route.group(() => {
 	Route.get('/notice', 'NoticeController.all')
 	Route.get('/topupinfo', 'TopupinfoController.show')
 	Route.get('/leaderbordinfo', 'LeaderboardinfoController.all')
-	Route.get('/topuppackage', 'TopuppackageController.all')
+	Route.get('/topuppackage/:id', 'TopuppackageController.all')
 	Route.get('/banner', 'BannerController.all')
 	Route.get('/match/:id', 'MatchController.matchbyid')
 	Route.get('/match/', 'MatchController.matchbyid')

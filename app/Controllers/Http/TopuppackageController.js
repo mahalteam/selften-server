@@ -15,8 +15,12 @@ class TopuppackageController {
 		return view.render('Setup/Topuppackage/index',{topuppackages: topuppackage.rows});
 	}
 
-	async all ({ request, response, view }){
-		const topuppackages = await Topuppackage.all();
+	async all ({ params,request, response, view }){
+		const topuppackages = await Product
+			.query()
+			.with('topuppackage')
+			.where('id', params.id)
+			.fetch();;
 		response.send(topuppackages);
 		return
 	}

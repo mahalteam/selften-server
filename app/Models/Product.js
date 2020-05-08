@@ -17,6 +17,10 @@ class Product extends Model {
 	    return this.hasMany('App/Models/Match')
 	}
 
+	topuppackage () {
+	    return this.hasMany('App/Models/Topuppackage')
+	}
+
 }
 
 module.exports = Product

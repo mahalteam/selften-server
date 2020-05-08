@@ -16,6 +16,9 @@ class TopuppackageController {
 	}
 
 	async all ({ params,request, response, view }){
+		if(!params.id){
+			params.id=3
+		}
 		const topuppackages = await Product
 			.query()
 			.with('topuppackage')

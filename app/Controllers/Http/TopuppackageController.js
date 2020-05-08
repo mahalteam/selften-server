@@ -28,6 +28,12 @@ class TopuppackageController {
 		return
 	}
 
+	async all1 ({request, response, view }){ //will delete
+		const topuppackages = await Topuppackage.all();
+		response.send(topuppackages);
+		return
+	}
+
 	async create ({ request, response, view }) {
 		const products = await Product
 			.query()

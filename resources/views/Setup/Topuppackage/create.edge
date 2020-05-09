@@ -36,7 +36,7 @@
                     {{ elIf('<span class="alert lh-6 alert-danger lh-6 mb-2 mt-2">$self</span>', getErrorFor('name'), hasErrorFor('name')) }}
                 </div>
                 <div class="col-6">
-                    <label for="name">Price</label>
+                    <label for="name">Sale Price</label>
                     <input
                         type="text"
                         name="price"
@@ -45,18 +45,15 @@
                         aria-describedby="start_at">
                     {{ elIf('<span class="alert lh-6 alert-danger lh-6 mb-2 mt-2">$self</span>', getErrorFor('price'), hasErrorFor('price')) }}
                 </div>
-                 <div class="col-6">
-                    <label for="name">Type</label>
-                    <select
+                <div class="col-6">
+                    <label for="name">Buy Price</label>
+                    <input
                         type="text"
-                        name="type"
+                        name="bprice"
                         class="form-control"
-                        value="{{ old('type', '') }}"
-                    >
-                        <option value="1">ID Code</option>
-                        <option value="2">IN Game</option>
-                    </select>
-                    {{ elIf('<span class="alert lh-6 alert-danger lh-6 mb-2 mt-2">$self</span>', getErrorFor('price'), hasErrorFor('price')) }}
+                        value="{{ old('bprice', '') }}"
+                        aria-describedby="start_at">
+                    {{ elIf('<span class="alert lh-6 alert-danger lh-6 mb-2 mt-2">$self</span>', getErrorFor('bprice'), hasErrorFor('bprice')) }}
                 </div>
             </div>
             <br>

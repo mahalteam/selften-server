@@ -17,6 +17,7 @@ class OrderSchema extends Schema {
 			table.enu('status',['pending','completed','cancel'])
 			table.integer('user_id')
 			table.float('amount')
+			table.float('bprice')
 			table.date('date')
 			table.timestamps()
 		})

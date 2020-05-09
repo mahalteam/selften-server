@@ -154,15 +154,21 @@ class OrderController {
 
 		let user_id= request.input('user_id')
 		let amount= request.input('amount')
+		let bprice= request.input('bprice')
+
+		let product = await Product.query().where('id',request.input('product_id')).fetch();
 
 		const ddd = await Order.query().where('user_id',user_id).where('status','pending').getCount();
 		if(ddd>0){
 			response.json('You Have Already A Pending Order. Please Completed To Add Another Order');
 		}
-		// else if(1){
-		// 	response.json('Stock Out');
-		// }
+		else if(bprice>product.price){
+			response.json('Stock Out');
+		}
 		else{
+
+			product.price=product.price-bprice;
+			product.save();
 
 			const user = await User.find(user_id);
 			let wallet = user.wallet;
@@ -181,6 +187,7 @@ class OrderController {
 				const order = new Order(); 
 				order.topuppackage_id=request.input('topuppackage_id')
 				order.name=request.input('name')
+				order.product_id=request.input('product_id')
 				order.ingameid=request.input('ingameid')
 				order.ingamepassword=request.input('ingamepassword')
 				order.user_id=user_id
@@ -188,6 +195,7 @@ class OrderController {
 				order.phone=request.input('emailaddress')
 				order.status=request.input('status')
 				order.amount=amount
+				order.bprice=bprice
 				order.payment_mathod=request.input('payment_mathod')
 				await order.save()
 				order.topuppackage;

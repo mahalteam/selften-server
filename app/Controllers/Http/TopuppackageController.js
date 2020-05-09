@@ -46,8 +46,8 @@ class TopuppackageController {
 		const topuppackages = new Topuppackage()
 		topuppackages.product_id = request.input('product_id')
 		topuppackages.name = request.input('name')
-		topuppackages.type = request.input('type')
 		topuppackages.price = request.input('price')
+		topuppackages.bprice = request.input('bprice')
 		await topuppackages.save()
 		return response.redirect('/topuppackage');
 	}
@@ -71,8 +71,8 @@ class TopuppackageController {
 		}
 		topuppackages.product_id = request.input('product_id')
 		topuppackages.name = request.input('name')
-		topuppackages.type = request.input('type')
 		topuppackages.price = request.input('price')
+		topuppackages.bprice = request.input('bprice')
 		await topuppackages.save();
 
 		return response.redirect('/topuppackage');

@@ -9,7 +9,8 @@ class TopuppackageSchema extends Schema {
       table.increments()
       table.integer('product_id')
       table.string('name')
-      table.integer('amount')
+      table.float('price')
+      table.float('bprice')
       table.timestamps()
     })
   }

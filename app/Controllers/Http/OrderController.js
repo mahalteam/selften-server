@@ -104,7 +104,8 @@ class OrderController {
 
 		let user_id= request.input('user_id')
 		let amount= request.input('amount')
-		const ddd = await Eventorder.query().where('user_id',user_id).where('active',1).getCount();
+		// const ddd = await Eventorder.query().where('user_id',user_id).where('active',1).getCount();
+		const ddd=0;
 		if(ddd>0){
 			response.json('You Have Already A Pending Order. Please Completed To Add Another Order');
 		}else{

@@ -156,7 +156,7 @@ class OrderController {
 		let amount= request.input('amount')
 		let bprice= request.input('bprice')
 
-		let product = await Product.query().where('id',request.input('product_id')).fetch();
+		let product = await Product.find(request.input('product_id'));
 
 		const ddd = await Order.query().where('user_id',user_id).where('status','pending').getCount();
 		if(ddd>0){
@@ -168,7 +168,7 @@ class OrderController {
 		else{
 
 			product.price=product.price-bprice;
-			product.save();
+			await product.save();
 
 			const user = await User.find(user_id);
 			let wallet = user.wallet;
@@ -254,8 +254,11 @@ class OrderController {
 	async update ({ params, request, response }) {
 		const id = await params.id;
 		let transaction = await Order.find(id);
+		let product = await Product.find(transaction.product_id);
 		var status = request.input('status')
 		if(status=='cancel'){
+			product.price=product.price+transaction.bprice
+			await product.save()
 			let user = await User.find(transaction.user_id);
 			user.wallet=user.wallet+transaction.amount
 			await user.save()

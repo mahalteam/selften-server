@@ -53,6 +53,11 @@ class ProductController {
 		return response.send(product);
 	}
 
+	async shopproduct ({params, request, response, view}){
+		const product = await Product.query().where('isactiveforshop',1).fetch();
+		return response.send(product);
+	}
+
 	async show ({ params, request, response, view }) {
 	}
 

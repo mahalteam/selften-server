@@ -158,12 +158,13 @@ class OrderController {
 
 		let product = await Product.find(request.input('product_id'));
 
-		const ddd = await Order.query().where('user_id',user_id).where('status','pending').getCount();
+		// const ddd = await Order.query().where('user_id',user_id).where('status','pending').getCount();
+		const ddd  = 0;
 		if(ddd>0){
 			response.json('You Have Already A Pending Order. Please Completed To Add Another Order');
 		}
 		else if(bprice>product.price){
-			response.json('Stock Out');
+			response.json('StockOut');
 		}
 		else{
 

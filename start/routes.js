@@ -73,7 +73,6 @@ Route.group(() => {
 	Route.get('/updateuser/:id', 'AuthController.updateuser')
 	Route.get('/matchproduct', 'ProductController.matchproduct')
 	Route.get('/topupproduct', 'ProductController.topupproduct')
-	Route.get('/shopproduct', 'ProductController.shopproduct')
 	Route.get('/notice', 'NoticeController.all')
 	Route.get('/topupinfo', 'TopupinfoController.show')
 	Route.get('/leaderbordinfo', 'LeaderboardinfoController.all')
@@ -102,4 +101,9 @@ Route.group(() => {
 	Route.post('password/email', 'Auth/PasswordResetController.sendResetLinkEmail')
 	Route.get('password/reset/:token', 'Auth/PasswordResetController.showResetForm')
 	Route.post('password/reset', 'Auth/PasswordResetController.reset')
+
+
+	// shop
+	Route.get('/shopproduct', 'ProductController.shopproduct')
+	
 }).prefix('api')

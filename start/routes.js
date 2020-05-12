@@ -102,6 +102,9 @@ Route.group(() => {
 	Route.get('password/reset/:token', 'Auth/PasswordResetController.showResetForm')
 	Route.post('password/reset', 'Auth/PasswordResetController.reset')
 
+	// home
+	Route.get('countsamary', 'HomeController.countsection')
+
 
 	// shop
 	Route.get('/shopproduct', 'ProductController.shopproduct')

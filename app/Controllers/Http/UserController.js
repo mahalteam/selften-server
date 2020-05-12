@@ -24,12 +24,12 @@ class UserController {
 		const user_id = request.get().user_id;
 		let user=[];
 		if(email){
-			user = await User.query().where('email',email).fetch();
+			user = await User.query().orderBy('id',"desc").where('email',email).fetch();
 		}else if(user_id){
-			user = await User.query().where('id',user_id).fetch();
+			user = await User.query().orderBy('id',"desc").where('id',user_id).fetch();
 		}
 		else{
-			user = await User.query().paginate(page,10);
+			user = await User.query().orderBy('id',"desc").paginate(page,10);
 		}
 		return view.render('Setup/users/index',{users: user.toJSON()});
 	}

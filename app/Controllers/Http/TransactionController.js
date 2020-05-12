@@ -107,6 +107,7 @@ class TransactionController {
 	 * @param {Response} ctx.response
 	 */
 	async store ({ request, response, view }) {
+		
 		const page = request.get().page || 1
 		const number = request.get().number;
 		const user_id = request.get().user_id;
@@ -175,7 +176,6 @@ class TransactionController {
 		const id = await params.id;
 		const transaction = await Transaction.find(id);
 		var status = request.input('status')
-		var page = request.input('page')
 		var old_status = request.input('old_status')
 
 		if(status=='completed' && transaction.purpose=='addwallet' && transaction.status=='pending'){
@@ -198,7 +198,6 @@ class TransactionController {
 
 		transaction.status=status;
 		await transaction.save();
-		// return response.redirect('/transaction?page='+page);
 		return response.redirect('back');
 	}
 	

@@ -55,7 +55,7 @@ module.exports = {
 			user: Env.get('DB_USER', 'root'),
 			password: Env.get('DB_PASSWORD', ''),
 			database: Env.get('DB_DATABASE', 'adonis'),
-			timezone: 'GMT+6',
+			timezone: 'Asia/Dhaka',
 			options: {
 		        useGMT: true
 		    },

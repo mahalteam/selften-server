@@ -54,7 +54,7 @@ class ProductController {
 	}
 
 	async shopproduct ({params, request, response, view}){
-		const product = await Product.query().where('isactiveforshop',1).fetch();
+		const product = await Product.query().where('isactiveforsale',1).fetch();
 		return response.send(product);
 	}
 

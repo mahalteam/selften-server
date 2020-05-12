@@ -1,7 +1,7 @@
 @layout('layout')
 
 @section('body')
-<div class="container">
+<div class="p-3">
 	<!-- Page Heading -->
 	<div class="text-right">
 		<a href="/product/create" class="btn btn-success">Create</a>
@@ -29,7 +29,7 @@
 		      <td>{{ product.start_at }}</td>
 		      <td>{{ product.end_at }}</td>
 		      <td><img src="{{ 'uploads/product/'+product.logo }}" width="50px" /></td>
-		      <td>{{ product.rules }}</td>
+		      <td>{{{ product.rules }}}</td>
 		   	 <td class="d-flex">
 			  	<form method="POST" action="/product/{{product.id}}?_method=delete">
 					<button type="submit" class="btn btn-primary">Delete</button>

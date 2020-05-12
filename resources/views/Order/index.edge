@@ -1,7 +1,7 @@
 @layout('layout')
 
 @section('body')
-<div class="container">
+<div class="p-3">
 	<form action="/orders" method="GET">
 		<div class="row">
 			<div class="col-md-12">
@@ -26,6 +26,7 @@
 				<th scope="col">Phone</th>
 				<th scope="col">Status</th>
 				<th scope="col">Date</th>
+				<th scope="col">Updated</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -41,6 +42,7 @@
 					<td>{{ transaction.user.phone }}</td>
 					<td>{{ transaction.status }}</td>
 					<td>{{ transaction.created_at }}</td>
+					<td>{{ transaction.updated_at }}</td>
 					<td>
 						@if(transaction.status!='cancel' && transaction.status!='completed')
 							<a href="#" onclick="myfunction({{transaction.id}})" class="btn btn-primary" data-toggle="modal" data-target="#examplemodel1" data-whatever="@mdo">Edit</a>
@@ -54,7 +56,7 @@
 		</tbody>
 	</table>
 
-	<ul class="pagination">
+	<ul class="pagination" style="overflow: scroll;">
 		  <li class="page-item">
 		    <a class="page-link" href="{{ orders.page == 1 ? '#' : '?page=' + (orders.page - 1) }}">Previous</a>
 		  </li>

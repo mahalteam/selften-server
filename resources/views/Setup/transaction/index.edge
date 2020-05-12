@@ -1,7 +1,7 @@
 @layout('layout')
 
 @section('body') 
-<div class="container">  
+<div class="p-3">  
 	<br>
 	<form action="/transaction" method="GET">
 		<div class="row">
@@ -31,6 +31,7 @@
 				<th scope="col">Purpose</th>
 				<th scope="col">Status</th>
 	      		<th scope="col">Date</th>
+	      		<th scope="col">Update</th>
 				<th scope="col">Action</th> 
 			</tr>
 		</thead>
@@ -46,6 +47,7 @@
 						<td>{{ transaction.purpose }}</td>
 						<td>{{ transaction.status }}</td>
 			     		 <td>{{ transaction.created_at }}</td>
+			     		 <td>{{ transaction.updated_at }}</td>
 						<td>
 							@if(transaction.status!='cancel' && transaction.status!='completed')
 								<a href="#" onclick="myfunction({{transaction.id}})" class="btn btn-primary" data-toggle="modal" data-target="#examplemodel1" data-whatever="@mdo">Edit</a>

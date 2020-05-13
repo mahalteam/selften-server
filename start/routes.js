@@ -79,9 +79,9 @@ Route.group(() => {
 	Route.get('/topuppackage', 'TopuppackageController.all1') //will deletew
 	Route.get('/topuppackage/:id', 'TopuppackageController.all')
 	Route.get('/banner', 'BannerController.all')
-	Route.get('/match/:id/:id1', 'MatchController.matchbyid')
+	Route.get('/match/:id', 'MatchController.matchbyid')
 	Route.get('/match/', 'MatchController.matchbyid')
-	Route.get('/matchs/:status', 'MatchController.matchbystatus')
+	Route.get('/matchs/:status/:id1', 'MatchController.matchbystatus')
 	Route.get('/singlematch/:id', 'MatchController.singlematch')
 	Route.get('/paymentMethod', 'PaymentMethodController.paymentMethod')
 	Route.get('/paymentMethod/:id', 'PaymentMethodController.paymentMethodbyid')

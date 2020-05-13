@@ -150,7 +150,7 @@ class OrderController {
 		return ddd
 	}
 
-	async package ({ request, response }) {
+	async topup_packageorder ({ request, response }) {
 
 		let user_id= request.input('user_id')
 		let amount= request.input('amount')
@@ -188,6 +188,7 @@ class OrderController {
 				const order = new Order(); 
 				order.topuppackage_id=request.input('topuppackage_id')
 				order.name=request.input('name')
+				order.accounttype=request.input('accounttype')
 				order.product_id=request.input('product_id')
 				order.ingameid=request.input('ingameid')
 				order.ingamepassword=request.input('ingamepassword')

@@ -10,6 +10,7 @@ class OrderSchema extends Schema {
 			table.integer('product_id')
 			table.string('phone')
 			table.text('name')
+			table.text('accounttype').nullable();
 			table.text('ingameid').nullable();
 			table.text('ingamepassword').nullable();
 			table.integer('playerid')

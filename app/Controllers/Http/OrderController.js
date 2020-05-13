@@ -159,21 +159,16 @@ class OrderController {
 		let product = await Product.find(request.input('product_id'));
 
 		// const ddd = await Order.query().where('user_id',user_id).where('status','pending').getCount();
-		const ddd  = 0;
-		if(ddd>0){
-			response.json('You Have Already A Pending Order. Please Completed To Add Another Order');
-		}
-		else if(bprice>product.price){
+		if(bprice>product.price){
 			response.json('StockOut');
 		}
 		else{
-
-			product.price=product.price-bprice;
-			await product.save();
-
 			const user = await User.find(user_id);
 			let wallet = user.wallet;
 			if((wallet+user.earn_wallet)>=amount){
+
+				product.price=product.price-bprice;
+				await product.save();
 
 				if(wallet-amount>=0){
 					user.wallet=user.wallet-amount

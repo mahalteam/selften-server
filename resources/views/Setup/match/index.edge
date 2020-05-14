@@ -24,7 +24,7 @@
 			</tr>
 		  </thead>
 		  <tbody> 
-			@each((m,index) in match)
+			@each((m,index) in match.data)
 				<tr>
 				  <th scope="row">{{ index+1 }}</th>
 				  <td>{{ m.product.name }}</td>
@@ -74,6 +74,19 @@
 			@endeach
 		  </tbody>
 		</table>
+			<ul class="pagination" style="overflow-x: scroll;">
+	  <li class="page-item">
+	    <a class="page-link" href="{{ match.page == 1 ? '#' : '?page=' + (match.page - 1) }}">Previous</a>
+	  </li>
+	  @each(page in range(1, match.lastPage))
+	    <li class="page-item">
+	      <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+	    </li>
+	  @endeach
+	  <li class="page-item">
+	    <a class="page-link" href="{{ match.lastPage == match.page ? '#' : '?page=' + (match.page + 1) }}">Next</a>
+	  </li>
+	</ul>
 	</div>
 </div>
 

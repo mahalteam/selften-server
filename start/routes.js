@@ -109,10 +109,10 @@ Route.group(() => {
 	// shop
 	Route.get('/shopproduct', 'ProductController.shopproduct')
 
-	Route.get('login/facebook', 'LoginController.redirect')
-	Route.get('facebook/callback', 'LoginController.callback')
+	Route.get('login/facebook', 'Auth/LoginController.redirect')
+	Route.get('facebook/callback', 'Auth/LoginController.callback')
 
-	Route.get('login/google', 'LoginController.redirectg')
-	Route.get('google/callback', 'LoginController.callbackg')
+	Route.get('login/google', 'Auth/LoginController.redirectg')
+	Route.get('google/callback', 'Auth/LoginController.callbackg')
 	
 }).prefix('api')

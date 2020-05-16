@@ -49,6 +49,8 @@ class LoginController {
 	    try {
 	      const fbUser = await ally.driver('facebook').getUser()
 
+	      return fbUser;
+
 	      // user details to be saved
 	      const userDetails = {
 	        email: fbUser.getEmail(),

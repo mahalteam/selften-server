@@ -100,6 +100,55 @@ class LoginController {
 	      return 'Unable to authenticate. Try again later'
 	    }
   	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  		async redirectToProvider ({ally, params}) {
+	    await ally.driver(params.provider).redirect()
+	  }
+
+	  async handleProviderCallback ({params, ally, auth, response}) {
+	    const provider = params.provider
+	    try {
+	      const userData = await ally.driver(params.provider).getUser()
+
+	      const authUser = await User.query().where({
+	        'provider': provider,
+	        'provider_id': userData.getId()
+	      }).first()
+	      if (!(authUser === null)) {
+	        await auth.loginViaId(authUser.id)
+	        return response.redirect('/')
+	      }
+
+	      const user = new User()
+	      user.username = userData.getNickname()
+	      user.email = userData.getEmail()
+	      user.avatar = userData.getAvatar()
+
+	      await user.save()
+
+	      await auth.loginViaId(user.id)
+	      return response.redirect('/')
+	    } catch (e) {
+	      console.log(e)
+	      response.redirect('/auth/' + provider)
+	    }
+	  }
+
 }
 
 module.exports = LoginController

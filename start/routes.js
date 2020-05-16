@@ -65,6 +65,11 @@ Route.group(() => {
 	Route.resource('paymentMethod', 'PaymentMethodController');
 }).middleware(['auth'])
 
+
+Route.get('/auth/:provider', 'Auth/LoginController.redirectToProvider').as('social.login')
+Route.get('/authenticated/:provider', 'Auth/LoginController.handleProviderCallback').as('social.login.callback')
+
+
 // api
 Route.group(() => {
 	Route.post('/register', 'AuthController.register1')

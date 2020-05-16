@@ -29,7 +29,7 @@ module.exports = {
     facebook: {
       clientId: "1714206765383902",
       clientSecret: "1412d5a8bc19cc8fb77aac5ce6f21aae",
-      redirectUri: `https://admin.selften.com/authenticated/facebook`
+      redirectUri: `https://admin.selften.com/api/login/facebook`
     },
 
     /*
@@ -44,7 +44,7 @@ module.exports = {
     google: {
       clientId: "385072095149-kf1b8ub6h50l7kjht94lavfkuohbanpe.apps.googleusercontent.com",
       clientSecret: "oQnMH673gzGF09p1CH2pRtKA",
-      redirectUri: `https://admin.selften.com/authenticated/google`
+      redirectUri: `https://admin.selften.com/api/login/google`
     },
 
     /*

@@ -42,6 +42,7 @@ class LoginController {
 	}
 
 	async redirect ({ ally }) {
+		return ally;
     	await ally.driver('facebook').redirect()
   	}
 

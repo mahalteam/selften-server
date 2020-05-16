@@ -79,7 +79,7 @@ class LoginController {
   	async callbackg ({ ally, auth }) {
 	    try {
 	      const fbUser = await ally.driver('google').getUser()
-
+	      return fbUser;
 	      // user details to be saved
 	      const userDetails = {
 	        email: fbUser.getEmail(),

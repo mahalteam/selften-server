@@ -42,8 +42,8 @@ module.exports = {
     |
     */
     google: {
-      clientId: Env.get('GOOGLE_CLIENT_ID'),
-      clientSecret: Env.get('GOOGLE_CLIENT_SECRET'),
+      clientId: "385072095149-kf1b8ub6h50l7kjht94lavfkuohbanpe.apps.googleusercontent.com",
+      clientSecret: "oQnMH673gzGF09p1CH2pRtKA",
       redirectUri: `${Env.get('APP_URL')}/authenticated/google`
     },
 

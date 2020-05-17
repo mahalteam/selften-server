@@ -140,10 +140,7 @@ class LoginController {
 	        return authUser
 	      }
 
-	      return authUser;
-
 	      const user = new User()
-
 	      // user.authUser = userData.getName()
 	      user.username = userData.getNickname()
 	      user.email = userData.getEmail()

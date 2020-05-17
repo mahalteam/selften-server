@@ -142,7 +142,9 @@ class LoginController {
 
 
 	      const user = new User()
-	      // user.name = userData.getName()
+	      
+	      return authUser
+	      // user.authUser = userData.getName()
 	      user.username = userData.getNickname()
 	      user.email = userData.getEmail()
 	      user.provider_id = userData.getId()
@@ -151,7 +153,6 @@ class LoginController {
 	      await user.save()
 
 	      let login = await auth.loginViaId(user.id)
-	      return login
 	    } catch (e) {
 	      console.log(e)
 	      response.redirect('/auth/' + provider)

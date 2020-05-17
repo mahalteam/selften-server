@@ -44,7 +44,7 @@ module.exports = {
 		google: {
 			clientId: "385072095149-kf1b8ub6h50l7kjht94lavfkuohbanpe.apps.googleusercontent.com",
 			clientSecret: "oQnMH673gzGF09p1CH2pRtKA",
-			redirectUri: `http://127.0.0.1:3333/aur/google`
+			redirectUri: `https://admin.selften.com/aur/google`
 		},
 
 		/*

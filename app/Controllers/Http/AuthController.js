@@ -6,6 +6,18 @@ const Persona = use('Persona')
 const Hash = use('Hash')
 class AuthController {
 
+	async loginbyid({ request, auth, response }){
+
+
+	    let login = await auth.loginViaId(user.id)
+
+		let token = await auth.authenticator('jwt').generate(authUser)
+		Object.assign(login, token)
+
+		response.json(login);
+
+	}
+
 	async register({request, auth, response}) {
 
 		const rules = {

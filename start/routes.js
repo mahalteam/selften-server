@@ -66,8 +66,8 @@ Route.group(() => {
 }).middleware(['auth'])
 
 
-Route.get('/auth/:provider', 'Auth/LoginController.redirectToProvider').as('social.login')
-Route.get('/authenticated/:provider', 'Auth/LoginController.handleProviderCallback').as('social.login.callback')
+Route.get('/au/:provider', 'Auth/LoginController.redirectToProvider').as('social.login')
+Route.get('/aur/:provider', 'Auth/LoginController.handleProviderCallback').as('social.login.callback')
 
 
 // api

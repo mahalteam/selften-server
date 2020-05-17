@@ -116,12 +116,13 @@ class LoginController {
 
 
 
-  		async redirectToProvider ({ally, params}) {
+  	async redirectToProvider ({ally, params}) {
 	    await ally.driver(params.provider).redirect()
-	  }
+	}
 
 	  async handleProviderCallback ({params, ally, auth, response}) {
 	    const provider = params.provider
+
 	    try {
 	      const userData = await ally.driver(params.provider).getUser()
 
@@ -129,20 +130,26 @@ class LoginController {
 	        'provider': provider,
 	        'provider_id': userData.getId()
 	      }).first()
+
+
 	      if (!(authUser === null)) {
-	        await auth.loginViaId(authUser.id)
-	        return response.redirect('/')
+	        // let user = await auth.loginViaId(authUser.id)
+	        let token = await auth.authenticator('jwt').generate(authUser)
+			Object.assign(authUser, token)
+	        return authUser
 	      }
 
 	      const user = new User()
+	      // user.name = userData.getName()
 	      user.username = userData.getNickname()
 	      user.email = userData.getEmail()
+	      user.provider_id = userData.getId()
 	      user.avatar = userData.getAvatar()
-
+	      user.provider = provider
 	      await user.save()
 
-	      await auth.loginViaId(user.id)
-	      return response.redirect('/')
+	      let login = await auth.loginViaId(user.id)
+	      return login
 	    } catch (e) {
 	      console.log(e)
 	      response.redirect('/auth/' + provider)

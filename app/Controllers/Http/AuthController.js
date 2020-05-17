@@ -9,12 +9,14 @@ class AuthController {
 	async loginbyid({params, request, auth, response }){
 
 
-	    let login = await auth.loginViaId(params.id)
+	   const user = await User.query()
+				.where('id', params.id)
+				.first()
 
-		let token = await auth.authenticator('jwt').generate(login)
-		Object.assign(login, token)
+		let token = await auth.authenticator('jwt').generate(user)
+		Object.assign(user, token)
 
-		response.json(login);
+		response.json(user);
 
 	}
 

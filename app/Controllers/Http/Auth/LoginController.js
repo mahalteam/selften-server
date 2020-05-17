@@ -123,6 +123,8 @@ class LoginController {
 	  async handleProviderCallback ({params, ally, auth, response}) {
 	    const provider = params.provider
 
+	        return provider
+
 	    try {
 	      const userData = await ally.driver(params.provider).getUser()
 

@@ -81,7 +81,7 @@ Route.get('/aur/:provider', 'Auth/LoginController.handleProviderCallback').as('s
 Route.group(() => {
 	Route.post('/register', 'AuthController.register1')
 	Route.post('/login', 'AuthController.login')
-	Route.post('loginbyid/:id', 'Auth/AuthController.loginbyid')
+	Route.post('loginbyid/:id', 'AuthController.loginbyid')
 	Route.post('/forgotpassword', 'AuthController.forgotPassword')
 	Route.get('/updateuser/:id', 'AuthController.updateuser')
 	Route.get('/matchproduct', 'ProductController.matchproduct')

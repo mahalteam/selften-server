@@ -140,7 +140,7 @@ class LoginController {
 	        return authUser
 	      }
 
-	      return 'authUser';
+	      return authUser;
 
 	      const user = new User()
 

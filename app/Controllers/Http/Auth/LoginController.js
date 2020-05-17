@@ -136,7 +136,7 @@ class LoginController {
 	        // let user = await auth.loginViaId(authUser.id)
 	        // let token = await auth.authenticator('jwt').generate(authUser)
 			// Object.assign(authUser, token)
-	      	response.redirect('https://selften.com/login/'+authUser.id);
+	      	response.redirect('https://selften.com/oauth/'+authUser.id);
 	        return authUser
 	      }
 
@@ -151,7 +151,7 @@ class LoginController {
 
 	      // let login = await auth.loginViaId(user.id)
 
-	      response.redirect('https://selften.com/login/'+user.id);
+	      response.redirect('https://selften.com/oauth/'+user.id);
 
 	    } catch (e) {
 	      console.log(e)

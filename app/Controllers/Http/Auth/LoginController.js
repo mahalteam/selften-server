@@ -120,9 +120,8 @@ class LoginController {
 	    await ally.driver(params.provider).redirect()
 	}
 
-	  async handleProviderCallback ({params, ally, auth, response}) {
+	async handleProviderCallback ({params, ally, auth, response}) {
 	    const provider = params.provider
-
 
 	    try {
 	      const userData = await ally.driver(params.provider).getUser()
@@ -150,13 +149,15 @@ class LoginController {
 	      await user.save()
 
 	      let login = await auth.loginViaId(user.id)
-	      
+
 	      return login;
+
+
 	    } catch (e) {
 	      console.log(e)
 	      return e;
 	    }
-	  }
+	}
 
 }
 

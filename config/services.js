@@ -29,7 +29,7 @@ module.exports = {
 		facebook: {
 			clientId: "1714206765383902",
 			clientSecret: "1412d5a8bc19cc8fb77aac5ce6f21aae",
-			redirectUri:  `${Env.get('APP_URL')}/aur/facebook`
+			redirectUri:  `${Env.get('APP_U')}/aur/facebook`
 		},
 
 		/*
@@ -44,7 +44,7 @@ module.exports = {
 		google: {
 			clientId: "385072095149-kf1b8ub6h50l7kjht94lavfkuohbanpe.apps.googleusercontent.com",
 			clientSecret: "oQnMH673gzGF09p1CH2pRtKA",
-			redirectUri:  `${Env.get('APP_URL')}/aur/google`
+			redirectUri:  `${Env.get('APP_U')}/aur/google`
 		},
 
 		/*
@@ -59,7 +59,7 @@ module.exports = {
 		github: {
 			clientId: Env.get('GITHUB_CLIENT_ID'),
 			clientSecret: Env.get('GITHUB_CLIENT_SECRET'),
-			redirectUri: `${Env.get('APP_URL')}/authenticated/github`
+			redirectUri: `${Env.get('APP_U')}/authenticated/github`
 		},
 
 		/*
@@ -74,7 +74,7 @@ module.exports = {
 		instagram: {
 			clientId: Env.get('INSTAGRAM_CLIENT_ID'),
 			clientSecret: Env.get('INSTAGRAM_CLIENT_SECRET'),
-			redirectUri: `${Env.get('APP_URL')}/authenticated/instagram`
+			redirectUri: `${Env.get('APP_U')}/authenticated/instagram`
 		},
 
 		/*
@@ -89,7 +89,7 @@ module.exports = {
 		foursquare: {
 			clientId: Env.get('FOURSQUARE_ID'),
 			clientSecret: Env.get('FOURSQUARE_SECRET'),
-			redirectUri: `${Env.get('APP_URL')}/authenticated/foursquare`
+			redirectUri: `${Env.get('APP_U')}/authenticated/foursquare`
 		}
 	}
 }

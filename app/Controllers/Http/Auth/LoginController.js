@@ -123,7 +123,6 @@ class LoginController {
 	  async handleProviderCallback ({params, ally, auth, response}) {
 	    const provider = params.provider
 
-	        return provider
 
 	    try {
 	      const userData = await ally.driver(params.provider).getUser()
@@ -134,12 +133,16 @@ class LoginController {
 	      }).first()
 
 
+
+
 	      if (!(authUser === null)) {
 	        // let user = await auth.loginViaId(authUser.id)
 	        let token = await auth.authenticator('jwt').generate(authUser)
 			Object.assign(authUser, token)
 	        return authUser
 	      }
+
+	       return provider
 
 	      const user = new User()
 	      // user.name = userData.getName()

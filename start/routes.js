@@ -69,6 +69,13 @@ Route.group(() => {
 Route.get('/au/:provider', 'Auth/LoginController.redirectToProvider').as('social.login')
 Route.get('/aur/:provider', 'Auth/LoginController.handleProviderCallback').as('social.login.callback')
 
+// Route
+//   .group(() => {
+//     Route.get('users', async ({ subdomains }) => {
+//       return `The username is ${subdomains.user}`
+//     })
+//   })
+//   .domain('http://selften.com/')
 
 // api
 Route.group(() => {

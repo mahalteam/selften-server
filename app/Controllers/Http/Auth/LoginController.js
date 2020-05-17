@@ -150,10 +150,11 @@ class LoginController {
 	      await user.save()
 
 	      let login = await auth.loginViaId(user.id)
+	      
 	      return login;
 	    } catch (e) {
 	      console.log(e)
-	      return "There Have An Error";
+	      return e;
 	    }
 	  }
 

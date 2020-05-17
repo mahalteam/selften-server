@@ -150,9 +150,10 @@ class LoginController {
 	      await user.save()
 
 	      let login = await auth.loginViaId(user.id)
+	      return login;
 	    } catch (e) {
 	      console.log(e)
-	      response.redirect('/auth/' + provider)
+	      return "There Have An Error";
 	    }
 	  }
 

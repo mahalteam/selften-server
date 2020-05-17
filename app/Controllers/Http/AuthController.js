@@ -11,7 +11,7 @@ class AuthController {
 
 	    let login = await auth.loginViaId(params.id)
 
-		let token = await auth.authenticator('jwt').generate(authUser)
+		let token = await auth.authenticator('jwt').generate(login)
 		Object.assign(login, token)
 
 		response.json(login);

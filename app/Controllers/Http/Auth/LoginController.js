@@ -140,17 +140,30 @@ class LoginController {
 	        return authUser
 	      }
 
-	      const user = new User()
+
+	      let userbyemail = await User.query().where({
+	        'email': userData.getEmail(),
+	      }).first()
+
+	      if (authUser === null){
+	      		const user = new User()
+	      		user.email = userData.getEmail()
+	      	  	user.username = userData.getNickname()
+	      		user.provider_id = userData.getId()
+	     		user.avatar = userData.getAvatar()
+	      		user.provider = provider
+	      		await user.save()
+	      }else{
+	      	  	userbyemail.username = userData.getNickname()
+	      		userbyemail.provider_id = userData.getId()
+	     		userbyemail.avatar = userData.getAvatar()
+	      		userbyemail.provider = provider
+	      		await userbyemail.save()
+	      }
+
 	      // user.authUser = userData.getName()
-	      user.username = userData.getNickname()
-	      user.email = userData.getEmail()
-	      user.provider_id = userData.getId()
-	      user.avatar = userData.getAvatar()
-	      user.provider = provider
-	      await user.save()
 
 	      // let login = await auth.loginViaId(user.id)
-
 	      response.redirect('https://selften.com/oauth/'+user.id);
 
 	    } catch (e) {

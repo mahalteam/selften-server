@@ -140,12 +140,9 @@ class LoginController {
 	        return authUser
 	      }
 
+	      let userbyemail = await User.query().where('email', userData.getEmail()).first()
 
-	      let userbyemail = await User.query().where({
-	        'email': userData.getEmail(),
-	      }).first()
-
-	      if (authUser === null){
+	      if (!userbyemail){
 	      		const user = new User()
 	      		user.email = userData.getEmail()
 	      	  	user.username = userData.getNickname()

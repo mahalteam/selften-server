@@ -133,8 +133,6 @@ class LoginController {
 	      }).first()
 
 
-
-
 	      if (!(authUser === null)) {
 	        // let user = await auth.loginViaId(authUser.id)
 	        let token = await auth.authenticator('jwt').generate(authUser)
@@ -142,7 +140,6 @@ class LoginController {
 	        return authUser
 	      }
 
-	       return provider
 
 	      const user = new User()
 	      // user.name = userData.getName()

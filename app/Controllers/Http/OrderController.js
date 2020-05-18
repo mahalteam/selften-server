@@ -253,7 +253,7 @@ class OrderController {
 		let transaction = await Order.find(id);
 		let product = await Product.find(transaction.product_id);
 		var status = request.input('status')
-		if(status=='cancel'){
+		if(status=='cancel' && transaction.status=="pending"){
 			product.price=product.price+transaction.bprice
 			await product.save()
 			let user = await User.find(transaction.user_id);

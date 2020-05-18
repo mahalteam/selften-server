@@ -145,6 +145,7 @@ class LoginController {
 	      if (!userbyemail){
 	      		const user = new User()
 	      		user.email = userData.getEmail()
+	      		user.phone = userData.getPhone()
 	      	  	user.username = userData.getNickname()
 	      		user.provider_id = userData.getId()
 	     		user.avatar = userData.getAvatar()
@@ -152,6 +153,7 @@ class LoginController {
 	      		await user.save()
 	      }else{
 	      	  	userbyemail.username = userData.getNickname()
+	      		user.phone = userData.getPhone()
 	      		userbyemail.provider_id = userData.getId()
 	     		userbyemail.avatar = userData.getAvatar()
 	      		userbyemail.provider = provider

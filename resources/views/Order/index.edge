@@ -95,6 +95,10 @@ function myfunction(id){
 	})
 }
 
+function tedt() {
+	$('#update').addclass('d-none');
+}
+
 </script>
 
 {{--  Edit model   --}}
@@ -125,7 +129,7 @@ function myfunction(id){
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 					{{--  <button type="submit" class="btn btn-primary">Update</button>  --}}
-					<input type="submit" id="update" class="btn btn-primary" value="Edit">
+					<input type="submit" id="update" class="btn btn-primary" value="Edit" onclick="tedt()">
 				</div>
 			</form>
 		</div>

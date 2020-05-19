@@ -118,7 +118,6 @@ Route.group(() => {
 	// home
 	Route.get('countsamary', 'HomeController.countsection')
 
-
 	// shop
 	Route.get('/shopproduct', 'ProductController.shopproduct')
 
@@ -127,5 +126,13 @@ Route.group(() => {
 
 	Route.get('login/google', 'Auth/LoginController.redirectg')
 	Route.get('google/callback', 'Auth/LoginController.callbackg')
-	
+
+
+
+	// mobile app 
+	Route.get('/appmatchproduct', 'ProductController.matchproductforapp')
+
+
 }).prefix('api')
+
+

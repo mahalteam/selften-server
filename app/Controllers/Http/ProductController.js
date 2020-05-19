@@ -68,6 +68,13 @@ class ProductController {
 		return response.send(product);
 	}
 
+	async matchproductforapp ({ params, request, response, view }) {
+		const product = await Product.query().with('matches',(builder) => {
+		    builder.where('status', 'upcoming').orWhere('status', 'ongoing')
+		  }).where('isactiveformatch',1).fetch();
+		return response.send({result:product});
+	}
+
 	// this is edit controller 
 
 	async edit ({ params, request, response, view }) {

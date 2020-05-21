@@ -121,6 +121,11 @@ class AuthController {
 		return response.json(user)
 	}
 
+	async updateuser({request, response,params}){
+		let user = await User.findBy('id', params.id)
+		return response.json({result:user})
+	}
+
 	async verifyEmail ({ params, session, response }) {
 	  	const user = await Persona.verifyEmail(params.token)
 

@@ -104,32 +104,22 @@ class LoginController {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
   	async redirectToProvider ({ally, params}) {
 	    await ally.driver(params.provider).redirect()
 	}
 
 	async handleProviderCallback ({params, ally, auth, response}) {
 	    const provider = params.provider
-
 	    try {
 	      const userData = await ally.driver(params.provider).getUser()
+
+	      return 'userData';
 
 	      const authUser = await User.query().where({
 	        'provider': provider,
 	        'provider_id': userData.getId()
 	      }).first()
+
 
 
 	      if (!(authUser === null)) {
@@ -166,8 +156,7 @@ class LoginController {
 	      response.redirect('https://selften.com/oauth/'+user.id);
 
 	    } catch (e) {
-	      console.log(e)
-	      return e;
+	      	return e;
 	    }
 	}
 

@@ -132,10 +132,7 @@ Route.group(() => {
 	// mobile app 
 	Route.get('/appmatchproduct', 'ProductController.matchproductforapp')
 	Route.get('/appmatchs/:status/:id1', 'MatchController.matchbystatusapp')
-
-
-
-
+	Route.get('appuerbyid/:id', 'AuthController.loginbyid')
 
 }).prefix('api')
 

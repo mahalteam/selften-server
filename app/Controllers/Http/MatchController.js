@@ -363,9 +363,11 @@ class MatchController {
 	async totalplayer({ params, request, response,view }){
 		const id = params.id;
 		const match = await Match.query().with('users').with('prizes').where('id',id).first();
+		let sum = await Matchuser.query().where('match_id',id).sum('total_earn as sum');
 		return view.render('Setup/match/totalplayer',
 			{
-				match: match.toJSON()
+				match: match.toJSON(),
+				sum:sum[0]
 			}
 		);
 	}

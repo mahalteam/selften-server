@@ -133,6 +133,12 @@ Route.group(() => {
 	Route.get('/appmatchproduct', 'ProductController.matchproductforapp')
 	Route.get('/appmatchs/:status/:id1', 'MatchController.matchbystatusapp')
 	Route.get('appuerbyid/:id', 'AuthController.updateuserapp')
+	Route.get('/apppaymentMethod', 'PaymentMethodController.paymentMethod1')
+	Route.get('/apppaymentMethod/:id', 'PaymentMethodController.paymentMethodbyid1')
+	Route.get('/appusertransaction/:id', 'TransactionController.usertransactionapp')
+	Route.post('/appjoin/:id', 'MatchController.join')
+	Route.post('/appaddwallet', 'TransactionController.index')
+
 
 }).prefix('api')
 

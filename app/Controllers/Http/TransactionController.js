@@ -84,6 +84,11 @@ class TransactionController {
 		response.send(transaction);
 	}
 
+	async usertransactionapp({ params,request, response, view }){
+		const transaction= await Transaction.query().where('user_id',params.id).orderBy('id', 'desc').limit(15).fetch();
+		response.send({result:transaction});
+	}
+
 	async cancelalltransaction({request, response, view}){
 		const transaction= await Transaction.query().where('status','pending').where('purpose','addwallet').update({ status: 'cancel' });
 		return response.redirect('back');

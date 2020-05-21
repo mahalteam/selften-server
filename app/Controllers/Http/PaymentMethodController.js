@@ -82,9 +82,19 @@ class PaymentMethodController {
     return response.send(paymentMethod);
   }
 
+  async paymentMethod1 ({ params, request, response, view }) {
+    const paymentMethod = await PaymentMethod.all();
+    return response.send({result:paymentMethod});
+  }
+
   async paymentMethodbyid ({ params, request, response, view }) {
     const paymentMethod = await PaymentMethod.find(params.id);
     return response.send(paymentMethod);
+  }
+
+  async paymentMethodbyid1 ({ params, request, response, view }) {
+    const paymentMethod = await PaymentMethod.find(params.id);
+    return response.send({result:paymentMethod});
   }
 
   /**

@@ -30,8 +30,9 @@
 		    </tr>
 		@endeach
 		<tr>
-			<td colspan="5" align="right">{{ match.entryfee*match.users.length }}</td>
-			<td align="right">{{ sum.sum }}</td>
+			<td colspan="5" align="right">Total Entry fee:{{ match.entryfee*match.users.length }}</td>
+			<td align="right">Total Prize:{{ sum.sum+10 }}  </td>
+			<td>loses = {{ (sum.sum+10)-match.entryfee*match.users.length  }}</td>
 		</tr>
 	  </tbody>
 	</table>

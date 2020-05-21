@@ -121,7 +121,7 @@ class AuthController {
 		return response.json(user)
 	}
 
-	async updateuser({request, response,params}){
+	async updateuserapp({request, response,params}){
 		let user = await User.findBy('id', params.id)
 		return response.json({result:user})
 	}

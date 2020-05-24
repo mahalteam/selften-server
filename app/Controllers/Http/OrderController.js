@@ -172,12 +172,12 @@ class OrderController {
 
 				if(wallet-amount>=0){
 					user.wallet=user.wallet-amount
-					user.save();
+					await user.save();
 				}else{
 					user.wallet=0;
 					let current = amount-wallet;
 					user.earn_wallet=user.earn_wallet-current;
-					user.save();
+					await user.save();
 				}
 
 				const order = new Order(); 
@@ -197,7 +197,6 @@ class OrderController {
 				await order.save()
 				order.topuppackage;
 				return order;
-
 			}else{
 				response.json('faliled')
 			}

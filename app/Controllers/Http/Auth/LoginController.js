@@ -112,7 +112,6 @@ class LoginController {
 	    const provider = params.provider
 	    try {
 	      const userData = await ally.driver(provider).getUser()
-	    return userData;
 
 	      const authUser = await User.query().where({
 	        'provider': provider,

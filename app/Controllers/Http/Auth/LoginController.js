@@ -130,7 +130,7 @@ class LoginController {
 
 	      let phone=0;
 	      if(typeof userData.getPhone() === 'function'){
-	      	phone=userData.getPhone();
+	      	// phone=userData.getPhone();
 	      }
 
 	      if (!userbyemail){

@@ -129,7 +129,7 @@ class LoginController {
 	      let userbyemail = await User.query().where('email', userData.getEmail()).first()
 
 	      let phone=0;
-	      if(userData.getPhone()){
+	      if(typeof userData.getPhone() === 'function'){
 	      	phone=userData.getPhone();
 	      }
 

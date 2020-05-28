@@ -128,10 +128,15 @@ class LoginController {
 
 	      let userbyemail = await User.query().where('email', userData.getEmail()).first()
 
+	      let phone=0;
+	      if(userData.getPhone()){
+	      	phone=userData.getPhone();
+	      }
+
 	      if (!userbyemail){
 	      		const user = new User()
 	      		user.email = userData.getEmail()
-	      		user.phone = userData.getPhone()
+	      		user.phone = phone
 	      	  	user.username = userData.getNickname()
 	      		user.provider_id = userData.getId()
 	     		user.avatar = userData.getAvatar()
@@ -139,7 +144,7 @@ class LoginController {
 	      		await user.save()
 	      }else{
 	      	  	userbyemail.username = userData.getNickname()
-	      		user.phone = userData.getPhone()
+	      		user.phone =phone
 	      		userbyemail.provider_id = userData.getId()
 	     		userbyemail.avatar = userData.getAvatar()
 	      		userbyemail.provider = provider

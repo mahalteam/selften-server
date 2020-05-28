@@ -129,9 +129,9 @@ class LoginController {
 	      let userbyemail = await User.query().where('email', userData.getEmail()).first()
 
 	      let phone=0;
-	      if(typeof userData.getPhone() === 'function'){
-	      	// phone=userData.getPhone();
-	      }
+	      // if(typeof userData.getPhone() === 'function'){
+	      // 	// phone=userData.getPhone();
+	      // }
 
 	      if (!userbyemail){
 	      		const user = new User()

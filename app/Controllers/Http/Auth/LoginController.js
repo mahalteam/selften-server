@@ -144,7 +144,7 @@ class LoginController {
 	      		await user.save()
 	      }else{
 	      	  	userbyemail.username = userData.getNickname()
-	      		user.phone =phone
+	      		userbyemail.phone =phone
 	      		userbyemail.provider_id = userData.getId()
 	     		userbyemail.avatar = userData.getAvatar()
 	      		userbyemail.provider = provider

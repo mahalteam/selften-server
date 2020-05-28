@@ -118,13 +118,11 @@ class LoginController {
 	        'provider_id': userData.getId()
 	      }).first()
 
-
-
 	      if (!(authUser === null)) {
 	        // let user = await auth.loginViaId(authUser.id)
 	        // let token = await auth.authenticator('jwt').generate(authUser)
 			// Object.assign(authUser, token)
-	      	response.redirect('https://selften.com/oauth/'+authUser.id);
+	      	response.redirect('https://selften.com/oauth/'+authUser.id+'/'+userData.getId());
 	        return authUser
 	      }
 
@@ -151,7 +149,7 @@ class LoginController {
 	      // user.authUser = userData.getName()
 
 	      // let login = await auth.loginViaId(user.id)
-	      response.redirect('https://selften.com/oauth/'+user.id);
+	      	response.redirect('https://selften.com/oauth/'+user.id+'/'+userData.getId());
 
 	    } catch (e) {
 	      	return 'error'+e;

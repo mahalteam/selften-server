@@ -8,15 +8,20 @@ class AuthController {
 
 	async loginbyid({params, request, auth, response }){
 
-
 	   const user = await User.query()
 				.where('id', params.id)
+				.where('provider_id', params.providerid)
 				.first()
 
-		let token = await auth.authenticator('jwt').generate(user)
-		Object.assign(user, token)
+		if(user){
+			let token = await auth.authenticator('jwt').generate(user)
+			Object.assign(user, token)
+			response.json(user);
+		}else{
+			response.json(0);
+		}
 
-		response.json(user);
+
 
 	}
 

@@ -140,6 +140,7 @@ Route.group(() => {
 	Route.post('/appaddwallet', 'TransactionController.index')
 	Route.get('/matchdata/:userid/:matchid', 'MatchController.matchdata')
 	Route.get('/appinfo', 'AdminController.appinfo')
+	Route.post('/appjoin/:id', 'MatchController.join')
 
 
 }).prefix('api')

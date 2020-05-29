@@ -39,6 +39,28 @@ class MatchController {
 	}
 
 
+	async matchdata({params ,request, response}){
+
+		const match = await Match.find(params.matchid);
+
+		const user = await User.find(params.userid);
+
+		let canjoin=false;
+		let isjoin=false;
+
+		const matchuser = Matchuser.query().where('match_id',params.matchid).where('user_id',params.userid).fetch();
+		if(matchuser>0){
+			isjoin=true;
+		}
+
+		if(user.wallet+user.earn_wallet>=match && isjoin==false){
+			canjoin=true;
+		}
+
+		response.json({result:{isjoin:isjoin,canjoin:canjoin,match:match,user:user}})
+	}
+
+
 	async matchprize ({ params ,request, response, view }){
 		const prize = await Prize.query().with('match').where('match_id',params.id).fetch();
 		return view.render('Setup.Prize.index',

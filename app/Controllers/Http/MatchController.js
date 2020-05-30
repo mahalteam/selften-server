@@ -45,13 +45,13 @@ class MatchController {
 
 		const user = await User.find(params.userid);
 
-		let canjoin=false;
+		let canjoin=true;
 		let isjoin=false;
 
 		const matchuser = Matchuser.query().where('match_id',params.matchid).where('user_id',params.userid).getCount();
 
 		if(matchuser==0){
-			isjoin=true;
+			isjoin=false;
 		}
 
 		if(user.wallet+user.earn_wallet>=match.entryfee){

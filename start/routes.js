@@ -102,7 +102,7 @@ Route.group(() => {
 	Route.post('/join/:id', 'MatchController.join')
 	Route.post('/addwallet', 'TransactionController.index')
 	Route.post('/change/:id', 'UserController.change')
-	Route.post('/withdrawwallet', 'TransactionController.withdrawwallet').middleware(['auth'])
+	Route.post('/withdrawwallet', 'TransactionController.withdrawwallet')
 	Route.post('/order', 'OrderController.eventorder')
 	Route.post('/packageorder', 'OrderController.topup_packageorder').middleware(['auth'])
 	Route.get('/offerproduct', 'ProductController.offerproduct')

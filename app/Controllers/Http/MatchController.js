@@ -50,6 +50,8 @@ class MatchController {
 
 		const matchuser = Matchuser.query().where('match_id',params.matchid).where('user_id',params.userid).getCount();
 
+		return matchuser;
+
 		if(matchuser>0){
 			isjoin=true;
 		}

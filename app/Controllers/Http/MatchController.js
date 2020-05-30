@@ -53,7 +53,7 @@ class MatchController {
 			isjoin=true;
 		}
 
-		if(user.wallet+user.earn_wallet>=match){
+		if(user.wallet+user.earn_wallet>=match.entryfee){
 			canjoin=true;
 		}
 

@@ -48,12 +48,12 @@ class MatchController {
 		let canjoin=false;
 		let isjoin=false;
 
-		const matchuser = Matchuser.query().where('match_id',params.matchid).where('user_id',params.userid).fetch();
+		const matchuser = Matchuser.query().where('match_id',params.matchid).where('user_id',params.userid).getCount();
 		if(matchuser>0){
 			isjoin=true;
 		}
 
-		if(user.wallet+user.earn_wallet>=match && isjoin==false){
+		if(user.wallet+user.earn_wallet>=match){
 			canjoin=true;
 		}
 

@@ -48,9 +48,8 @@ class MatchController {
 		let canjoin=false;
 		let isjoin=false;
 
-		const matchuser = Matchuser.query().where('match_id',params.matchid).where('user_id',params.userid).getCount();
+		const matchuser = await Matchuser.query().where('match_id',params.matchid).where('user_id',params.userid).getCount();
 
-		return matchuser;
 
 		if(matchuser>0){
 			isjoin=true;

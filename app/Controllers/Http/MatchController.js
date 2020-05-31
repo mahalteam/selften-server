@@ -62,6 +62,21 @@ class MatchController {
 		response.json({result:{isjoin:isjoin,canjoin:canjoin,match:match,user:user}})
 	}
 
+	async percipient({params ,request, response}){
+		const matchuser = await Matchuser.query().with('users').where('match_id',params.matchid).fetch();
+		response.json({result:matchuser})
+	}
+
+	async prize({params ,request, response}){
+		const matchuser = await Prize.query().where('match_id',params.matchid).fetch();
+		response.json({result:matchuser})
+	}
+
+	async rulse({params ,request, response}){
+		const product = await Product.query().where('id',params.productid).fetch();
+		response.json({result:product})
+	}
+
 
 	async matchprize ({ params ,request, response, view }){
 		const prize = await Prize.query().with('match').where('match_id',params.id).fetch();

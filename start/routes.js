@@ -141,7 +141,9 @@ Route.group(() => {
 	Route.get('/matchdata/:userid/:matchid', 'MatchController.matchdata')
 	Route.get('/appinfo', 'AdminController.appinfo')
 	Route.post('/appjoin/:id', 'MatchController.join')
-
+	Route.get('/prize/:matchid', 'MatchController.prize')
+	Route.get('/rulse/:productid', 'MatchController.rulse')
+	Route.get('/percipient/:matchid', 'MatchController.percipient')
 
 }).prefix('api')
 

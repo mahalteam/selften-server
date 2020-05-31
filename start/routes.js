@@ -104,7 +104,7 @@ Route.group(() => {
 	Route.post('/change/:id', 'UserController.change')
 	Route.post('/withdrawwallet', 'TransactionController.withdrawwallet')
 	Route.post('/order', 'OrderController.eventorder')
-	Route.post('/packageorder', 'OrderController.topup_packageorder').middleware(['auth'])
+	Route.post('/packageorder', 'OrderController.topup_packageorder')
 	Route.get('/offerproduct', 'ProductController.offerproduct')
 	Route.get('/myorder/:id', 'OrderController.show')
 	Route.get('/offerorder/:id', 'OrderController.offerorder')

@@ -118,13 +118,14 @@ class TransactionController {
 		const user_id = request.get().user_id;
 		let transaction=[];
 		if(number){
-			transaction= await Transaction.query().with('payment_method').where('number',number).fetch()
+			transaction= await Transaction.query().with('payment_method').where('number',number).orderBy('id', 'desc').fetch()
 		}else if(user_id){
-			transaction= await Transaction.query().with('payment_method').where('user_id',user_id).fetch()
+			transaction= await Transaction.query().with('payment_method').where('user_id',user_id).orderBy('id', 'desc').fetch()
 		}else{
 			transaction = await Transaction.query().with('payment_method').orderBy('id', 'desc').where('purpose','addwallet').paginate(page,10)
 		}
 		return view.render('Setup/transaction/index',{transactions: transaction.toJSON()});
+		
 	}
 
 	async transactionwithdraw ({ request, response, view }) {

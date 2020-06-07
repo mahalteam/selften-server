@@ -24,9 +24,12 @@ class OrderController {
 	async index ({ request, response, view }) {
 		const page = request.get().page || 1
 		const user_id = request.get().user_id;
+		const order_id = request.get().order_id;
 		let order = [] ; 
-		if(user_id){
-			order = await Order.query().with('user').with('topuppackage').where('user_id',user_id).orderBy('id', 'desc').paginate(page,10);
+		if(order_id){
+			order = await Order.query().with('user').with('topuppackage').where('id',order_id).orderBy('id', 'desc').paginate(page,10);
+		}else if(user_id){
+			order = await Order.query().with('user').with('topuppackage').where('user_id',user_id).orderBy('id', 'desc').paginate(page,1000);
 		}else{
 		 	order = await Order.query().with('user').with('topuppackage').orderBy('id', 'desc').paginate(page,10)
 		}

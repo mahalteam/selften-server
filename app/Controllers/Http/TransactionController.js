@@ -80,12 +80,12 @@ class TransactionController {
 	}
 
 	async usertransaction({ params,request, response, view }){
-		const transaction= await Transaction.query().where('user_id',params.id).orderBy('id', 'desc').limit(15).fetch();
+		const transaction= await Transaction.query().where('user_id',params.id).orderBy('id', 'desc').limit(50).fetch();
 		response.send(transaction);
 	}
 
 	async usertransactionapp({ params,request, response, view }){
-		const transaction= await Transaction.query().where('user_id',params.id).orderBy('id', 'desc').limit(15).fetch();
+		const transaction= await Transaction.query().where('user_id',params.id).orderBy('id', 'desc').limit(50).fetch();
 		response.send({result:transaction});
 	}
 

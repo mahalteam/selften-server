@@ -99,7 +99,7 @@ Route.group(() => {
 	Route.get('/paymentMethod', 'PaymentMethodController.paymentMethod')
 	Route.get('/paymentMethod/:id', 'PaymentMethodController.paymentMethodbyid')
 	Route.get('/usertransaction/:id', 'TransactionController.usertransaction')
-	Route.post('/join/:id', 'MatchController.join')
+	Route.post('/join/:id', 'MatchController.join').middleware(['auth:jwt'])
 	Route.post('/addwallet', 'TransactionController.index')
 	Route.post('/change/:id', 'UserController.change')
 	Route.post('/withdrawwallet', 'TransactionController.withdrawwallet')

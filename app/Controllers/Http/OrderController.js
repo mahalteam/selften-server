@@ -155,8 +155,6 @@ class OrderController {
 
 	async topup_packageorder ({ request,auth, response }) {
 
-		return await auth.current.user.id
-
 		// let user_id= request.input('user_id')
 		let user_id= await auth.current.user.id
 		let amount= request.input('amount')

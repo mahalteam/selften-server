@@ -86,7 +86,7 @@ Route.group(() => {
 	Route.get('/updateuser/:id', 'AuthController.updateuser')
 	Route.get('/matchproduct', 'ProductController.matchproduct')
 	Route.get('/topupproduct', 'ProductController.topupproduct')
-	Route.get('/NoticeController', 'NoticeController.all')
+	Route.get('/notice', 'NoticeController.all')
 	Route.get('/topupinfo', 'TopupinfoController.show')
 	Route.get('/leaderbordinfo', 'LeaderboardinfoController.all')
 	Route.get('/topuppackage', 'TopuppackageController.all1') //will deletew

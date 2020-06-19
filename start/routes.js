@@ -63,7 +63,7 @@ Route.group(() => {
 	Route.resource('leaderboardinfo', 'LeaderboardinfoController');
 	Route.get('prize/create/:id', 'PrizeController.create');
 	Route.resource('paymentMethod', 'PaymentMethodController');
-}).middleware(['auth'])
+}).middleware(['auth:session'])
 
 
 Route.get('/au/:provider', 'Auth/LoginController.redirectToProvider').as('social.login')
@@ -86,7 +86,7 @@ Route.group(() => {
 	Route.get('/updateuser/:id', 'AuthController.updateuser')
 	Route.get('/matchproduct', 'ProductController.matchproduct')
 	Route.get('/topupproduct', 'ProductController.topupproduct')
-	Route.get('/notice', 'NoticeController.all')
+	Route.get('/NoticeController', 'NoticeController.all')
 	Route.get('/topupinfo', 'TopupinfoController.show')
 	Route.get('/leaderbordinfo', 'LeaderboardinfoController.all')
 	Route.get('/topuppackage', 'TopuppackageController.all1') //will deletew
@@ -104,7 +104,7 @@ Route.group(() => {
 	Route.post('/change/:id', 'UserController.change')
 	Route.post('/withdrawwallet', 'TransactionController.withdrawwallet')
 	Route.post('/order', 'OrderController.eventorder')
-	Route.post('/packageorder', 'OrderController.topup_packageorder')
+	Route.post('/packageorder', 'OrderController.topup_packageorder').middleware(['auth:jwt'])
 	Route.get('/offerproduct', 'ProductController.offerproduct')
 	Route.get('/myorder/:id', 'OrderController.show')
 	Route.get('/offerorder/:id', 'OrderController.offerorder')

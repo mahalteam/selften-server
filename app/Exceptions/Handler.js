@@ -20,13 +20,13 @@ class ExceptionHandler extends BaseExceptionHandler {
 	 *
 	 * @return {void}
 	 */
-	async handle (error, { request, response }) {
-		if (error.message === 'E_INVALID_SESSION: Invalid session') {
-			response.redirect('login')
-			return
-		}
-		response.status(error.status).send(error)
-	}
+		// async handle (error, { request, response }) {
+		// 	if (error.message === 'E_INVALID_SESSION: Invalid session') {
+		// 		response.redirect('login')
+		// 		return
+		// 	}
+		// 	response.status(error.status).send(error)
+		// }
 
 	/**
 	 * Report exception for logging or debugging.

@@ -122,7 +122,8 @@ class MatchController {
 		
 		var type = request.input('type');
 		var totalfee = request.input('fee');
-		var user_id=request.input('user_id');
+		// var user_id=request.input('user_id');
+		var user_id= await auth.current.user.id
 		var match_id=request.input('match_id');
 
 		let matchuser= await Matchuser.query().where('match_id',match_id).getCount();

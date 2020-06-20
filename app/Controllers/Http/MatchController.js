@@ -113,12 +113,12 @@ class MatchController {
 		response.json({result:match})
 	}
 
-	async singlematch ({ params,request, response, view }) {
+	async singlematch ({ params,auth,request, response, view }) {
 		const match = await Match.query().with('product').with('users').with('map').with('prizes').where('id',params.id).fetch();
 		response.json(match)
 	}
 
-	async join ({ params,request, response, view }) {
+	async join ({ params,request, auth,response, view }) {
 		
 		var type = request.input('type');
 		var totalfee = request.input('fee');

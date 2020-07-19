@@ -89,7 +89,7 @@ class MatchController {
 	}
 
 	async matchbyid ({ params,request, response, view }) {
-		const match = await Match.query().with('product').with('users').with('map').with('prizes').where('status', 'upcoming').orWhere('status', 'ongoing').orWhere('status', 'result').orderBy('id', 'desc').limit(35).fetch();
+		const match = await Match.query().with('product').with('users').with('map').with('prizes').where('status', 'upcoming').orWhere('status', 'ongoing').orWhere('status', 'result').orderBy('id', 'desc').limit(15).fetch();
 		response.json(match)
 	}
 

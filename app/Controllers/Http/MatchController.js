@@ -89,14 +89,14 @@ class MatchController {
 	}
 
 	async matchbyid ({ params,request, response, view }) {
-		const match = await Match.query().with('product').with('users').with('map').with('prizes').where('status', 'upcoming').orWhere('status', 'ongoing').orWhere('status', 'result').orderBy('id', 'desc').limit(10).fetch();
+		const match = await Match.query().with('product').with('users').with('map').with('prizes').where('status', 'upcoming').orWhere('status', 'ongoing').orWhere('status', 'result').orderBy('id', 'desc').limit(15).fetch();
 		response.json(match)
 	}
 
 	async matchbystatus ({ params,request, response, view }){
 		// let match=[];
 		// if(params.status=='result'){
-			let match = await Match.query().with('product').with('users').with('map').with('prizes').where('product_id',params.id1).where('status',params.status).orderBy('id', 'desc').limit(10).fetch();
+			let match = await Match.query().with('product').with('users').with('map').with('prizes').where('product_id',params.id1).where('status',params.status).orderBy('id', 'desc').limit(5).fetch();
 		// }else{
 		// 	let match = await Match.query().with('product').with('users').with('map').with('prizes').where('status',params.status).limit(35).fetch();
 		// }

@@ -139,7 +139,7 @@ Route.group(() => {
 	Route.post('/appaddwallet', 'TransactionController.index')
 	Route.get('/matchdata/:userid/:matchid', 'MatchController.matchdata')
 	Route.get('/appinfo', 'AdminController.appinfo')
-	Route.post('/appjoin/:id', 'MatchController.join')
+	Route.post('/appjoin/:id', 'MatchController.join').middleware(['auth:jwt'])
 	Route.get('/prize/:matchid', 'MatchController.prize')
 	Route.get('/rulse/:productid', 'MatchController.rulse')
 	Route.get('/percipient/:matchid', 'MatchController.percipient')

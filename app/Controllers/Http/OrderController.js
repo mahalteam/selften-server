@@ -218,7 +218,7 @@ class OrderController {
 	 * @param {View} ctx.view
 	 */
 	async show ({ params, request, response, view }) {
-		const ddd = await Order.query().where('user_id',params.id).orderBy('id','desc').limit(50).fetch();
+		const ddd = await Order.query().select('id', 'product_id', 'name','accounttype','user_id','ingameid','topuppackage_id','playerid','phone','payment_mathod','status','amount','bprice','date','created_at').where('user_id',params.id).orderBy('id','desc').limit(50).fetch();
 		return ddd;
 	}
 

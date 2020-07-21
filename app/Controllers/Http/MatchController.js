@@ -106,7 +106,7 @@ class MatchController {
 	async matchbystatusapp ({ params,request, response, view }){
 		// let match=[];
 		// if(params.status=='result'){
-			let match = await Match.query().with('product').with('users').with('map').with('prizes').where('product_id',params.id1).where('status',params.status).orderBy('id', 'desc').limit(10).fetch();
+			let match = await Match.query().with('product').with('users').with('map').with('prizes').where('product_id',params.id1).where('status',params.status).orderBy('id', 'desc').limit(5).fetch();
 		// }else{
 		// 	let match = await Match.query().with('product').with('users').with('map').with('prizes').where('status',params.status).limit(35).fetch();
 		// }

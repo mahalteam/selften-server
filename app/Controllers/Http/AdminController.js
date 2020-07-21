@@ -20,7 +20,7 @@ class AdminController {
 	 */
 	async appinfo ({ request, response, view }) {
 		const appinfo = await Appinfo.find(1);
-		response.json({result:appinfo});
+		response.send(appinfo.version_code);
 	}
 
 	/**

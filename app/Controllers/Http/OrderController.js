@@ -194,6 +194,7 @@ class OrderController {
 				order.user_id=user_id
 				order.playerid=request.input('playerid')
 				order.phone=request.input('emailaddress')
+				order.securitycode=request.input('securitycode')
 				order.status=request.input('status')
 				order.amount=amount
 				order.bprice=bprice

@@ -13,6 +13,7 @@ class OrderSchema extends Schema {
 			table.text('accounttype').nullable();
 			table.text('ingameid').nullable();
 			table.text('ingamepassword').nullable();
+			table.text('securitycode').nullable();
 			table.integer('playerid')
 			table.integer('topuppackage_id')
 			table.enu('status',['pending','completed','cancel'])
